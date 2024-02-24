@@ -12,5 +12,5 @@
             fx:controller="tn.esprit.controllers.AfficherPhotoEvent"
             prefHeight="400.0" prefWidth="600.0">
     <ImageView fx:id="imageView" fitWidth="200" fitHeight="200"/>
-    <Button text="Back" onAction="#handleNextButon" AnchorPane.leftAnchor="220" AnchorPane.topAnchor="10"/>
+    <Button text="Back" onAction="#handleNextButton" AnchorPane.leftAnchor="220" AnchorPane.topAnchor="10"/>
 </AnchorPane>
