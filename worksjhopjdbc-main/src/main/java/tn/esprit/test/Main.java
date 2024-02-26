@@ -2,10 +2,15 @@ package tn.esprit.test;
 
 import tn.esprit.models.Personne;
 import tn.esprit.services.ServicePersonne;
+import tn.esprit.services.annonceService;
+import tn.esprit.services.commandeService;
+import tn.esprit.services.panierService;
 import tn.esprit.utils.MyDataBase;
 
+import java.sql.SQLException;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
         commandeService sp = new commandeService();
         panierService sp1 = new panierService();
         annonceService sp2 = new annonceService();
@@ -36,5 +41,6 @@ public class Main {
         //System.out.println(sp.prixCommande(1));
         //System.out.println(sp1.rechercherAnnoncesDansPanierParNom(1,"sssssss"));
         //System.out.println(sp2.getAllAnnonces());
+        System.out.println(sp1.getAllAnnoncesFromPanier(1));
     }
 }

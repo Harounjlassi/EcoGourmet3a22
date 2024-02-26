@@ -15,7 +15,7 @@ public class annonceService {
     public  annonceService(){
         cnx = MyDataBase.getInstance().getCnx();
     }
-    public static List<Annonce> getAllAnnonces() {
+        public static List<Annonce> getAllAnnonces() {
         ArrayList<Annonce> annonces = new ArrayList();
         String qry ="SELECT * FROM `annonce`";
         try {
