@@ -1,5 +1,6 @@
 package tn.esprit.controllers.livraison;
 
+import javafx.animation.PauseTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.esprit.models.livraison.*;
 import tn.esprit.services.livraison.*;
 
@@ -81,6 +83,31 @@ public class Add_livraison {
         try {
             ServiceLivraison serviceLivraison = new ServiceLivraison();
 
+            String source = adresse_source.getText().trim();
+            String destination = adresse_destination.getText().trim();
+
+            if (source.isEmpty() || destination.isEmpty()) {
+                // Show an error message if either field is empty
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Both source and destination addresses are required.");
+                alert.showAndWait();
+                return; // Stop execution if validation fails
+            }
+
+            // Validate alphabetic characters
+            if (!source.matches(".*[a-zA-Z].*") || !destination.matches(".*[a-zA-Z].*")) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setHeaderText(null);
+                alert.setContentText("Source and destination must contain alphabetic characters.");
+                alert.showAndWait();
+                return; // Stop execution if validation fails
+            }
+
+
+
             Feedback_livraison feedback = null;
             Réclamation reclamation = null;
 
@@ -111,8 +138,16 @@ public class Add_livraison {
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
             alert.setContentText("Livraison added successfully!");
+            // Close the alert after 2 seconds
+            PauseTransition pause = new PauseTransition(Duration.seconds(2));
+            pause.setOnFinished(e -> {
+                alert.close();
+                openNewStage("/livraison/Gestion_livraisons.fxml");
+            });
+            pause.play();
+
             alert.showAndWait();
-            openNewStage("/Gestion_livraisons.fxml");
+
         } catch (Exception e) {
             e.printStackTrace();
         }

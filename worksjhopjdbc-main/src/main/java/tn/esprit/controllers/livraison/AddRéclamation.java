@@ -20,15 +20,25 @@ public class AddRéclamation {
 
     @FXML
     void ajouterréclamation(ActionEvent event) {
-            ps.add(new Réclamation(0,new Timestamp(System.currentTimeMillis()), cause_réclamation.getText()));
+        String reclamationText = cause_réclamation.getText().trim();
+        if (reclamationText.length() >= 10) {
+            ps.add(new Réclamation(0, new Timestamp(System.currentTimeMillis()), reclamationText));
             // Display a confirmation message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
             alert.setContentText("Réclamation added successfully!");
             alert.showAndWait();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.close();
-    }
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.close();
+        } else {
+            // Show an error message if the text is too short
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText(null);
+            alert.setContentText("Réclamation must contain at least 10 characters.");
+            alert.showAndWait();
+
+        }}
 
 }

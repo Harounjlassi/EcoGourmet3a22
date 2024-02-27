@@ -45,7 +45,10 @@ public class YourController {
     @FXML
     private TableColumn<livraison, commande> commande;
     @FXML
+    private TableColumn<livraison,Void> update;
+    @FXML
     private TableColumn<livraison,Void> delete;
+
     @FXML
     private Button tri_par_FB_livreur;
     @FXML
@@ -371,6 +374,7 @@ public class YourController {
                 setText(null);
             }
         });
+
 
         // Load the data
         table.setItems(FXCollections.observableArrayList(new ServiceLivraison().getAll()));

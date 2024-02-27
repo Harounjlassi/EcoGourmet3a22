@@ -172,7 +172,7 @@
                                     <TableColumn fx:id="réclamation" prefWidth="100.0" text="Réclamation" style="-fx-alignment: CENTER;"/>
                                     <TableColumn fx:id="time_start" prefWidth="150.0" text="Time Start" style="-fx-alignment: CENTER;"/>
                                     <TableColumn fx:id="commande" prefWidth="100.0" text="Commande" style="-fx-alignment: CENTER;"/>
-                                    <TableColumn fx:id="delete" prefWidth="100.0" text="" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="delete" prefWidth="100.0" text="delete" style="-fx-alignment: CENTER;"/>
                                  </columns>
                               </TableView>
 
