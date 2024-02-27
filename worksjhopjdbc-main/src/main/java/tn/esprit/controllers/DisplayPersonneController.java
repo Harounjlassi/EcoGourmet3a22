@@ -15,8 +15,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import tn.esprit.models.Personne;
 import tn.esprit.services.ServicePersonne;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
-import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

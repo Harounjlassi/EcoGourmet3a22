@@ -12,16 +12,16 @@
 }
 .button:hover
 {
-    -fx-background-color: #BAEAC3;
+    -fx-background-color: #ffb347;
 }
 .button:pressed
-{-fx-background-color: #BAEAC3;
+{-fx-background-color: #ffb347;
 
 }
 
 .button:focused{
 
-    -fx-background-color:#BAEAC3;
+    -fx-background-color:#ffb347;
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px 0px 0px 3px;
 }
@@ -81,16 +81,16 @@ table-view .column-header,
 }
 /*scrool bar strated here*/
 
-/* The increment and decrement button CSS class of scrollbar */ 
+/* The increment and decrement button CSS class of scrollbar */
 .table-view .increment-button,.table-view .decrement-button {
 
     -fx-background-color:transparent;
     -fx-background-radius: 2em;
 }
-/* The main scrollbar **track** CSS class */ 
-.table-view .scroll-bar:horizontal .track, 
+/* The main scrollbar **track** CSS class */
+.table-view .scroll-bar:horizontal .track,
 .table-view .scroll-bar:vertical .track{
-    -fx-background-color: transparent; 
+    -fx-background-color: transparent;
     -fx-border-color: #BAEAC3; /* 80% opacity */
     -fx-background-radius: 2em;
     -fx-border-radius:2em;
@@ -100,7 +100,7 @@ table-view .column-header,
 .table-view .scroll-bar:vertical .thumb {
 
     -fx-background-color: #BAEAC3; /* 80% opacity */
-    -fx-background-insets: 2, 0, 0; 
+    -fx-background-insets: 2, 0, 0;
     -fx-background-radius: 2em;}
 /* chart properties */
 .chart {
@@ -127,7 +127,7 @@ table-view .column-header,
 {
 
     -fx-tab-min-width:90px;
-        -fx-tab-min-height:30px;
+    -fx-tab-min-height:30px;
 
 }
 .tab{
@@ -141,15 +141,15 @@ table-view .column-header,
 {
     -fx-background-color: #FFFFFF;
     -fx-text-fill: #BAEAC3;
-      -fx-border-color: #BAEAC3;
+    -fx-border-color: #BAEAC3;
     -fx-border-width: 0px 0px 2x 0px;}
 
 
 .tab tab-label {
-    -fx-alignment: CENTER; 
+    -fx-alignment: CENTER;
     -fx-text-fill: #A5A9B4;
-/*    -fx-font-size: 12px; 
-    -fx-font-weight: bold;*/
+    /*    -fx-font-size: 12px;
+        -fx-font-weight: bold;*/
 }
 .tab:selected .tab-label {
     -fx-alignment: CENTER;

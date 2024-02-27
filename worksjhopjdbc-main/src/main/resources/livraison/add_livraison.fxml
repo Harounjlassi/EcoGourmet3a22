@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml" fx:controller="tn.esprit.controllers.livraison.Add_livraison">
+    <children>
+        <Text text="Add Livraison:" />
+        <TextField fx:id="adresse_source" promptText="Adresse Source" />
+        <TextField fx:id="adresse_destination" promptText="Adresse Destination" />
+        <ComboBox fx:id="livreur" id="livreur" promptText="Livreur" />
+        <ComboBox fx:id="chef" id="chef" promptText="Chef" />
+        <Button fx:id="feedbackButton" id="feedbackButton" text="Add feedback"  />
+        <Button fx:id="reclamationButton" id="reclamationButton" text="Add Réclamation"  />
+        <ComboBox fx:id="commande" id="commande" promptText="Commande" />
+        <Button fx:id="mySubmitButton" id="mySubmitButton" text="Submit" onAction="#ajouterLivraison"/>
+    </children>
+</VBox>
+
