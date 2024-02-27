@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<AnchorPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.DetailsFeedbackController">
+    <children>
+        <VBox alignment="CENTER" spacing="10" prefWidth="250.0" prefHeight="250.0">
+            <Label fx:id="idLabel" text="ID: " />
+            <Label fx:id="FB_livreur" text="FB_livreur: " />
+            <Label fx:id="FB_duration" text="FB_duration: " />
+        </VBox>
+    </children>
+</AnchorPane>
