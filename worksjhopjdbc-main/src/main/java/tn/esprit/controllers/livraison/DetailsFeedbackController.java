@@ -12,7 +12,7 @@ public class DetailsFeedbackController {
     @FXML
     private Label FB_duration;
 
-    // Other fields...
+
 
     public void setFeedback(Feedback_livraison feedbackLivraison) {
         idLabel.setText("id :" + String.valueOf(feedbackLivraison.getId()));

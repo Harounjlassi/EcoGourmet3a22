@@ -87,23 +87,21 @@ public class Add_livraison {
             String destination = adresse_destination.getText().trim();
 
             if (source.isEmpty() || destination.isEmpty()) {
-                // Show an error message if either field is empty
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
                 alert.setContentText("Both source and destination addresses are required.");
                 alert.showAndWait();
-                return; // Stop execution if validation fails
+                return;
             }
 
-            // Validate alphabetic characters
             if (!source.matches(".*[a-zA-Z].*") || !destination.matches(".*[a-zA-Z].*")) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
                 alert.setHeaderText(null);
                 alert.setContentText("Source and destination must contain alphabetic characters.");
                 alert.showAndWait();
-                return; // Stop execution if validation fails
+                return;
             }
 
 
@@ -138,7 +136,7 @@ public class Add_livraison {
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);
             alert.setContentText("Livraison added successfully!");
-            // Close the alert after 2 seconds
+
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(e -> {
                 alert.close();

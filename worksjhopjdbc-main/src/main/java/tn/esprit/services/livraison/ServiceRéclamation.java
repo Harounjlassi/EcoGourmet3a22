@@ -82,7 +82,7 @@ public class ServiceRéclamation implements IService<Réclamation> {
                 réclamation.setId(id);
                 réclamation.setDate_Réclamation(rs.getTimestamp("date_réclamation"));
                 réclamation.setCause_Réclamation(rs.getString("cause_réclamation"));
-                // Set other fields as needed
+
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

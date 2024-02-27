@@ -139,7 +139,7 @@ public class ServiceLivraison implements IService<livraison> {
                 stm.setNull(11, Types.INTEGER);
             }
 
-            stm.setInt(12, livraison.getId()); // assuming you have a getId() method
+            stm.setInt(12, livraison.getId());
 
             stm.executeUpdate();
 
@@ -160,19 +160,19 @@ public class ServiceLivraison implements IService<livraison> {
                 int feedbackId = rs.getInt("Feedback_liv");
                 int reclamationId = rs.getInt("Réclamation");
 
-                // Delete the livraison
+
                 String qryDeleteLivraison = "DELETE FROM `livraison` WHERE `id`=?";
                 PreparedStatement stmDeleteLivraison = cnx.prepareStatement(qryDeleteLivraison);
                 stmDeleteLivraison.setInt(1, id);
                 stmDeleteLivraison.executeUpdate();
 
-                // Delete the related reclamation
+
                 String qryReclamation = "DELETE FROM `réclamation` WHERE `id`=?";
                 PreparedStatement stmReclamation = cnx.prepareStatement(qryReclamation);
                 stmReclamation.setInt(1, reclamationId);
                 stmReclamation.executeUpdate();
 
-                // Delete the related feedback
+
                 String qryFeedback = "DELETE FROM `feedback_livraison` WHERE `id`=?";
                 PreparedStatement stmFeedback = cnx.prepareStatement(qryFeedback);
                 stmFeedback.setInt(1, feedbackId);
@@ -303,8 +303,7 @@ public class ServiceLivraison implements IService<livraison> {
             PreparedStatement stm = cnx.prepareStatement(qry);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                // Create a new Livraison object and add it to the list
-                // You will need to replace this with your own method of creating a Livraison
+
                 livraison livraison = new livraison();
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));

@@ -12,7 +12,7 @@ public class DetailsReclamationController {
     @FXML
     private Label cause_réclamation;
 
-    // Other fields...
+
 
     public void setFeedback(Réclamation réclamation) {
         idLabel.setText("id :" + String.valueOf(réclamation.getId()));

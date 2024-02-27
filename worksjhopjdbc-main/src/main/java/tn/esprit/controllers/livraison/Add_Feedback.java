@@ -20,18 +20,15 @@ public class Add_Feedback {
     @FXML
     void ajouterfeedback(ActionEvent event) {
         try {
-            // Get the selected values
             RadioButton selectedLivreur = (RadioButton) groupLivreur.getSelectedToggle();
             RadioButton selectedTemps = (RadioButton) groupTemps.getSelectedToggle();
 
             int feedbackLivreur = Integer.parseInt(selectedLivreur.getText());
             int feedbackTemps = Integer.parseInt(selectedTemps.getText());
 
-            // Add the feedback
             Service_FeedBack_livraison serviceFeedback = new Service_FeedBack_livraison();
             serviceFeedback.add(new Feedback_livraison(0,feedbackLivreur,feedbackTemps));
 
-            // Display a confirmation message
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Confirmation");
             alert.setHeaderText(null);

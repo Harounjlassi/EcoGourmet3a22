@@ -16,7 +16,7 @@ public class DetailsChefController {
     @FXML
     private Label telLabel;
 
-    // Other fields...
+
 
     public void setChef(chef chef) {
         idLabel.setText("id :" + String.valueOf(chef.getId()));

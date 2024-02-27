@@ -60,7 +60,7 @@ public class YourController {
 
 
 
-    // Add other TableColumn fields as needed
+
     private void openNewStage(String fxmlFile) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
@@ -81,40 +81,39 @@ public class YourController {
     @FXML
     public void initialize() {
         table.getStylesheets().add(getClass().getResource("/css/livraison/livraison.css").toExternalForm());
-        // Initialize the table columns
+
         tri_par_FB_livreur.setOnAction(event -> {
-            // Call your sort function
+
             ServiceLivraison serviceLivraison = new ServiceLivraison();
             List<livraison> sortedList = serviceLivraison.getLivraisonsSortedByFBLivreur();
 
-            // Update the table view
+
             ObservableList<livraison> data = FXCollections.observableArrayList(sortedList);
             table.setItems(data);
         });
         tri_par_FB_temps.setOnAction(event -> {
-            // Call your sort function
+
             ServiceLivraison serviceLivraison = new ServiceLivraison();
             List<livraison> sortedList = serviceLivraison.getLivraisonsSortedByFBtemps();
 
-            // Update the table view
             ObservableList<livraison> data = FXCollections.observableArrayList(sortedList);
             table.setItems(data);
         });
         tri_par_debut_livraison.setOnAction(event -> {
-            // Call your sort function
+
             ServiceLivraison serviceLivraison = new ServiceLivraison();
             List<livraison> sortedList = serviceLivraison.getLivraisonsSortedByTimeStart();
 
-            // Update the table view
+
             ObservableList<livraison> data = FXCollections.observableArrayList(sortedList);
             table.setItems(data);
         });
         avec_réclamation.setOnAction(event -> {
-            // Call your sort function
+
             ServiceLivraison serviceLivraison = new ServiceLivraison();
             List<livraison> sortedList = serviceLivraison.getLivraisonsWithReclamation();
 
-            // Update the table view
+
             ObservableList<livraison> data = FXCollections.observableArrayList(sortedList);
             table.setItems(data);
         });

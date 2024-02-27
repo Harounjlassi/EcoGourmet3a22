@@ -18,7 +18,7 @@ public class DetailslivreurController {
     @FXML
     private Label telLabel;
 
-    // Other fields...
+
 
     public void setLivreur(livreur livreur) {
         idLabel.setText("id :"+String.valueOf(livreur.getId()));

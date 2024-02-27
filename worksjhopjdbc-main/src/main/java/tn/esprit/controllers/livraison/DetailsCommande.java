@@ -8,7 +8,7 @@ public class DetailsCommande {
     @FXML
     private Label idLabel;
 
-    // Other fields...
+
 
     public void setFeedback(commande commande) {
         idLabel.setText("id:" + String.valueOf(commande.getId()));
