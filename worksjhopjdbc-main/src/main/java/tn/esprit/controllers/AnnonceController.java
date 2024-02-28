@@ -37,11 +37,6 @@ public class AnnonceController {
         // Configurez la cellule de la colonne "Ajouter au panier"
         addToCartColumn.setCellFactory(new ButtonTableCellFactoryAddToCart(panierService));
 
-        //addToCartColumn.setCellFactory((Callback<TableColumn<Annonce, Void>, TableCell<Annonce, Void>>)
-                //new ButtonTableCellFactoryAddToCart());
-        //deleteColumn.setCellFactory(new ButtonTableCellFactoryDelete());
-
-
         // Initialisez votre service
         annonceService = new annonceService();
 

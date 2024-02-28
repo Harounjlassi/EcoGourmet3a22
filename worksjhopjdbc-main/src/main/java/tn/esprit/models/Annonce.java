@@ -8,6 +8,7 @@ public class Annonce {
     private int id_du_chef;
     private String ingredients;
     private String categorie_de_plat;
+    private int quantite ;
 
     public int getId_annonce() {
         return id_annonce;
@@ -65,6 +66,14 @@ public class Annonce {
         this.categorie_de_plat = categorie_de_plat;
     }
 
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
     @Override
     public String toString() {
         return "Annonce{" +
@@ -75,6 +84,7 @@ public class Annonce {
                 ", id_du_chef=" + id_du_chef +
                 ", ingredients='" + ingredients + '\'' +
                 ", categorie_de_plat='" + categorie_de_plat + '\'' +
+                ", quantite=" + quantite +
                 '}';
     }
 }

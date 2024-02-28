@@ -19,11 +19,6 @@
    </VBox>
     <TableView fx:id="annonceTable" prefHeight="695.0" prefWidth="848.0">
         <columns>
-            <TableColumn prefWidth="100" text="ID Annonce">
-                <cellValueFactory>
-                    <PropertyValueFactory property="id_annonce" />
-                </cellValueFactory>
-            </TableColumn>
             <TableColumn prefWidth="141.5999755859375" text="Nom du plat">
                 <cellValueFactory>
                     <PropertyValueFactory property="nom_annonce" />

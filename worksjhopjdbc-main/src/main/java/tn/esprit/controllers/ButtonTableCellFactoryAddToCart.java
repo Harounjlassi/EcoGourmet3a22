@@ -9,7 +9,10 @@ import tn.esprit.services.panierService;
 
 public class ButtonTableCellFactoryAddToCart implements Callback<TableColumn<Annonce, Void>, TableCell<Annonce, Void>> {
 
-    private final panierService panierService;
+    private panierService panierService;
+    public void PanierController(panierService panierService) {
+        this.panierService = panierService;
+    }
 
     public ButtonTableCellFactoryAddToCart(tn.esprit.services.panierService panierService) {
         this.panierService = panierService;
@@ -26,6 +29,8 @@ public class ButtonTableCellFactoryAddToCart implements Callback<TableColumn<Ann
                     Annonce annonce = getTableView().getItems().get(getIndex());
                     // Appelez la méthode de service pour ajouter la commande dans le panier
                     panierService.ajouterAnnonceAuPanier(1,annonce.getId_annonce());
+                    getTableView().refresh(); // Rafraîchissez la vue
+
                 });
             }
 

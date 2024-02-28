@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CommandeController">
+    <ImageView fx:id="image" fitHeight="750" fitWidth="1600"  pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@/icon/background.png" />
+        </image>
+    </ImageView>
+</AnchorPane>

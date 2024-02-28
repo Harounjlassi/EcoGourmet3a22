@@ -94,13 +94,47 @@ public class panierService implements IPService<Panier> {
         return panier;
     }
 
+//    public void ajouterAnnonceAuPanier(int id_panier, int id_annonce) {
+//        String qry = "INSERT INTO Panier_Annonce (id_panier, id_annonce) VALUES (?, ?)";
+//        try {
+//            PreparedStatement pst = cnx.prepareStatement(qry);
+//            pst.setInt(1, id_panier);
+//            pst.setInt(2, id_annonce);
+//            pst.executeUpdate();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    }
     public void ajouterAnnonceAuPanier(int id_panier, int id_annonce) {
-        String qry = "INSERT INTO Panier_Annonce (id_panier, id_annonce) VALUES (?, ?)";
+        // Vérifier si l'annonce existe déjà dans le panier
+        String selectQuery = "SELECT quantite FROM Panier_Annonce WHERE id_panier = ? AND id_annonce = ?";
         try {
-            PreparedStatement pst = cnx.prepareStatement(qry);
-            pst.setInt(1, id_panier);
-            pst.setInt(2, id_annonce);
-            pst.executeUpdate();
+            PreparedStatement selectStatement = cnx.prepareStatement(selectQuery);
+            selectStatement.setInt(1, id_panier);
+            selectStatement.setInt(2, id_annonce);
+            ResultSet rs = selectStatement.executeQuery();
+            if (rs.next()) {
+                // L'annonce existe déjà dans le panier, incrémenter la quantité
+                int quantite = rs.getInt("quantite") + 1;
+                String updateQuery = "UPDATE Panier_Annonce SET quantite = ? WHERE id_panier = ? AND id_annonce = ?";
+                try  {
+                    PreparedStatement updateStatement = cnx.prepareStatement(updateQuery);
+                    updateStatement.setInt(1, quantite);
+                    updateStatement.setInt(2, id_panier);
+                    updateStatement.setInt(3, id_annonce);
+                    updateStatement.executeUpdate();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
+            } else {
+                // L'annonce n'existe pas dans le panier, l'ajouter avec une quantité de 1
+                String insertQuery = "INSERT INTO Panier_Annonce (id_panier, id_annonce, quantite) VALUES (?, ?, 1)";
+                try (PreparedStatement insertStatement = cnx.prepareStatement(insertQuery)) {
+                    insertStatement.setInt(1, id_panier);
+                    insertStatement.setInt(2, id_annonce);
+                    insertStatement.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -108,7 +142,7 @@ public class panierService implements IPService<Panier> {
 
     public List<Annonce> getAllAnnoncesFromPanier(int idPanier) {
         List<Annonce> annonces = new ArrayList<>();
-        String qry = "SELECT a.id_annonce, a.nom_du_plat, a.description_du_plat, a.prix, a.id_du_chef, a.ingredients, a.categorie_de_plat " +
+        String qry = "SELECT a.id_annonce, a.nom_du_plat, a.description_du_plat, a.prix, a.id_du_chef, a.ingredients, a.categorie_de_plat, pa.quantite " +
                 "FROM Annonce a " +
                 "JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "JOIN Panier p ON pa.id_panier = p.id_panier " +
@@ -126,6 +160,7 @@ public class panierService implements IPService<Panier> {
                 annonce.setId_du_chef(resultSet.getInt("id_du_chef"));
                 annonce.setIngredients(resultSet.getString("ingredients"));
                 annonce.setCategorie_de_plat(resultSet.getString("categorie_de_plat"));
+                annonce.setQuantite(resultSet.getInt("quantite")); // Ajouter la quantité à l'objet Annonce
                 annonces.add(annonce);
             }
         } catch (SQLException e) {
@@ -134,31 +169,25 @@ public class panierService implements IPService<Panier> {
         return annonces;
     }
 
-    /*public void ajouterAnnonceAuPanier(Annonce annonce) {
-        try {
-            // Vérifier si l'annonce existe déjà dans la table Annonce
-            String checkAnnonceQuery = "SELECT COUNT(*) FROM Annonce WHERE id_annonce = ?";
-            PreparedStatement checkAnnonceStatement = cnx.prepareStatement(checkAnnonceQuery);
-            checkAnnonceStatement.setInt(1, annonce.getId_annonce());
-            ResultSet resultSet = checkAnnonceStatement.executeQuery();
-            resultSet.next();
-            int annonceCount = resultSet.getInt(1);
-
-            // Ajouter l'annonce au panier dans la table Panier
-            String addAnnonceToPanierQuery = "INSERT INTO Panier (id_client, id_annonce, nom_annonce, annonce_img, quantite) VALUES (?, ?, ?, ?, ?)";
-            PreparedStatement addAnnonceToPanierStatement = cnx.prepareStatement(addAnnonceToPanierQuery);
-            addAnnonceToPanierStatement.setInt(1, annonce.getId_client());
-            addAnnonceToPanierStatement.setInt(2, annonce.getId_annonce());
-            addAnnonceToPanierStatement.setString(3, annonce.getNom_du_plat());
-            addAnnonceToPanierStatement.setString(4, annonce.getAnnonce_img());
-            addAnnonceToPanierStatement.setInt(5, annonce.getQuantite());
-            addAnnonceToPanierStatement.executeUpdate();
-
-            System.out.println("Annonce ajoutée au panier avec succès !");
+    public int calculerPrixTotalPanier(int idPanier) {
+        int prixTotal = 0;
+        String qry = "SELECT SUM(a.prix * pa.quantite) AS prix_total " +
+                "FROM Annonce a " +
+                "JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
+                "WHERE pa.id_panier = ?";
+        try  {
+            PreparedStatement pst = cnx.prepareStatement(qry);
+            pst.setInt(1, /*idPanier*/1);
+            ResultSet resultSet = pst.executeQuery();
+            if (resultSet.next()) {
+                prixTotal = resultSet.getInt("prix_total");
+            }
         } catch (SQLException e) {
-            System.err.println("Erreur lors de l'ajout de l'annonce au panier : " + e.getMessage());
+            e.printStackTrace();
         }
-    }*/
+        return prixTotal;
+    }
+
         public void supprimerAnnonceDuPanier ( int id_panier, int id_annonce){
             String qry = "DELETE FROM Panier_Annonce WHERE id_panier = ? AND id_annonce = ?";
             try {

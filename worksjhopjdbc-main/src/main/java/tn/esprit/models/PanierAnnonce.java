@@ -4,6 +4,7 @@ public class PanierAnnonce {
     private int id_PanierAnnonce;
     private int id_panier;
     private int id_annonce;
+    private int quantite;
 
     public PanierAnnonce(){
     }
@@ -15,6 +16,12 @@ public class PanierAnnonce {
         this.id_PanierAnnonce=id_PanierAnnonce;
         this.id_panier = id_panier;
         this.id_annonce = id_annonce;
+    }
+    public PanierAnnonce(int id_PanierAnnonce, int id_panier, int id_annonce, int quantite) {
+        this.id_PanierAnnonce = id_PanierAnnonce;
+        this.id_panier = id_panier;
+        this.id_annonce = id_annonce;
+        this.quantite = quantite;
     }
 
     public int getId_PanierAnnonce() {
@@ -41,4 +48,11 @@ public class PanierAnnonce {
         this.id_annonce = id_annonce;
     }
 
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
 }

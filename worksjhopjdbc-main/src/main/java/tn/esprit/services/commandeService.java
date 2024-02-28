@@ -18,13 +18,12 @@ public class commandeService implements ICService<Commande> {
     @Override
     public void Ajouter(Commande commande) {
         try {
-            String qry1 ="INSERT INTO Commande (id_client, id_panier, prix_total, adresse, etatcommande) VALUES (?, ?, ?, ?, ?)";
+            String qry1 ="INSERT INTO Commande (id_client, id_panier, prix_total, adresse) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement pst = cnx.prepareStatement(qry1);
             pst.setInt(1,commande.getId_client());
             pst.setInt(2,commande.getId_panier());
             pst.setInt(3,commande.getPrix_total());
             pst.setString(4,commande.getAdresse());
-            pst.setString(5,commande.getEtatcommande());
             pst.executeUpdate();
             System.out.println("commande ajouté !");
         } catch (SQLException e) {
@@ -62,7 +61,6 @@ public class commandeService implements ICService<Commande> {
             pst1.setInt(2, idPanier);
             pst1.setInt(3, prixTotal);
             pst1.setString(4, adresse);
-            pst1.setString(5, etatCommande);
             pst1.executeUpdate();
 
             // Récupération des annonces associées au panier
@@ -132,8 +130,7 @@ public class commandeService implements ICService<Commande> {
                 c.setId_client(rs.getInt(2));
                 c.setPrix_total(rs.getInt(3));
                 c.setAdresse(rs.getString(4));
-                c.setEtatcommande(rs.getString(5));
-                c.setId_panier(rs.getInt(6));
+                c.setId_panier(rs.getInt(5));
                 commandes.add(c);
             }
         } catch (SQLException e) {
@@ -155,8 +152,7 @@ public class commandeService implements ICService<Commande> {
                 commande.setId_client(rs.getInt(2));
                 commande.setPrix_total(rs.getInt(3));
                 commande.setAdresse(rs.getString(4));
-                commande.setEtatcommande(rs.getString(5));
-                commande.setId_panier(rs.getInt(6));
+                commande.setId_panier(rs.getInt(5));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -177,7 +173,6 @@ public class commandeService implements ICService<Commande> {
                 commande.setId_client(rs.getInt("id_client"));
                 commande.setPrix_total(rs.getInt("prix_total"));
                 commande.setAdresse(rs.getString("adresse"));
-                commande.setEtatcommande(rs.getString("etatcommande"));
                 commande.setId_commande(rs.getInt("id_panier"));
                 commandesTriees.add(commande);
             }
@@ -202,7 +197,6 @@ public class commandeService implements ICService<Commande> {
                 commande.setId_client(rs.getInt("id_client"));
                 commande.setPrix_total(rs.getInt("prix_total"));
                 commande.setAdresse(rs.getString("adresse"));
-                commande.setEtatcommande(rs.getString("etatcommande"));
                 commandesTrouvees.add(commande);
             }
         } catch (SQLException e) {

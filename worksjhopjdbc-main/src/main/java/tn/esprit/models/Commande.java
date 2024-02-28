@@ -5,46 +5,46 @@ public class Commande {
     private int id_client;
     private int prix_total;
     private String adresse;
-    private String etatcommande;
+
     private int id_panier;
 
     public Commande(){
 
     }
 
-    public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatcommande){
+    public Commande(int id_commande,int id_client,int prix_total,String adresse){
         this.id_commande=id_commande;
         this.id_client=id_client;
         this.prix_total=prix_total;
         this.adresse=adresse;
-        this.etatcommande=etatcommande;
+
     }
-    public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatcommande,int id_panier){
+    public Commande(int id_commande,int id_client,int prix_total,String adresse,int id_panier){
         this.id_commande=id_commande;
         this.id_client=id_client;
         this.prix_total=prix_total;
         this.adresse=adresse;
-        this.etatcommande=etatcommande;
+
         this.id_panier=id_panier;
     }
-    public Commande(int prix_total,String adresse,String etatcommande){
+    public Commande(int prix_total,String adresse){
         this.prix_total=prix_total;
         this.adresse=adresse;
-        this.etatcommande=etatcommande;
+
     }
 
-    public Commande(int id_client,int prix_total,String adresse,String etatcommande,int id_panier){
+    public Commande(int id_client,int prix_total,String adresse,int id_panier){
         this.id_client=id_client;
         this.prix_total=prix_total;
         this.adresse=adresse;
-        this.etatcommande=etatcommande;
+
         this.id_panier= id_panier;
     }
-    public Commande(int id_client,int prix_total,String adresse,String etatcommande){
+    public Commande(int id_client,int prix_total,String adresse){
         this.id_client=id_client;
         this.prix_total=prix_total;
         this.adresse=adresse;
-        this.etatcommande=etatcommande;
+
     }
     public int getId_commande() {
         return id_commande;
@@ -74,14 +74,6 @@ public class Commande {
         return adresse;
     }
 
-    public String getEtatcommande() {
-        return etatcommande;
-    }
-
-    public void setEtatcommande(String etatcommande) {
-        this.etatcommande = etatcommande;
-    }
-
     public void setAdresse(String adresse) {
         this.adresse = adresse;
     }
@@ -101,7 +93,6 @@ public class Commande {
                 ", id_client=" + id_client +
                 ", prix_total=" + prix_total +
                 ", adresse='" + adresse + '\'' +
-                ", etatcommande='" + etatcommande + '\'' +
                 ", id_panier=" + id_panier +
                 '}';
     }
