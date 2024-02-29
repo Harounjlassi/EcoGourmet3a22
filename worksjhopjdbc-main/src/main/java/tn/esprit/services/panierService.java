@@ -188,7 +188,9 @@ public class panierService implements IPService<Panier> {
         return prixTotal;
     }
 
-        public void supprimerAnnonceDuPanier ( int id_panier, int id_annonce){
+
+
+    public void supprimerAnnonceDuPanier ( int id_panier, int id_annonce){
             String qry = "DELETE FROM Panier_Annonce WHERE id_panier = ? AND id_annonce = ?";
             try {
                 PreparedStatement pst = cnx.prepareStatement(qry);
@@ -201,7 +203,7 @@ public class panierService implements IPService<Panier> {
             }
 
         }
-        public void mettreAJourQuantiteAnnonceDansPanier ( int id_panier, int id_annonce, int nouvelleQuantite){
+    public void mettreAJourQuantiteAnnonceDansPanier( int id_panier, int id_annonce, int nouvelleQuantite){
             String qry = "UPDATE Panier_Annonce SET quantite = ? WHERE id_panier = ? AND id_annonce = ?";
             try {
                 PreparedStatement pst = cnx.prepareStatement(qry);
@@ -219,38 +221,5 @@ public class panierService implements IPService<Panier> {
                 e.printStackTrace();
             }
         }
-
-        public List<Annonce> rechercherAnnoncesDansPanierParNom ( int idPanier, String nomAnnonce){
-            List<Annonce> annoncesTrouvees = new ArrayList<>();
-            String qry = "SELECT a.id_annonce, a.nom_du_plat, a.description_du_plat, a.prix, a.id_du_chef, a.ingredients, a.categorie_de_plat " +
-                    "FROM Annonce a " +
-                    "JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
-                    "JOIN Panier p ON pa.id_panier = p.id_panier " +
-                    "WHERE p.id_panier = ? AND a.nom_du_plat LIKE ?";
-            try {
-                PreparedStatement pst = cnx.prepareStatement(qry);
-                pst.setInt(1, idPanier);
-                pst.setString(2, "%" + nomAnnonce + "%");
-                try {
-                    ResultSet rs = pst.executeQuery();
-                    while (rs.next()) {
-                        Annonce annonce = new Annonce();
-                        annonce.setId_annonce(rs.getInt("id_annonce"));
-                        annonce.setNom_annonce(rs.getString("nom_du_plat"));
-                        annonce.setDescription_du_plat(rs.getString("description_du_plat"));
-                        annonce.setPrix(rs.getInt("prix"));
-                        annonce.setId_du_chef(rs.getInt("id_du_chef"));
-                        annonce.setIngredients(rs.getString("ingredients"));
-                        annonce.setCategorie_de_plat(rs.getString("categorie_de_plat"));
-                        annoncesTrouvees.add(annonce);
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException(e);
-                }
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            return annoncesTrouvees;
-        }
-    }
+}
 

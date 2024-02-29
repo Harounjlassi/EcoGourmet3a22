@@ -27,6 +27,8 @@ import tn.esprit.services.panierService;
 
 
 import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class PanierController {
@@ -81,6 +83,9 @@ public class PanierController {
 
     @FXML
     private VBox commandeForm;
+
+    @FXML
+    private ComboBox<String> triComboBox;
     public void initialize() {
 
         // Initialisez votre service PanierService
@@ -142,6 +147,20 @@ public class PanierController {
     private void addButtonToTable() {
     }
 
+//    private void trierAnnoncesParPrix() {
+//        List<Annonce> annonces = annonceTable.getItems();
+//
+//        // Comparator pour comparer les annonces par prix
+//        Comparator<Annonce> comparator = Comparator.comparingInt(Annonce::getPrix);
+//
+//        // Trier les annonces selon le comparateur
+//        Collections.sort(annonces, comparator);
+//        // Mettre à jour le TableView avec les annonces triées
+//        annonceTable.setItems(FXCollections.observableArrayList(annonces));
+//    }
+
+
+
     @FXML
     private void afficherFormulaireCommande() {
         commandeForm.setVisible(true);
@@ -164,6 +183,47 @@ public class PanierController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    @FXML
+    private void trierAnnonces() {
+        ObservableList<Annonce> annonces = annonceTable.getItems();
+        String choixTri = triComboBox.getValue();
+        if (choixTri != null) {
+            switch (choixTri) {
+                case "Prix croissant":
+                    trierAnnoncesParPrixCroissant(annonces);
+                    break;
+                case "Prix décroissant":
+                    trierAnnoncesParPrixDecroissant(annonces);
+                    break;
+                case "Nom A à Z":
+                    trierAnnoncesParNomAZ(annonces);
+                    break;
+                case "Nom Z à A":
+                    trierAnnoncesParNomZA(annonces);
+                    break;
+                default:
+                    // Gérer les cas non valides si nécessaire
+                    break;
+            }
+        }
+    }
+
+    private void trierAnnoncesParPrixCroissant(ObservableList<Annonce> annonces) {
+        annonces.sort(Comparator.comparingInt(Annonce::getPrix));
+    }
+
+    private void trierAnnoncesParPrixDecroissant(ObservableList<Annonce> annonces) {
+        annonces.sort(Comparator.comparingInt(Annonce::getPrix).reversed());
+    }
+
+    private void trierAnnoncesParNomAZ(ObservableList<Annonce> annonces) {
+        annonces.sort(Comparator.comparing(Annonce::getNom_annonce));
+    }
+
+    private void trierAnnoncesParNomZA(ObservableList<Annonce> annonces) {
+        annonces.sort(Comparator.comparing(Annonce::getNom_annonce).reversed());
     }
 
 }

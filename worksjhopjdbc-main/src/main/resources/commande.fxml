@@ -1,13 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 
 <AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CommandeController">
-    <ImageView fx:id="image" fitHeight="750" fitWidth="1600"  pickOnBounds="true" preserveRatio="true">
+    <ImageView fx:id="image" fitHeight="750" fitWidth="1600" pickOnBounds="true" preserveRatio="true">
         <image>
             <Image url="@/icon/background.png" />
         </image>
     </ImageView>
+   <Pane style="-fx-background-color: lightgrey;" layoutX="359.0" layoutY="42.0" prefHeight="665.0" prefWidth="398.0">
+      <children>
+          <!-- Champ de saisie pour le nom -->
+          <Label layoutX="183.0" layoutY="67.0" text="Nom  " />
+      
+          <!-- Champ de saisie pour l'adresse -->
+          <Label layoutX="175.0" layoutY="277.0" text="Adresse : " />
+      
+          <!-- Champ de saisie pour le prénom -->
+          <Label layoutX="175.0" layoutY="137.0" text="Prénom : " />
+          <TextField fx:id="nomField" layoutX="72.0" layoutY="308.0" prefHeight="25.0" prefWidth="287.0" />
+         <Label layoutX="151.0" layoutY="206.0" text="numéro telephone" />
+         <TextField fx:id="nomField2" layoutX="72.0" layoutY="236.0" prefHeight="25.0" prefWidth="287.0" />
+         <TextField fx:id="nomField1" layoutX="71.0" layoutY="167.0" prefHeight="25.0" prefWidth="287.0" />
+         <TextField fx:id="nomField3" layoutX="71.0" layoutY="103.0" prefHeight="25.0" prefWidth="287.0" />
+         <Button layoutX="142.0" layoutY="361.0" mnemonicParsing="false" text="valider commande" />
+      </children>
+   </Pane>
+
 </AnchorPane>
