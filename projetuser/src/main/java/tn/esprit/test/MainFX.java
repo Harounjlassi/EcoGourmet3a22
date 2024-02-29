@@ -28,15 +28,13 @@ public class MainFX extends Application {
 
             Scene scene = new Scene(root);
             primaryStage.setTitle("EcoGourmé");
-            primaryStage.setScene(scene);
-            primaryStage.show();
+
             Rectangle2D screenBounds = Screen.getPrimary().getBounds();
             // Configurez la taille de la fenêtre principale
             primaryStage.setWidth(screenBounds.getWidth());
             primaryStage.setHeight(screenBounds.getHeight());
             System.out.println(screenBounds.getWidth()+"'''"+screenBounds.getHeight());
-
-            // Affichez la fenêtre principale
+            primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException e) {
             System.out.println(e.getMessage());

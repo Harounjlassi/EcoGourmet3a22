@@ -1,13 +1,5 @@
 package tn.esprit.controllers;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.io.IOException;
-import java.io.Serializable;
-import java.sql.Connection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -16,6 +8,12 @@ import javafx.scene.input.MouseEvent;
 import tn.esprit.models.User;
 import tn.esprit.services.UserService;
 import tn.esprit.utils.MyDataBase;
+
+import java.io.IOException;
+import java.io.Serializable;
+import java.sql.Connection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class SignupController implements Serializable {
     public TextField tel;
@@ -27,6 +25,7 @@ public class SignupController implements Serializable {
     public PasswordField mdp; // Change to PasswordField for secure password input
     public SplitMenuButton Role;
     public Label back;
+    public ToggleButton showPasswordToggleButton; // ToggleButton to show/hide password
     UserService uti = new UserService();
 
     public void inscription(ActionEvent actionEvent) {
@@ -59,7 +58,7 @@ public class SignupController implements Serializable {
         u.setNom(Nom.getText());
         u.setPrenom(Prenom.getText());
         u.setRole(Role.getText());
-        u.setPassword(hashPassword(mdp.getText())); // Hashing the password
+        u.setPassword(mdp.getText());
         u.setNumero(tel.getText());
         uti.add(u);
         showAlert(Alert.AlertType.CONFIRMATION, "Success", "Votre inscription est bien enregistrée !");
@@ -82,12 +81,27 @@ public class SignupController implements Serializable {
         Role.setText("livreur");
     }
 
+    public void togglePasswordVisibility(ActionEvent event) {
+        if (showPasswordToggleButton.isSelected()) {
+            // Show the password
+            mdp.setPromptText(mdp.getText());
+            mdp.setText("");
+            mdp.setDisable(true);
+        } else {
+            // Hide the password
+            mdp.setText(mdp.getPromptText());
+            mdp.setPromptText("");
+            mdp.setDisable(false);
+        }
+    }
+
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.show();
     }
+
 
     private boolean isValidEmail(String email) {
         // Use a simple regular expression for email validation
@@ -117,21 +131,6 @@ public class SignupController implements Serializable {
             inscription.getScene().setRoot(root);
         } catch (IOException ex) {
             Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
-    private String hashPassword(String password) {
-        try {
-            MessageDigest md = MessageDigest.getInstance("SHA-256");
-            byte[] hashedBytes = md.digest(password.getBytes());
-            StringBuilder sb = new StringBuilder();
-            for (byte b : hashedBytes) {
-                sb.append(String.format("%02x", b));
-            }
-            return sb.toString();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return null; // Handle the error as per your need
         }
     }
 }

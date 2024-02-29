@@ -32,6 +32,14 @@ public class User {
         this.Role = Role;
     }
 
+    public User(String nom, String prenom, String email, String numero, String role) {
+        this.Nom = nom;
+        this.Prenom = prenom;
+        this.Email = email;
+        this.Numero = numero;
+        this.Role = role;
+    }
+
     public int getUserID() {
         return UserID;
     }

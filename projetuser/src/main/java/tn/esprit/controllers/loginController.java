@@ -1,12 +1,10 @@
 package tn.esprit.controllers;
-import javafx.scene.control.Alert;
-import javafx.scene.control.PasswordField;
+
+import javafx.fxml.FXML;
+import javafx.scene.control.*;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.utils.MyDataBase;
@@ -30,6 +28,8 @@ public class loginController implements Initializable {
     public Button connexion;
     public Label cnx;
     public PasswordField mdp;
+    @FXML
+    private ToggleButton showPasswordToggleButton;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -56,7 +56,7 @@ public class loginController implements Initializable {
                             loadFXML("/market.fxml");
                             break;
                         case "chef":
-                            loadFXML("/chef.fxml");
+                            loadFXML("/displayEvent.fxml");
                             break;
                         case "livreur":
                             loadFXML("/livreur.fxml");
@@ -104,5 +104,18 @@ public class loginController implements Initializable {
         alert.show();
     }
 
-
+    // Method to toggle password visibility
+    public void togglePasswordVisibility(ActionEvent event) {
+        if (showPasswordToggleButton.isSelected()) {
+            // Show the password
+            mdp.setPromptText(mdp.getText());
+            mdp.setText("");
+            mdp.setDisable(true);
+        } else {
+            // Hide the password
+            mdp.setText(mdp.getPromptText());
+            mdp.setPromptText("");
+            mdp.setDisable(false);
+        }
+    }
 }

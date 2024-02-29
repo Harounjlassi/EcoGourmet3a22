@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="695.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterAnnonceController">
+   <VBox alignment="TOP_CENTER" prefWidth="300" spacing="10">
+      <VBox spacing="10">
+         <TextField fx:id="nomtf" promptText="Nom du plat" />
+         <TextField fx:id="prenomTF" promptText="Description du plat" />
+         <TextField fx:id="ageTF" promptText="Prix" />
+         <TextField fx:id="chefTF" promptText="Chef" />
+         <TextField fx:id="CategorieTF" promptText="Categorie" />
+         <TextField fx:id="IngredientTF" promptText="Ingredient" />
+
+      </VBox>
+
+      <Button fx:id="importImageButton" mnemonicParsing="false" onAction="#importImageClicked" text="Importer et ajouter" />
+   </VBox>
+
+   <!-- Container for TilePanes and pagination buttons -->
+   <VBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <!-- Container for TilePanes -->
+      <VBox fx:id="tilePaneContainer" spacing="10" />
+
+      <!-- Pagination buttons -->
+      <HBox alignment="CENTER">
+         <Button fx:id="previousPageButton" onAction="#showPreviousPage" text="Previous" />
+         <Button fx:id="nextPageButton" onAction="#showNextPage" text="Next" />
+      </HBox>
+   </VBox>
+   <TextField fx:id="searchField" layoutX="482.0" layoutY="31.0" onKeyReleased="#searchTextChanged" promptText="Search" />
+   <ComboBox fx:id="Tri" layoutX="482.0" layoutY="72.0" onAction="#sortAnnonces" prefWidth="150.0" />
+</AnchorPane>
