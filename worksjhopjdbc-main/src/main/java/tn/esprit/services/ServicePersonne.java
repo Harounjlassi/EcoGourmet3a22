@@ -37,7 +37,6 @@ public class ServicePersonne implements IService<Personne> {
 
     }
 
-    @Override
     public ArrayList<Personne> getAll() {
 
 
