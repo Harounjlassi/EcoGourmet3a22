@@ -24,11 +24,11 @@
                   <!-- Conservez le bouton Profile -->
                   <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" stylesheets="@/css/sample.css" text="Profile" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/icon/profile.png" />
-                           </image>
-                        </ImageView>
+<!--                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@/icon/profile.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
                      </graphic>
                      <VBox.margin>
                         <Insets left="16.0" top="16.0" />
@@ -40,11 +40,11 @@
                   <!-- Conservez le bouton Annonce -->
                   <Button fx:id="annonce" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onAction="#openAnnonces" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="annonce" textFill="WHITE">
                      <graphic>
-                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/icon/projects.png" />
-                           </image>
-                        </ImageView>
+<!--                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@/icon/projects.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
                      </graphic>
                      <padding>
                         <Insets left="20.0" />
@@ -77,11 +77,11 @@
                <children>
                   <Label graphicTextGap="14.0" prefHeight="131.0" prefWidth="319.0" text="EcoGourmet" textFill="#ffb347">
                      <graphic>
-                        <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@/icon/logo.png" />
-                           </image>
-                        </ImageView>
+<!--                        <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">-->
+<!--                           <image>-->
+<!--                              <Image url="@/icon/logo.png" />-->
+<!--                           </image>-->
+<!--                        </ImageView>-->
                      </graphic>
                      <font>
                         <Font name="Britannic Bold" size="27.0" />

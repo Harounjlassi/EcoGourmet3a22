@@ -5,7 +5,6 @@ public class Commande {
     private int id_client;
     private int prix_total;
     private String adresse;
-
     private int id_panier;
 
     public Commande(){

@@ -1,36 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CommandeController">
-    <ImageView fx:id="image" fitHeight="750" fitWidth="1600" pickOnBounds="true" preserveRatio="true">
-        <image>
-            <Image url="@/icon/background.png" />
-        </image>
-    </ImageView>
-   <Pane style="-fx-background-color: lightgrey;" layoutX="359.0" layoutY="42.0" prefHeight="665.0" prefWidth="398.0">
-      <children>
-          <!-- Champ de saisie pour le nom -->
-          <Label layoutX="183.0" layoutY="67.0" text="Nom  " />
-      
-          <!-- Champ de saisie pour l'adresse -->
-          <Label layoutX="175.0" layoutY="277.0" text="Adresse : " />
-      
-          <!-- Champ de saisie pour le prénom -->
-          <Label layoutX="175.0" layoutY="137.0" text="Prénom : " />
-          <TextField fx:id="nomField" layoutX="72.0" layoutY="308.0" prefHeight="25.0" prefWidth="287.0" />
-         <Label layoutX="151.0" layoutY="206.0" text="numéro telephone" />
-         <TextField fx:id="nomField2" layoutX="72.0" layoutY="236.0" prefHeight="25.0" prefWidth="287.0" />
-         <TextField fx:id="nomField1" layoutX="71.0" layoutY="167.0" prefHeight="25.0" prefWidth="287.0" />
-         <TextField fx:id="nomField3" layoutX="71.0" layoutY="103.0" prefHeight="25.0" prefWidth="287.0" />
-         <Button layoutX="142.0" layoutY="361.0" mnemonicParsing="false" text="valider commande" />
-      </children>
-   </Pane>
+    <children>
+      <TableView layoutX="553.0" layoutY="117.0" prefHeight="383.0" prefWidth="371.0">
+        <columns>
+          <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="C1" />
+        </columns>
+      </TableView>
+        <GridPane layoutX="51.0" layoutY="14.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" />
+                <ColumnConstraints hgrow="SOMETIMES" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+        </GridPane>
+          <TextField fx:id="nomField" promptText="Nom" layoutX="124.0" layoutY="110.0" prefHeight="26.0" prefWidth="101.0" editable="false" />
+          <TextField fx:id="prenomField" promptText="Prenom" layoutX="238.0" layoutY="110.0" prefHeight="26.0" prefWidth="102.0" editable="false" />
+      <TextField fx:id="numeroField" promptText="Numero telephone" layoutX="124.0" layoutY="150.0" prefHeight="26.0" prefWidth="215.0" editable="false" />
+      <Text layoutX="125.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre Information Personnel :" wrappingWidth="226.13673400878906">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <TextField fx:id="adresseEmailField" promptText="Adresse E-mail" layoutX="124.0" layoutY="191.0" prefHeight="26.0" prefWidth="215.0" editable="false" />
+      <Text layoutX="124.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre adresse :" wrappingWidth="157.3367462158203">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Text layoutX="124.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'adresse sélectionnée sera utilisée comme adresse de livraison." wrappingWidth="308.5366973876953" />
+      <TextField fx:id="adresse" promptText="Adresse de livraison" layoutX="123.0" layoutY="257.0" prefHeight="26.0" prefWidth="287.0" />
+        <TextField fx:id="cardNumberField"  layoutX="123.0" layoutY="469.0" prefHeight="26.0" prefWidth="157.0" promptText="Numéro de carte" />
+        <TextField fx:id="expiryDateField"  layoutX="123.0" layoutY="513.0" prefHeight="26.0" prefWidth="186.0" promptText="Date d'expiration (MM/YY)" />
+        <TextField fx:id="cvvField"  layoutX="318.0" layoutY="513.0" prefHeight="26.0" prefWidth="90.0" promptText="CVV" />
+        <TextField fx:id="amountField"  layoutX="287.0" layoutY="468.0" prefHeight="26.0" prefWidth="121.0" promptText="Montant à payer" />
+      <Text layoutX="124.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode Paiement :" wrappingWidth="157.3367462158203">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <Button layoutX="174.0" layoutY="561.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0" text="Finalizer Votre Commande"
+              onAction="#finaliserCommande"/>
+      <Text layoutX="124.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode De Livraison :" wrappingWidth="157.3367462158203">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Text>
+      <CheckBox layoutX="123.0" layoutY="359.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="309.0" text="Ramassage direct" />
+      <CheckBox layoutX="123.0" layoutY="393.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="309.0" text="Livraison par livreur" />
 
+<!--        <Button text="Payer" onAction="#processPayment" />-->
+    </children>
 </AnchorPane>

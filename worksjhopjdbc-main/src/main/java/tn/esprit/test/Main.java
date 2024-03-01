@@ -1,10 +1,7 @@
 package tn.esprit.test;
 
 import tn.esprit.models.Personne;
-import tn.esprit.services.ServicePersonne;
-import tn.esprit.services.annonceService;
-import tn.esprit.services.commandeService;
-import tn.esprit.services.panierService;
+import tn.esprit.services.*;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.SQLException;
@@ -14,6 +11,7 @@ public class Main {
         commandeService sp = new commandeService();
         panierService sp1 = new panierService();
         annonceService sp2 = new annonceService();
+        ClientService sp3 = new ClientService();
         /*Commande c1 = new Commande(1,1,"sahabi","termine",1);
         Commande c2 = new Commande(2,1,"minchiya","termine",6);
         Commande c3 = new Commande(2,1,"wled mana3","termine",6);
@@ -41,6 +39,7 @@ public class Main {
         //System.out.println(sp.prixCommande(1));
         //System.out.println(sp1.rechercherAnnoncesDansPanierParNom(1,"sssssss"));
         //System.out.println(sp2.getAllAnnonces());
-        System.out.println(sp1.getAllAnnoncesFromPanier(1));
+        //System.out.println(sp1.getAllAnnoncesFromPanier(1));
+        //System.out.println(sp3.afficherInformationsClient(1));
     }
 }
