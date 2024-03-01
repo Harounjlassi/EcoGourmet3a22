@@ -20,22 +20,14 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/Gestion_livraisons.fxml"));
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/User/login.fxml"));
             Parent root = loader.load();
-
-            // Get the controller for the market interface
-
-            Scene scene = new Scene(root);
-            primaryStage.setTitle("EcoGourmé");
-
-            Rectangle2D screenBounds = Screen.getPrimary().getBounds();
-            // Configurez la taille de la fenêtre principale
-            primaryStage.setWidth(screenBounds.getWidth());
-            primaryStage.setHeight(screenBounds.getHeight());
-            System.out.println(screenBounds.getWidth()+"'''"+screenBounds.getHeight());
+            Scene scene =new Scene(root);
+            primaryStage.setTitle("gestion personne");
             primaryStage.setScene(scene);
             primaryStage.show();
+
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }

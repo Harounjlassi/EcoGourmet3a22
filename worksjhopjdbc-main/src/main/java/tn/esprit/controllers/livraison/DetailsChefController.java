@@ -2,6 +2,7 @@ package tn.esprit.controllers.livraison;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.chef;
 
 public class DetailsChefController {
@@ -18,11 +19,11 @@ public class DetailsChefController {
 
 
 
-    public void setChef(chef chef) {
-        idLabel.setText("id :" + String.valueOf(chef.getId()));
+    public void setChef(User chef) {
+        idLabel.setText("id :" + String.valueOf(chef.getUserID()));
         nameLabel.setText("nom :" +chef.getNom());
-        prenomLabel.setText("prenom :" + chef.getPrénom());
-        ageLabel.setText("age :" + String.valueOf(chef.getAge()));
-        telLabel.setText("tel :" + String.valueOf(chef.getTel()));
+        prenomLabel.setText("prenom :" + chef.getPrenom());
+        ageLabel.setText("email :" + String.valueOf(chef.getEmail()));
+        telLabel.setText("tel :" + String.valueOf(chef.getNumero()));
     }
 }

@@ -12,7 +12,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
+import tn.esprit.services.User.UserService;
 import tn.esprit.services.livraison.*;
 
 import java.io.IOException;
@@ -27,9 +29,9 @@ public class Add_livraison {
     @FXML
     private TextField adresse_destination;
     @FXML
-    private ComboBox<livreur> livreur;
+    private ComboBox<User> livreur;
     @FXML
-    private ComboBox<chef> chef;
+    private ComboBox<User> chef;
     @FXML
     private Button feedbackButton;
     @FXML
@@ -61,8 +63,8 @@ public class Add_livraison {
             commande.getStylesheets().add(getClass().getResource("/css/livraison/livraison.css").toExternalForm());
             feedbackButton.getStylesheets().add(getClass().getResource("/css/livraison/livraison.css").toExternalForm());
             reclamationButton.getStylesheets().add(getClass().getResource("/css/livraison/livraison.css").toExternalForm());
-            List<livreur> livreurs = new ServiceLivreur().getAll();
-            List<chef> chefs = new ServiceChef().getAll();
+            List<User> livreurs = new UserService().getAllLivreurs();
+            List<User> chefs = new UserService().getAllChefs();
             List<Feedback_livraison> feedbacks = new Service_FeedBack_livraison().getAll();
             List<Réclamation> reclamations = new ServiceRéclamation().getAll();
             List<commande> commandes = new ServiceCommande().getAll();
@@ -103,28 +105,15 @@ public class Add_livraison {
                 alert.showAndWait();
                 return;
             }
-
-
-
-            Feedback_livraison feedback = null;
-            Réclamation reclamation = null;
-
-            if (feedbackButton.isPressed()) {
-                feedback = new Service_FeedBack_livraison().getLastInsertedFeedback();
-            }
-
-            if (reclamationButton.isPressed()) {
-                reclamation = new ServiceRéclamation().getLastInsertedReclamation();
-            }
-
+            System.out.println("i'm here");
             serviceLivraison.add(new livraison(
                     0,
                     livreur.getValue(),
                     chef.getValue(),
                     adresse_source.getText(),
                     adresse_destination.getText(),
-                    feedback,
-                    reclamation,
+                    new Service_FeedBack_livraison().getLastInsertedFeedback(),
+                    new ServiceRéclamation().getLastInsertedReclamation(),
                     false,
                     false,
                     new Timestamp(System.currentTimeMillis()),

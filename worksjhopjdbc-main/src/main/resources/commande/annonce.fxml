@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.commande.AnnonceController">
+
+   <!-- Container for TilePanes and pagination buttons -->
+   <VBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+      <!-- Container for TilePanes -->
+      <VBox fx:id="tilePaneContainer" spacing="10" />
+
+      <!-- Pagination buttons -->
+      <HBox alignment="CENTER" />
+   </VBox>
+    <TableView fx:id="annonceTable" prefHeight="695.0" prefWidth="848.0">
+        <columns>
+            <TableColumn prefWidth="141.5999755859375" text="Nom du plat">
+                <cellValueFactory>
+                    <PropertyValueFactory property="nom_annonce" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="107.199951171875" text="Prix">
+                <cellValueFactory>
+                    <PropertyValueFactory property="prix" />
+                </cellValueFactory>
+            </TableColumn>
+            <TableColumn prefWidth="156.79998779296875" text="Description du plat">
+                <cellValueFactory>
+                    <PropertyValueFactory property="description_du_plat" />
+                </cellValueFactory>
+            </TableColumn>
+         <TableColumn minWidth="0.0" prefWidth="183.20001220703125" text="boutoun ajoutet au panier">
+            <cellValueFactory>
+               <PropertyValueFactory property="description_du_plat" />
+            </cellValueFactory>
+         </TableColumn>
+            <TableColumn fx:id="addToCartColumn" text="Ajouter au panier" />
+        </columns>
+    </TableView>
+</AnchorPane>

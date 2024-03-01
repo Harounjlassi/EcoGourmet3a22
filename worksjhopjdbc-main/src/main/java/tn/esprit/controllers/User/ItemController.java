@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import tn.esprit.test.MainFX;
 import tn.esprit.test.MyListener;
-import tn.esprit.models.Fruit;
+import tn.esprit.models.User.Fruit;
 
 public class ItemController {
     @FXML

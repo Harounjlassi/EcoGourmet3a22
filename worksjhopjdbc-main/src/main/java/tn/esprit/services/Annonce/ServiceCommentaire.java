@@ -1,4 +1,4 @@
-package tn.esprit.services;
+package tn.esprit.services.Annonce;
 
 import tn.esprit.models.Annonce.Commentaire;
 import tn.esprit.utils.MyDataBase;

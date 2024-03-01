@@ -1,7 +1,9 @@
 package tn.esprit.services.livraison;
 
 import tn.esprit.interfaces.IService;
+import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
+import tn.esprit.services.User.UserService;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.*;
@@ -19,13 +21,13 @@ public class ServiceLivraison implements IService<livraison> {
             PreparedStatement stm = cnx.prepareStatement(qry);
 
             if (livraison.getLivreur() != null) {
-                stm.setInt(1,livraison.getLivreur().getId());
+                stm.setInt(1,livraison.getLivreur().getUserID());
             } else {
                 stm.setNull(1, Types.INTEGER);
             }
 
             if (livraison.getChef() != null) {
-                stm.setInt(2,livraison.getChef().getId());
+                stm.setInt(2,livraison.getChef().getUserID());
             } else {
                 stm.setNull(2, Types.INTEGER);
             }
@@ -73,8 +75,8 @@ public class ServiceLivraison implements IService<livraison> {
             while (rs.next()){
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));
-                liv.setLivreur(new ServiceLivreur().getById(rs.getInt(2)));
-                liv.setChef(new ServiceChef().getById(rs.getInt(3)));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
                 liv.setAdresse_source(rs.getString(4));
                 liv.setAdresse_destination(rs.getString(5));
                 liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));
@@ -102,13 +104,13 @@ public class ServiceLivraison implements IService<livraison> {
             PreparedStatement stm = cnx.prepareStatement(qry);
 
             if (livraison.getLivreur() != null) {
-                stm.setInt(1, livraison.getLivreur().getId());
+                stm.setInt(1, livraison.getLivreur().getUserID());
             } else {
                 stm.setNull(1, Types.INTEGER);
             }
 
             if (livraison.getChef() != null) {
-                stm.setInt(2, livraison.getChef().getId());
+                stm.setInt(2, livraison.getChef().getUserID());
             } else {
                 stm.setNull(2, Types.INTEGER);
             }
@@ -191,10 +193,10 @@ public class ServiceLivraison implements IService<livraison> {
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             if (rs.next()) {
-                ServiceLivreur sliv=new ServiceLivreur();
-                livreur livreur =sliv.getById(rs.getInt("livreur"));
-                ServiceChef schef=new ServiceChef();
-                chef chef = schef.getById(rs.getInt("chef"));
+                UserService sliv=new UserService();
+                User livreur =sliv.getUserById(rs.getInt("livreur"));
+                UserService schef=new UserService();
+                User chef = schef.getUserById(rs.getInt("chef"));
                 String adresse_source = rs.getString("adresse_source");
                 String adresse_destination = rs.getString("adresse_destination");
                 Service_FeedBack_livraison FB=new Service_FeedBack_livraison();
@@ -224,8 +226,8 @@ public class ServiceLivraison implements IService<livraison> {
             while (rs.next()) {
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));
-                liv.setLivreur(new ServiceLivreur().getById(rs.getInt(2)));
-                liv.setChef(new ServiceChef().getById(rs.getInt(3)));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
                 liv.setAdresse_source(rs.getString(4));
                 liv.setAdresse_destination(rs.getString(5));
                 liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));
@@ -251,8 +253,8 @@ public class ServiceLivraison implements IService<livraison> {
             while (rs.next()) {
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));
-                liv.setLivreur(new ServiceLivreur().getById(rs.getInt(2)));
-                liv.setChef(new ServiceChef().getById(rs.getInt(3)));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
                 liv.setAdresse_source(rs.getString(4));
                 liv.setAdresse_destination(rs.getString(5));
                 liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));
@@ -278,8 +280,8 @@ public class ServiceLivraison implements IService<livraison> {
             while (rs.next()) {
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));
-                liv.setLivreur(new ServiceLivreur().getById(rs.getInt(2)));
-                liv.setChef(new ServiceChef().getById(rs.getInt(3)));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
                 liv.setAdresse_source(rs.getString(4));
                 liv.setAdresse_destination(rs.getString(5));
                 liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));
@@ -307,8 +309,8 @@ public class ServiceLivraison implements IService<livraison> {
                 livraison livraison = new livraison();
                 livraison liv= new livraison();
                 liv.setId(rs.getInt(1));
-                liv.setLivreur(new ServiceLivreur().getById(rs.getInt(2)));
-                liv.setChef(new ServiceChef().getById(rs.getInt(3)));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
                 liv.setAdresse_source(rs.getString(4));
                 liv.setAdresse_destination(rs.getString(5));
                 liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));

@@ -13,7 +13,9 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
+import tn.esprit.services.User.UserService;
 import tn.esprit.services.livraison.*;
 
 import java.io.IOException;
@@ -28,9 +30,9 @@ public class YourController {
     @FXML
     private TableColumn<livraison, Integer> idColumn;
     @FXML
-    private TableColumn<livraison, livreur> livreurColumn;
+    private TableColumn<livraison, User> livreurColumn;
     @FXML
-    private TableColumn<livraison, chef> chefColumn;
+    private TableColumn<livraison, User> chefColumn;
     @FXML
     private TableColumn<livraison, String> adresse_source;
 
@@ -132,7 +134,7 @@ public class YourController {
             final Button btn = new Button("Show Details");
 
             @Override
-            public void updateItem(livreur item, boolean empty) {
+            public void updateItem(User item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item==null) {
                     setGraphic(null);
@@ -141,8 +143,10 @@ public class YourController {
                     btn.setOnAction(event -> {
                         try {
                             // Get the livreur details
-                            ServiceLivreur serviceLivreur = new ServiceLivreur();
-                            livreur livreurDetails = serviceLivreur.getById(item.getId());
+                            System.out.println(item);
+                            UserService userService = new UserService();
+                            User livreurDetails = userService.getUserById(item.getUserID());
+                            System.out.println(livreurDetails);
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/Detailslivreur.fxml"));
@@ -175,7 +179,7 @@ public class YourController {
             final Button btn = new Button("Show Details");
 
             @Override
-            public void updateItem(chef item, boolean empty) {
+            public void updateItem(User item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item==null) {
                     setGraphic(null);
@@ -184,8 +188,8 @@ public class YourController {
                     btn.setOnAction(event -> {
                         try {
                             // Get the livreur details
-                            ServiceChef serviceChef = new ServiceChef();
-                            chef chefdetails = serviceChef.getById(item.getId());
+                            UserService serviceChef = new UserService();
+                            User chefdetails = serviceChef.getUserById(item.getUserID());
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DetailsChef.fxml"));

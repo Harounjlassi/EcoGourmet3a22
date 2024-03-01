@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,6 +37,26 @@ public class UserService implements IService<User> {
         } catch (SQLException ex) {
             Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public User getUserById(int id) {
+        User user = null;
+        try {
+            String req = "SELECT * FROM user WHERE UserId = ?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setInt(1, id);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new User();
+                user.setUserID(rs.getInt("UserId"));
+                user.setNom(rs.getString("Nom"));
+                user.setPrenom(rs.getString("Prenom"));
+                user.setEmail(rs.getString("Email"));
+                user.setNumero(rs.getString("Numero"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return user;
     }
 
     @Override
@@ -93,4 +115,34 @@ public class UserService implements IService<User> {
             e.printStackTrace();
         }
     }
+    public List<User> getUsersByRole(String role) {
+        List<User> users = new ArrayList<>();
+        try {
+            String req = "SELECT * FROM user WHERE Role = ?";
+            PreparedStatement ps = cnx.prepareStatement(req);
+            ps.setString(1, role);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("UserId"));
+                user.setNom(rs.getString("Nom"));
+                user.setPrenom(rs.getString("Prenom"));
+                user.setEmail(rs.getString("Email"));
+                user.setNumero(rs.getString("Numero"));
+                users.add(user);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UserService.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return users;
+    }
+    public List<User> getAllChefs() {
+        return getUsersByRole("chef");
+    }
+
+    public List<User> getAllLivreurs() {
+        return getUsersByRole("livreur");
+    }
+
+
 }
