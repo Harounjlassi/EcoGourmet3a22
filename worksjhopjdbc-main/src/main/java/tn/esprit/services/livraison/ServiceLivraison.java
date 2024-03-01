@@ -64,6 +64,89 @@ public class ServiceLivraison implements IService<livraison> {
             System.out.println(e.getMessage());
         }
     }
+    public void updateLivraisonField(int livraisonId, String fieldName, Object newValue) {
+        String qry = "UPDATE `livraison` SET `" + fieldName + "` = ? WHERE `id` = ?";
+        try {
+            PreparedStatement stm = cnx.prepareStatement(qry);
+
+            if (newValue instanceof Integer) {
+                stm.setInt(1, (Integer) newValue);
+            } else if (newValue instanceof String) {
+                stm.setString(1, (String) newValue);
+            } else if (newValue instanceof Boolean) {
+                stm.setBoolean(1, (Boolean) newValue);
+            } else if (newValue instanceof Timestamp) {
+                stm.setTimestamp(1, (Timestamp) newValue);
+
+            } else {
+                stm.setObject(1, newValue);
+            }
+
+            stm.setInt(2, livraisonId);
+
+            stm.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+    public livraison getLastInsertedLivraison() {
+        livraison liv = null;
+        try {
+            String qry = "SELECT * FROM `livraison` ORDER BY `id` DESC LIMIT 1";
+            PreparedStatement stm = cnx.prepareStatement(qry);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                liv = new livraison();
+                // Assuming you have setters for all these fields in your livraison class
+                liv.setId(rs.getInt("id"));
+                liv.setLivreur(new UserService().getUserById(rs.getInt("livreur")));
+                liv.setChef(new UserService().getUserById(rs.getInt("chef")));
+                liv.setAdresse_source(rs.getString("adresse_source"));
+                liv.setAdresse_destination(rs.getString("adresse_destination"));
+                liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt("Feedback_liv")));
+                liv.setRéclamation(new ServiceRéclamation().getById(rs.getInt("Réclamation")));
+                liv.setState_reception(rs.getBoolean("state_reception"));
+                liv.setState_delivery(rs.getBoolean("state_delivery"));
+                liv.setTime_start(rs.getTimestamp("time_start"));
+                liv.setTime_end(rs.getTimestamp("time_end"));
+                liv.setCommande(new ServiceCommande().getById(rs.getInt("commande")));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return liv;
+    }
+    public List<livraison> getLivraisonsWithNullLivreur() {
+        List<livraison> livraisons = new ArrayList<>();
+
+        String qry = "SELECT * FROM `livraison` WHERE `livreur` IS NULL";
+        try {
+            PreparedStatement stm = cnx.prepareStatement(qry);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                livraison liv = new livraison();
+                liv.setId(rs.getInt(1));
+                liv.setLivreur(new UserService().getUserById(rs.getInt(2)));
+                liv.setChef(new UserService().getUserById(rs.getInt(3)));
+                liv.setAdresse_source(rs.getString(4));
+                liv.setAdresse_destination(rs.getString(5));
+                liv.setFeedback_liv(new Service_FeedBack_livraison().getById(rs.getInt(6)));
+                liv.setRéclamation(new ServiceRéclamation().getById(rs.getInt(7)));
+                liv.setState_reception(rs.getBoolean(8));
+                liv.setState_delivery(rs.getBoolean(9));
+                liv.setTime_start(rs.getTimestamp(10));
+                liv.setTime_end(rs.getTimestamp(11));
+                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                livraisons.add(liv);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+        return livraisons;
+    }
+
 
 
     public ArrayList<livraison> getAll(){

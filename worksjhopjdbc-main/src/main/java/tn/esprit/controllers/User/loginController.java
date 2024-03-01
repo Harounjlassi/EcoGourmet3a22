@@ -7,6 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.event.ActionEvent;
 import javafx.scene.input.MouseEvent;
+import tn.esprit.models.User.User;
 import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
@@ -21,6 +22,8 @@ import java.util.logging.Logger;
 
 public class loginController implements Initializable {
     String r;
+    public static  User logged_in_user;
+
     Connection connection;
 
     public Label mdpoublier;
@@ -45,6 +48,13 @@ public class loginController implements Initializable {
                 Statement st = connection.createStatement();
                 ResultSet rs = st.executeQuery(req);
                 if (rs.next()) {
+                    logged_in_user.setUserID(rs.getInt("id"));
+                    logged_in_user.setNom(rs.getString("Nom"));
+                    logged_in_user.setPrenom(rs.getString("Prenom"));
+                    logged_in_user.setEmail(rs.getString("Email"));
+                    logged_in_user.setNumero(rs.getString("Numero"));
+                    logged_in_user.setPassword(rs.getString("Paasword"));
+                    logged_in_user.setRole(rs.getString("Role"));
                     r = rs.getString("Role");
                     System.out.println(r);
 

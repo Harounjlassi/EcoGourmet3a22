@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1109.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.commande.DisplayEventController">
+   <stylesheets>
+      <URL value="@/css/sample.css" />
+   </stylesheets>
+   <children>
+      <BorderPane layoutX="-1.0" prefHeight="699.0" prefWidth="1109.0">
+         <left>
+            <VBox prefHeight="514.0" prefWidth="223.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <!-- Conservez le bouton Profile -->
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" stylesheets="@/css/sample.css" text="Profile" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/profile.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                  </Button>
+                  <!-- Conservez le bouton Annonce -->
+                  <Button fx:id="annonce" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onAction="#openAnnonces" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="annonce" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/projects.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <!-- Conservez le bouton Panier -->
+                  <Button fx:id="panier" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" onAction="#openPanier" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="panier" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon_commande/cart.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="858.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label graphicTextGap="14.0" prefHeight="131.0" prefWidth="319.0" text="EcoGourmet" textFill="#ffb347">
+                     <graphic>
+                        <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Britannic Bold" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <BorderPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+               <top>
+                  <BorderPane fx:id="annoncePane" prefHeight="565.0" prefWidth="886.0" BorderPane.alignment="CENTER" />
+               </top>
+            </BorderPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
