@@ -15,5 +15,6 @@
       <Label fx:id="ch" layoutX="115.0" layoutY="91.0" prefHeight="17.0" prefWidth="131.0" text="Chef information" />
       <Label fx:id="cl" layoutX="115.0" layoutY="91.0" prefHeight="17.0" prefWidth="105.0" text="Client information" visible="false" />
       <Label fx:id="label4" layoutX="116.0" layoutY="211.0" prefHeight="17.0" prefWidth="131.0" text="Label" />
+      <Button fx:id="reclamation" layoutX="417.0" layoutY="78.0" mnemonicParsing="false" onAction="#reclamation" text="réclamation" />
    </children>
 </AnchorPane>

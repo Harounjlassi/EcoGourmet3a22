@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import tn.esprit.controllers.livraison.AddRéclamation;
 import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.User.UserService;
 import tn.esprit.services.livraison.ServiceLivraison;
@@ -46,6 +47,8 @@ public class DeliveryController implements Initializable {
 
     @FXML
     private Button button3;
+    @FXML
+    private Button reclamation;
 
     @FXML
     private Label label1;
@@ -68,6 +71,7 @@ public class DeliveryController implements Initializable {
     @FXML
     void Delivery_Done(ActionEvent event) {
         ServiceLivraison sliv=new ServiceLivraison();
+        System.out.println(liv);
         sliv.updateLivraisonField(liv.getId(),"state_delivery",1);
         try {
             // Load the FXML file for the new view
@@ -122,6 +126,31 @@ public class DeliveryController implements Initializable {
         button2.setVisible(true);
         ch.setVisible(false);
         cl.setVisible(true);
+    }
+    @FXML
+    void reclamation(ActionEvent event) {
+        try {
+
+            // Load the FXML file for the new view
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/add_réclamation.fxml"));
+            Scene scene = new Scene(fxmlLoader.load());
+            AddRéclamation controller = fxmlLoader.getController();
+            controller.setLivraison(liv);
+
+            // Create a new scene
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+
+            // Show the new scene
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }
