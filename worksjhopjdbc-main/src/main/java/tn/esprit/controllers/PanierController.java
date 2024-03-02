@@ -1,5 +1,6 @@
 package tn.esprit.controllers;
 
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -86,7 +87,14 @@ public class PanierController {
 
     @FXML
     private ComboBox<String> triComboBox;
+
+    @FXML
+    private Button passerCommandeButton;
+
     public void initialize() {
+        passerCommandeButton.disableProperty().bind(
+                Bindings.isEmpty(annonceTable.getItems())
+        );
 
         // Initialisez votre service PanierService
         panierService = new panierService();
@@ -183,6 +191,10 @@ public class PanierController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+    }
+
+    private boolean panierEstVide() {
+        return annonceTable.getItems().isEmpty();
     }
 
     @FXML

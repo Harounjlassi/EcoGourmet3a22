@@ -104,4 +104,16 @@ public class DisplayEventController {
         }
     }
 
+    public void openListeCommande(ActionEvent actionEvent) {
+        try {
+            // Load annonce.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCommande.fxml"));
+            Parent panier = loader.load();
+
+            // Set annonce.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(panier);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

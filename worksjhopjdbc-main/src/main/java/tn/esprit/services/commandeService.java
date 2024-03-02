@@ -45,11 +45,47 @@ public class commandeService implements ICService<Commande> {
         }
     }
 
-
     //public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse, String etatCommande)
+//    public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse, String etatLivraison) {
+//        String insertCommandeQuery = "INSERT INTO Commande (id_client, id_panier, prix_total, adresse, etat_livraison) " +
+//                "VALUES (?, ?, ?, ?, ?)";
+//        String selectAnnoncesQuery = "SELECT a.* FROM Annonce a JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
+//                "WHERE pa.id_panier = ?";
+//        String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
+//
+//        try  {
+//            PreparedStatement pst1 = cnx.prepareStatement(insertCommandeQuery);
+//            PreparedStatement pst2 = cnx.prepareStatement(selectAnnoncesQuery);
+//            PreparedStatement pst3 = cnx.prepareStatement(deletePanierAnnonceQuery);
+//            // Ajout de la commande
+//            pst1.setInt(1, idClient);
+//            pst1.setInt(2, idPanier);
+//            pst1.setInt(3, prixTotal);
+//            pst1.setString(4, adresse);
+//            pst1.setString(5, etatLivraison); // Ajout de l'état de livraison
+//            pst1.executeUpdate();
+//
+//            // Récupération des annonces associées au panier
+//            pst2.setInt(1, idPanier);
+//            ResultSet rs = pst2.executeQuery();
+//            List<Integer> annonceIds = new ArrayList<>();
+//            while (rs.next()) {
+//                annonceIds.add(rs.getInt("id_annonce"));
+//            }
+//
+//            // Suppression des annonces du panier
+//            pst3.setInt(1, idPanier);
+//            pst3.executeUpdate();
+//
+//            System.out.println("Commande ajoutée avec succès !");
+//        } catch (SQLException e) {
+//            System.err.println("Erreur lors de l'ajout de la commande : " + e.getMessage());
+//        }
+//    }
+
     public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse, String etatLivraison) {
-        String insertCommandeQuery = "INSERT INTO Commande (id_client, id_panier, prix_total, adresse, etat_livraison) " +
-                "VALUES (?, ?, ?, ?, ?)";
+        String insertCommandeQuery = "INSERT INTO Commande (id_client, id_panier, prix_total, adresse, etat_livraison, tempsCommande) " +
+                "VALUES (?, ?, ?, ?, ?, NOW())"; // Utilisation de la fonction SQL NOW() pour obtenir le temps actuel
         String selectAnnoncesQuery = "SELECT a.* FROM Annonce a JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "WHERE pa.id_panier = ?";
         String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
@@ -142,6 +178,31 @@ public class commandeService implements ICService<Commande> {
         return commandes;
     }
 
+    public List<Commande> getCommandesByClientId(int idClient) {
+        List<Commande> commandes = new ArrayList<>();
+        String selectCommandesQuery = "SELECT * FROM Commande WHERE id_client = ?";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectCommandesQuery);
+            pst.setInt(1, idClient);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Commande commande = new Commande();
+                commande.setId_commande(rs.getInt("id_commande"));
+                commande.setId_client(rs.getInt("id_client"));
+                commande.setPrix_total(rs.getInt("prix_total"));
+                commande.setAdresse(rs.getString("adresse"));
+                commande.setId_panier(rs.getInt("id_panier"));
+                commande.setEtatLivraison(rs.getString("etat_livraison"));
+                commande.setTempsCommande(Timestamp.valueOf(rs.getTimestamp("tempsCommande").toLocalDateTime()));
+                commandes.add(commande);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des commandes du client : " + e.getMessage());
+        }
+        return commandes;
+    }
     public Commande readCommande(int id_commande) {
         Commande commande = null;
         String qry = "SELECT * FROM `commande` WHERE id_commande = ?";

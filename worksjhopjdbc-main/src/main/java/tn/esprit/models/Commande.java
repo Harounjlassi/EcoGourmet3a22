@@ -1,5 +1,7 @@
 package tn.esprit.models;
 
+import java.sql.Timestamp;
+
 public class Commande {
     private int id_commande ;
     private int id_client;
@@ -7,9 +9,18 @@ public class Commande {
     private String adresse;
     private int id_panier;
     private String etatLivraison;
+    private Timestamp tempsCommande;
 
     public Commande(){
+    }
 
+    public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatLivraison,Timestamp tempsCommande){
+        this.id_commande=id_commande;
+        this.id_client=id_client;
+        this.prix_total=prix_total;
+        this.adresse=adresse;
+        this.etatLivraison=etatLivraison;
+        this.tempsCommande=tempsCommande;
     }
 
     public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatLivraison){
@@ -95,6 +106,14 @@ public class Commande {
         this.etatLivraison = etatLivraison;
     }
 
+    public Timestamp getTempsCommande() {
+        return tempsCommande;
+    }
+
+    public void setTempsCommande(Timestamp tempsCommande) {
+        this.tempsCommande = tempsCommande;
+    }
+
     @Override
     public String toString() {
         return "Commande{" +
@@ -104,6 +123,7 @@ public class Commande {
                 ", adresse='" + adresse + '\'' +
                 ", id_panier=" + id_panier +
                 ", etatLivraison='" + etatLivraison + '\'' +
+                ", tempsCommande=" + tempsCommande +
                 '}';
     }
 

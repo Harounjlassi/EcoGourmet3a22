@@ -20,10 +20,12 @@ public class panierService implements IPService<Panier> {
 
     @Override
     public void Ajouter(Panier panier) {
-        String qry = "INSERT INTO panier (id_client) VALUES (?)";
+        String qry = "INSERT INTO panier (id_client, dateCreation, dateModification) VALUES (?, ?, ?)";
         try {
             PreparedStatement pst = cnx.prepareStatement(qry);
-            pst.setInt(1, panier.getId_panier());
+            pst.setInt(1, panier.getId_client());
+            pst.setDate(2, new java.sql.Date(panier.getDateCreation().getTime()));
+            pst.setDate(3, new java.sql.Date(panier.getDateModification().getTime()));
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -44,22 +46,22 @@ public class panierService implements IPService<Panier> {
 
     @Override
     public void Modifier(Panier panier) {
-        String qry = "UPDATE panier SET id_client = ? WHERE id_panier = ?";
+        String qry = "UPDATE panier SET id_client = ?, dateModification = ? WHERE id_panier = ?";
         try {
             PreparedStatement pst = cnx.prepareStatement(qry);
             pst.setInt(1, panier.getId_client());
-            pst.setInt(2, panier.getId_panier());
+            pst.setDate(2, new java.sql.Date(panier.getDateModification().getTime()));
+            pst.setInt(3, panier.getId_panier());
             pst.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
     }
 
     @Override
     public ArrayList<Panier> getAll() {
         ArrayList<Panier> paniers = new ArrayList<>();
-        String qry = "SELECT * FROM `panier`";
+        String qry = "SELECT id_panier, id_client, dateCreation, dateModification FROM panier";
         try {
             Statement stm = cnx.createStatement();
             ResultSet rs = stm.executeQuery(qry);
@@ -67,6 +69,8 @@ public class panierService implements IPService<Panier> {
                 Panier panier = new Panier();
                 panier.setId_panier(rs.getInt(1));
                 panier.setId_client(rs.getInt(2));
+                panier.setDateCreation(rs.getDate(3));
+                panier.setDateModification(rs.getDate(4));
                 paniers.add(panier);
             }
         } catch (SQLException e) {

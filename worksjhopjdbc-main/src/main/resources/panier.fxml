@@ -28,7 +28,8 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button onAction="#passerCommandeButtonClicked" style="-fx-font-weight: bold; -fx-text-fill: green; -fx-background-color: white;" text="Passer une commande" />
+            <Button fx:id="passerCommandeButton" onAction="#passerCommandeButtonClicked" style="-fx-font-weight: bold; -fx-text-fill: green; -fx-background-color: white;" text="Passer une commande" />
+
         </HBox>
         <TableView fx:id="annonceTable" prefHeight="496.0" prefWidth="874.0">
             <columns>

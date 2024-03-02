@@ -72,6 +72,12 @@ public class CommandeController {
     @FXML
     private TextField amountField;
 
+    @FXML
+    private CheckBox paiementALivraisonCheckBox;
+
+    @FXML
+    private CheckBox paiementEnLigneCheckBox;
+
 
     private panierService panierService;
     private commandeService commandeService;
@@ -108,24 +114,6 @@ public class CommandeController {
         List<Annonce> annonces = panierService.getAllAnnoncesFromPanier(idPanier);
         annonceTable.getItems().addAll(annonces);
     }
-    private void filtrerAnnonces(String searchText) {
-        ObservableList<Annonce> annonces = annonceTable.getItems();
-        ObservableList<Annonce> annoncesFiltrees = FXCollections.observableArrayList();
-        if (searchText.isEmpty()) {
-            annoncesFiltrees.setAll(panierService.getAllAnnoncesFromPanier(1)); // Remplacez observableListToutesLesAnnonces avec votre liste complète d'annonces
-        } else {
-            // Parcourez chaque annonce dans la liste
-            for (Annonce annonce : annonces) {
-                if (annonce.getNom_annonce().toLowerCase().contains(searchText.toLowerCase())) {
-                    annoncesFiltrees.add(annonce);
-                }
-            }
-        }
-        annonceTable.setItems(annoncesFiltrees);
-    }
-
-
-
 
     private void afficherInformationsClient(int idClient) {
         // Appel de la fonction du service pour récupérer les informations du client
@@ -221,6 +209,43 @@ public class CommandeController {
     }
     public String getEtatLivraison() {
         return etatLivraison;
+    }
+
+    @FXML
+    private void handlePaiementSelection(ActionEvent event) {
+        CheckBox selectedCheckBox = (CheckBox) event.getSource();
+        if (selectedCheckBox == paiementALivraisonCheckBox && paiementALivraisonCheckBox.isSelected()) {
+            paiementEnLigneCheckBox.setSelected(false);
+            cardNumberField.setDisable(true);
+            expiryDateField.setDisable(true);
+            cvvField.setDisable(true);
+            // Faites quelque chose pour le paiement à la livraison
+        } else if (selectedCheckBox == paiementEnLigneCheckBox && paiementEnLigneCheckBox.isSelected()) {
+            paiementALivraisonCheckBox.setSelected(false);
+            cardNumberField.setDisable(false);
+            expiryDateField.setDisable(false);
+            cvvField.setDisable(false);
+            // Faites quelque chose pour le paiement en ligne
+        }
+    }
+
+    @FXML
+    private void retourPanierButtonClicked(ActionEvent actionEvent) throws IOException {
+        // Charger l'interface du panier
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/displayEvent.fxml"));
+        Parent root = loader.load();
+
+        // Créer une nouvelle scène avec l'interface du panier
+        Scene scene = new Scene(root);
+
+        // Récupérer la fenêtre actuelle
+        Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+
+        // Définir la nouvelle scène sur la fenêtre
+        stage.setScene(scene);
+
+        // Afficher la fenêtre
+        stage.show();
     }
 }
 

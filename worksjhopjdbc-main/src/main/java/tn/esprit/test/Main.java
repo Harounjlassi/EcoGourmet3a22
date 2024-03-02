@@ -1,10 +1,12 @@
 package tn.esprit.test;
 
+import tn.esprit.models.Panier;
 import tn.esprit.models.Personne;
 import tn.esprit.services.*;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
@@ -41,5 +43,11 @@ public class Main {
         //System.out.println(sp2.getAllAnnonces());
         //System.out.println(sp1.getAllAnnoncesFromPanier(1));
         //System.out.println(sp3.afficherInformationsClient(1));
+//        Panier panier1=new Panier();
+//        panier1.setId_client(1); // Définir l'ID du client
+//        panier1.setDateCreation(new Date()); // Définir la date de création
+//        panier1.setDateModification(new Date()); // Définir la date de modification
+//        sp1.Ajouter(panier1);
+//        System.out.println(sp1.getAll());
     }
 }

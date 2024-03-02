@@ -1,22 +1,36 @@
 package tn.esprit.models;
 
 import java.util.List;
+import java.util.Date;
 
 public class Panier {
     private int id_panier;
     private int id_client;
 
-
     //list<anonce>
     List<Annonce> listAnnonce;
-
+    private Date dateCreation;
+    private Date dateModification;
 
     public Panier(){}
+
+//    public Panier(Date dateCreation,Date dateModification){
+//        this.dateCreation=dateCreation;
+//        this.dateModification=dateModification;
+//    }
 
     public Panier(int id_panier, int id_client, List<Annonce> listAnnonce) {
         this.id_panier = id_panier;
         this.id_client = id_client;
         this.listAnnonce = listAnnonce;
+    }
+
+    public Panier(int id_panier, int id_client, List<Annonce> listAnnonce,Date dateCreation,Date dateModification) {
+        this.id_panier = id_panier;
+        this.id_client = id_client;
+        this.listAnnonce = listAnnonce;
+        this.dateCreation=dateCreation;
+        this.dateModification=dateModification;
     }
 
     public Panier(int id_panier,int id_client){
@@ -46,11 +60,39 @@ public class Panier {
     public List<Annonce> getAnnonces() {
         return this.listAnnonce;
     }
+
+    public List<Annonce> getListAnnonce() {
+        return listAnnonce;
+    }
+
+    public void setListAnnonce(List<Annonce> listAnnonce) {
+        this.listAnnonce = listAnnonce;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Date getDateModification() {
+        return dateModification;
+    }
+
+    public void setDateModification(Date dateModification) {
+        this.dateModification = dateModification;
+    }
+
     @Override
     public String toString() {
         return "Panier{" +
                 "id_panier=" + id_panier +
                 ", id_client=" + id_client +
+                ", listAnnonce=" + listAnnonce +
+                ", dateCreation=" + dateCreation +
+                ", dateModification=" + dateModification +
                 '}';
     }
 }
