@@ -40,4 +40,6 @@ public class AnnonceController {
         ObservableList<Annonce> observableList = FXCollections.observableArrayList(annonces);
         annonceTable.setItems(observableList);
     }
+
+
 }

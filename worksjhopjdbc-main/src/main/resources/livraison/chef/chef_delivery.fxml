@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #7A8727;" fx:controller="tn.esprit.controllers.livraison.chef.AnnonceDelivery2">
+   <children>
+      <Label fx:id="label1" layoutX="45.0" layoutY="101.0" prefHeight="43.0" prefWidth="549.0" text="A delivery man is on the road to take a command">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Button fx:id="button1" layoutX="423.0" layoutY="212.0" mnemonicParsing="false" onAction="#show_command_Details" text="command details" />
+      <Button fx:id="button2" layoutX="449.0" layoutY="269.0" mnemonicParsing="false" onAction="#Refresh" text="Refresh" />
+      <Label fx:id="label2" layoutX="129.0" layoutY="101.0" prefHeight="43.0" prefWidth="308.0" text="Thank you for your trust :)" visible="false">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Label>
+      <Label fx:id="label3" layoutX="115.0" layoutY="192.0" prefHeight="17.0" prefWidth="131.0" text="livreur information" />
+      <Label fx:id="label5" layoutX="115.0" layoutY="237.0" prefHeight="17.0" prefWidth="131.0" text="label" />
+      <Label fx:id="label4" layoutX="115.0" layoutY="216.0" prefHeight="17.0" prefWidth="131.0" text="label" />
+      <Label fx:id="label6" layoutX="115.0" layoutY="260.0" prefHeight="17.0" prefWidth="131.0" text="label" />
+   </children>
+</AnchorPane>

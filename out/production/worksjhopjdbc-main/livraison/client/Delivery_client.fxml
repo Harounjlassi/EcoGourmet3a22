@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.client.DeliveryClient">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7A8727;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.client.DeliveryClient">
    <children>
       <Button fx:id="Refresh" layoutX="240.0" layoutY="150.0" mnemonicParsing="false" onAction="#Check_livraison" text="Refresh" />
       <Label fx:id="label1" layoutX="97.0" layoutY="48.0" prefHeight="57.0" prefWidth="341.0" text="Waiting for a delivery man....">

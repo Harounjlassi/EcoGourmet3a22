@@ -3,10 +3,12 @@ package tn.esprit.controllers.livraison;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.stage.Stage;
 import tn.esprit.models.livraison.Réclamation;
@@ -15,12 +17,16 @@ import tn.esprit.services.livraison.ServiceLivraison;
 import tn.esprit.services.livraison.ServiceRéclamation;
 
 import java.io.IOException;
+import java.net.URL;
 import java.sql.Timestamp;
+import java.util.ResourceBundle;
 
-public class AddRéclamation {
+public class AddRéclamation implements Initializable {
 
     @FXML
     private TextArea cause_réclamation;
+    @FXML
+    private Button ajouter;
 
     private livraison liv;
 
@@ -29,6 +35,9 @@ public class AddRéclamation {
         this.liv = liv;
 
         // Now you can use this.liv in your controller
+    }
+    public void initialize(URL url, ResourceBundle rb) {
+        ajouter.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
     }
 
     private final ServiceRéclamation ps = new ServiceRéclamation();

@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -19,11 +20,22 @@ import tn.esprit.services.livraison.ServiceLivraison;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 
 public class DeliveryController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        button1.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        button2.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        button3.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        reclamation.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        label1.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        label2.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        label3.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        label4.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        ch.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        cl.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
         ServiceLivraison sliv=new ServiceLivraison();
         livraison liv = sliv.getLastInsertedLivraison();
         label1.setText("nom :" + liv.getChef().getNom());
@@ -68,11 +80,13 @@ public class DeliveryController implements Initializable {
     private WebView webView;
 
 
+
     @FXML
     void Delivery_Done(ActionEvent event) {
         ServiceLivraison sliv=new ServiceLivraison();
         System.out.println(liv);
         sliv.updateLivraisonField(liv.getId(),"state_delivery",1);
+        sliv.updateLivraisonField(liv.getId(),"time_end",new Timestamp(System.currentTimeMillis()));
         try {
             // Load the FXML file for the new view
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/livreur/livreur_acceuil.fxml"));
@@ -103,10 +117,17 @@ public class DeliveryController implements Initializable {
         // Load OpenStreetMap
         webEngine.load("https://www.google.com/maps");
 
-        Scene scene = new Scene(webView, 600, 350);
+        // Create a button to close the new window
+        Button closeButton = new Button("Close");
+        closeButton.setOnAction(e -> ((Node)(e.getSource())).getScene().getWindow().hide());
 
-        // Get the Stage from the ActionEvent
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        // Create a VBox to hold the WebView and the close button
+        VBox vBox = new VBox(webView, closeButton);
+
+        Scene scene = new Scene(vBox, 600, 350);
+
+        // Create a new Stage
+        Stage stage = new Stage();
 
         stage.setScene(scene);
         stage.show();
@@ -118,6 +139,7 @@ public class DeliveryController implements Initializable {
     void order_received(ActionEvent event) {
         ServiceLivraison sliv=new ServiceLivraison();
         sliv.updateLivraisonField(liv.getId(),"state_reception",1);
+        sliv.updateLivraisonField(liv.getId(),"time_start",new Timestamp(System.currentTimeMillis()));
         label1.setText("nom :" + new UserService().getUserById(4).getNom());
         label2.setText("prenom :" + new UserService().getUserById(4).getPrenom());
         label3.setText("tel :" + String.valueOf(new UserService().getUserById(4).getNumero()));

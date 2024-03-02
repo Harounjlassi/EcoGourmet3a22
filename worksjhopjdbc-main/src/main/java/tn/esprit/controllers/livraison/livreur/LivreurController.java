@@ -47,6 +47,22 @@ public class LivreurController {
     private TableColumn<livraison,Void> accepter;
 
     @FXML
+    private Button button1;
+
+
+    @FXML
+    void Refresh(ActionEvent event) {
+        // Call the initialize method
+        initialize();
+
+        // Refresh the table view
+        table.refresh();
+
+    }
+
+
+
+    @FXML
     private Button tri_par_FB_livreur;
     @FXML
     private Button tri_par_FB_temps;
@@ -57,23 +73,6 @@ public class LivreurController {
 
 
 
-
-    /*private void openNewStage(String fxmlFile) {
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Parent root = (Parent) fxmlLoader.load();
-            Stage stage = new Stage();
-            stage.setScene(new Scene(root));
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    @FXML
-    void openAddLivraisonForm(ActionEvent event) {
-        openNewStage("/livraison/add_livraison.fxml");
-    }*/
 
     @FXML
     public void initialize() {
@@ -211,6 +210,8 @@ public class LivreurController {
                             Stage stage = new Stage();
                             stage.setScene(scene);
                             stage.show();
+                            Stage currentStage = (Stage) accepterbutton.getScene().getWindow();
+                            currentStage.close();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }

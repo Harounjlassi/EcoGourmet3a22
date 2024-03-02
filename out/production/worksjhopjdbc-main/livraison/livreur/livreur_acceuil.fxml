@@ -158,13 +158,14 @@
                                     <children>
                                         <TableView fx:id="table" layoutX="14.0" layoutY="50.0" prefHeight="500.0" prefWidth="1200.0" style="-fx-background-color: #f8f8f8; -fx-border-color: #e8e8e8; -fx-border-width: 1px;">
                                             <columns>
-                                                <TableColumn fx:id="chefColumn" prefWidth="100.0" text="Chef" style="-fx-alignment: CENTER;"/>
-                                                <TableColumn fx:id="adresse_source" prefWidth="100.0" text="Adresse Source" style="-fx-alignment: CENTER;"/>
-                                                <TableColumn fx:id="adresse_destination" prefWidth="100.0" text="Adresse Destination" style="-fx-alignment: CENTER;"/>
-                                                <TableColumn fx:id="commande" prefWidth="100.0" text="Commande" style="-fx-alignment: CENTER;"/>
-                                                <TableColumn fx:id="accepter" prefWidth="100.0" text="accepter" style="-fx-alignment: CENTER;"/>
+                                                <TableColumn fx:id="chefColumn" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Chef" />
+                                                <TableColumn fx:id="adresse_source" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Adresse Source" />
+                                                <TableColumn fx:id="adresse_destination" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Adresse Destination" />
+                                                <TableColumn fx:id="commande" prefWidth="100.0" style="-fx-alignment: CENTER;" text="Commande" />
+                                                <TableColumn fx:id="accepter" prefWidth="100.0" style="-fx-alignment: CENTER;" text="accepter" />
                                             </columns>
                                         </TableView>
+                              <Button fx:id="button1" layoutX="28.0" layoutY="14.0" mnemonicParsing="false" onAction="#Refresh" text="Refresh" />
 
                                     </children>
 

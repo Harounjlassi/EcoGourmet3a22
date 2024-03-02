@@ -4,17 +4,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.livreur.DeliveryController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7A8727;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.livreur.DeliveryController">
    <children>
       <Label fx:id="label1" layoutX="116.0" layoutY="118.0" prefHeight="17.0" prefWidth="131.0" text="Label" />
       <Label fx:id="label2" layoutX="116.0" layoutY="145.0" prefHeight="17.0" prefWidth="131.0" text="Label" />
       <Label fx:id="label3" layoutX="116.0" layoutY="175.0" prefHeight="17.0" prefWidth="131.0" text="Label" />
-      <Button fx:id="button1" layoutX="410.0" layoutY="141.0" mnemonicParsing="false" onAction="#order_received" text="order received" />
-      <Button fx:id="button3" layoutX="411.0" layoutY="207.0" mnemonicParsing="false" onAction="#open_maps" text="open maps" />
-      <Button fx:id="button2" layoutX="411.0" layoutY="141.0" mnemonicParsing="false" onAction="#Delivery_Done" text="Delivery Done" visible="false" />
+      <Button fx:id="button1" id="button1" layoutX="410.0" layoutY="141.0" mnemonicParsing="false" onAction="#order_received" text="order received" />
+      <Button fx:id="button3" id="button1" layoutX="411.0" layoutY="207.0" mnemonicParsing="false" onAction="#open_maps" text="open maps" />
+      <Button fx:id="button2" id="button1" layoutX="411.0" layoutY="141.0" mnemonicParsing="false" onAction="#Delivery_Done" text="Delivery Done" visible="false" />
       <Label fx:id="ch" layoutX="115.0" layoutY="91.0" prefHeight="17.0" prefWidth="131.0" text="Chef information" />
       <Label fx:id="cl" layoutX="115.0" layoutY="91.0" prefHeight="17.0" prefWidth="105.0" text="Client information" visible="false" />
       <Label fx:id="label4" layoutX="116.0" layoutY="211.0" prefHeight="17.0" prefWidth="131.0" text="Label" />
-      <Button fx:id="reclamation" layoutX="417.0" layoutY="78.0" mnemonicParsing="false" onAction="#reclamation" text="réclamation" />
+      <Button fx:id="reclamation" id="button1" layoutX="417.0" layoutY="78.0" mnemonicParsing="false" onAction="#reclamation" text="réclamation" />
    </children>
 </AnchorPane>

@@ -21,11 +21,15 @@ public class MainFX extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/livreur/livreur_acceuil.fxml"));
+        //FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/livreur/livreur_acceuil.fxml"));
+        //FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+        FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/client/commande.fxml"));
         try {
             Parent root = loader.load();
             Scene scene =new Scene(root);
-            primaryStage.setTitle("gestion personne");
+            //primaryStage.setTitle("livreur");
+            //primaryStage.setTitle("chef");
+            primaryStage.setTitle("client");
             primaryStage.setScene(scene);
             primaryStage.show();
 

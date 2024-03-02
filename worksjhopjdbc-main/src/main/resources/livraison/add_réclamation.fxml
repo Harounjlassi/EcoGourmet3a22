@@ -6,11 +6,11 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.AddRéclamation">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #7A8727;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.AddRéclamation">
     <children>
         <Label layoutX="14.0" layoutY="119.0" text="cause_réclamation:" />
         <TextArea fx:id="cause_réclamation" layoutX="114.0" layoutY="119.0" />
-        <Button layoutX="318.0" layoutY="309.0" mnemonicParsing="false" onAction="#ajouterréclamation" text="Ajouter" />
+        <Button fx:id="ajouter" layoutX="318.0" layoutY="309.0" mnemonicParsing="false" onAction="#ajouterréclamation" text="Ajouter" />
       <TextField layoutX="279.0" layoutY="72.0" text="Ajouter votre réclamation" />
     </children>
 </AnchorPane>
