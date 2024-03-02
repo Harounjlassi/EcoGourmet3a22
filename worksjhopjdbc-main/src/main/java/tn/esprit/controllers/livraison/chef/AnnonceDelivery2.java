@@ -1,6 +1,8 @@
 package tn.esprit.controllers.livraison.chef;
 
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -42,6 +44,11 @@ public class AnnonceDelivery2 implements Initializable {
         label4.setText("Nom:"+liv.getLivreur().getNom());
         label5.setText("Prenom:"+liv.getLivreur().getPrenom());
         label6.setText("tel"+liv.getLivreur().getNumero());
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refresh()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
+
+
     }
 
     @FXML
@@ -66,8 +73,38 @@ public class AnnonceDelivery2 implements Initializable {
 
     @FXML
     private Label label6;
+    private Timeline timeline;
+    void refresh() {
+        ServiceLivraison sliv=new ServiceLivraison();
+        System.out.println(sliv.getById(liv.getId()));
+        System.out.println(sliv.getById(liv.getId()).isState_reception());
+        if( sliv.getById(liv.getId()).isState_reception()){
+            timeline.stop();
+            label1.setVisible(false);
+            label2.setVisible(true);
+            button1.setVisible(false);
+            button2.setVisible(false);
+            PauseTransition pause = new PauseTransition(Duration.seconds(3));
+            pause.setOnFinished(e -> {
+                try {
+                    Stage currentStage = (Stage) button1.getScene().getWindow();
+                    currentStage.close();
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+                    Parent root = fxmlLoader.load();
 
-    @FXML
+                    Scene scene = new Scene(root);
+                    Stage stage = new Stage();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+            });
+            pause.play();
+        }
+    }
+
+    /*@FXML
     void Refresh(ActionEvent event) {
         ServiceLivraison sliv=new ServiceLivraison();
         if(sliv.getById(liv.getId()).isState_reception()){
@@ -94,7 +131,7 @@ public class AnnonceDelivery2 implements Initializable {
             pause.play();
 
         }
-    }
+    }*/
 
 
 

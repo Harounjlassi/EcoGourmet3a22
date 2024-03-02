@@ -1,8 +1,11 @@
 package tn.esprit.controllers.livraison.livreur;
 
+import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +17,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import tn.esprit.controllers.livraison.*;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.Feedback_livraison;
@@ -30,6 +34,8 @@ import tn.esprit.services.livraison.Service_FeedBack_livraison;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class LivreurController {
     @FXML
@@ -126,6 +132,8 @@ public class LivreurController {
                 setText(null);
             }
         });
+
+
         commande.setCellFactory(param -> new TableCell<>() {
             final Button btn = new Button("commande");
 
@@ -224,7 +232,31 @@ public class LivreurController {
         });
 
 
+
+
         // Load the data
         table.setItems(FXCollections.observableArrayList(new ServiceLivraison().getLivraisonsWithNullLivreur()));
+
+
+
+        /*Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Platform.runLater(() -> {
+                    // Call the initialize method
+                    new Thread(() -> {
+                        initialize();
+                        Platform.runLater(() -> {
+                            // Refresh the table view
+                            table.refresh();
+                        });
+                    }).start();
+                });
+            }
+        }, 0, 5000);*/
+
     }
+
+
 }
