@@ -70,7 +70,7 @@
                      </VBox.margin>
                   </Button>
                    <!-- Conservez le bouton Annonce -->
-                   <Button fx:id="listeCommande" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onAction="#openListeCommande" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Vos Commande" textFill="WHITE">
+                   <Button fx:id="listeCommande" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" onAction="#openListeCommande" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="History des Commande" textFill="WHITE">
                        <graphic>
                            <!--                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">-->
                            <!--                           <image>-->

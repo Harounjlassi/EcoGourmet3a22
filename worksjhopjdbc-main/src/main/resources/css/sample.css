@@ -5,10 +5,6 @@
     -fx-font-size: 14px;
     -fx-padding: 5px 10px; /* Adjust padding for better appearance */
     -fx-margin: 5px; /* Add margin around the button */
-
-
-
-
 }
 .button:hover
 {
