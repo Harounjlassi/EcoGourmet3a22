@@ -14,9 +14,11 @@
 
 <AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CommandeController">
     <children>
-      <TableView layoutX="553.0" layoutY="117.0" prefHeight="383.0" prefWidth="371.0">
+      <TableView fx:id="annonceTable" layoutX="521.0" layoutY="115.0" prefHeight="383.0" prefWidth="404.0">
         <columns>
-          <TableColumn maxWidth="-1.0" minWidth="-1.0" prefWidth="-1.0" text="C1" />
+            <TableColumn fx:id="nomAnnonceColumn" prefWidth="128.0" text="Nom Annonce" />
+            <TableColumn fx:id="quantiteColumn" prefWidth="136.00006103515625" text="Quantité" />
+            <TableColumn fx:id="supprimerColumn" prefWidth="141.60003662109375" text="supprimer" />
         </columns>
       </TableView>
         <GridPane layoutX="51.0" layoutY="14.0">
@@ -32,41 +34,38 @@
                 <RowConstraints vgrow="SOMETIMES" />
             </rowConstraints>
         </GridPane>
-          <TextField fx:id="nomField" promptText="Nom" layoutX="124.0" layoutY="110.0" prefHeight="26.0" prefWidth="101.0" editable="false" />
-          <TextField fx:id="prenomField" promptText="Prenom" layoutX="238.0" layoutY="110.0" prefHeight="26.0" prefWidth="102.0" editable="false" />
-      <TextField fx:id="numeroField" promptText="Numero telephone" layoutX="124.0" layoutY="150.0" prefHeight="26.0" prefWidth="215.0" editable="false" />
-      <Text layoutX="125.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre Information Personnel :" wrappingWidth="226.13673400878906">
+          <TextField fx:id="nomField" editable="false" layoutX="124.0" layoutY="110.0" prefHeight="26.0" prefWidth="101.0" promptText="Nom" />
+          <TextField fx:id="prenomField" editable="false" layoutX="238.0" layoutY="110.0" prefHeight="26.0" prefWidth="102.0" promptText="Prenom" />
+      <TextField fx:id="numeroField" editable="false" layoutX="124.0" layoutY="150.0" prefHeight="26.0" prefWidth="215.0" promptText="Numero telephone" />
+      <Text layoutX="129.0" layoutY="94.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre Information Personnel :" wrappingWidth="226.13673400878906">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <TextField fx:id="adresseEmailField" promptText="Adresse E-mail" layoutX="124.0" layoutY="191.0" prefHeight="26.0" prefWidth="215.0" editable="false" />
-      <Text layoutX="124.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre adresse :" wrappingWidth="157.3367462158203">
+      <TextField fx:id="adresseEmailField" editable="false" layoutX="124.0" layoutY="191.0" prefHeight="26.0" prefWidth="215.0" promptText="Adresse E-mail" />
+      <Text layoutX="159.0" layoutY="244.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Votre adresse :" wrappingWidth="157.3367462158203">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
       <Text layoutX="124.0" layoutY="304.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'adresse sélectionnée sera utilisée comme adresse de livraison." wrappingWidth="308.5366973876953" />
-      <TextField fx:id="adresse" promptText="Adresse de livraison" layoutX="123.0" layoutY="257.0" prefHeight="26.0" prefWidth="287.0" />
-        <TextField fx:id="cardNumberField"  layoutX="123.0" layoutY="469.0" prefHeight="26.0" prefWidth="157.0" promptText="Numéro de carte" />
-        <TextField fx:id="expiryDateField"  layoutX="123.0" layoutY="513.0" prefHeight="26.0" prefWidth="186.0" promptText="Date d'expiration (MM/YY)" />
-        <TextField fx:id="cvvField"  layoutX="318.0" layoutY="513.0" prefHeight="26.0" prefWidth="90.0" promptText="CVV" />
-        <TextField fx:id="amountField"  layoutX="287.0" layoutY="468.0" prefHeight="26.0" prefWidth="121.0" promptText="Montant à payer" />
-      <Text layoutX="124.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode Paiement :" wrappingWidth="157.3367462158203">
+      <TextField fx:id="adresse" layoutX="123.0" layoutY="257.0" prefHeight="26.0" prefWidth="287.0" promptText="Adresse de livraison" />
+        <TextField fx:id="cardNumberField" layoutX="143.0" layoutY="466.0" prefHeight="26.0" prefWidth="190.0" promptText="Numéro de carte" />
+        <TextField fx:id="expiryDateField" layoutX="143.0" layoutY="499.0" prefHeight="26.0" prefWidth="109.0" promptText="Date d'expiration (MM/YY)" />
+        <TextField fx:id="cvvField" layoutX="256.0" layoutY="499.0" prefHeight="26.0" prefWidth="76.0" promptText="CVV" />
+      <Text layoutX="163.0" layoutY="452.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode Paiement :" wrappingWidth="157.3367462158203">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="174.0" layoutY="561.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="158.0" text="Finalizer Votre Commande"
-              onAction="#finaliserCommande"/>
-      <Text layoutX="124.0" layoutY="351.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode De Livraison :" wrappingWidth="157.3367462158203">
+      <Button layoutX="158.0" layoutY="554.0" mnemonicParsing="false" onAction="#finaliserCommande" prefHeight="26.0" prefWidth="158.0" text="Finalizer Votre Commande" />
+      <Text layoutX="163.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode De Livraison :" wrappingWidth="157.3367462158203">
          <font>
             <Font size="15.0" />
          </font>
       </Text>
-      <CheckBox layoutX="123.0" layoutY="359.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="309.0" text="Ramassage direct" />
-      <CheckBox layoutX="123.0" layoutY="393.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="309.0" text="Livraison par livreur" />
-
+        <CheckBox fx:id="ramassageDirectCheckBox" layoutX="123.0" layoutY="359.0" mnemonicParsing="false" onAction="#handleLivraisonSelection" prefHeight="34.0" prefWidth="309.0" text="Ramassage direct" />
+        <CheckBox fx:id="livraisonLivreurCheckBox" layoutX="123.0" layoutY="393.0" mnemonicParsing="false" onAction="#handleLivraisonSelection" prefHeight="34.0" prefWidth="309.0" text="Livraison par livreur" />
 <!--        <Button text="Payer" onAction="#processPayment" />-->
     </children>
 </AnchorPane>

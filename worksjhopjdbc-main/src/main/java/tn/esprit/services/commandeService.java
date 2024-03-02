@@ -47,9 +47,9 @@ public class commandeService implements ICService<Commande> {
 
 
     //public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse, String etatCommande)
-    public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse) {
-        String insertCommandeQuery = "INSERT INTO Commande (id_client, id_panier, prix_total, adresse) " +
-                "VALUES (?, ?, ?, ?)";
+    public void ajouterCommande(int idClient, int idPanier, int prixTotal, String adresse, String etatLivraison) {
+        String insertCommandeQuery = "INSERT INTO Commande (id_client, id_panier, prix_total, adresse, etat_livraison) " +
+                "VALUES (?, ?, ?, ?, ?)";
         String selectAnnoncesQuery = "SELECT a.* FROM Annonce a JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "WHERE pa.id_panier = ?";
         String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
@@ -63,6 +63,7 @@ public class commandeService implements ICService<Commande> {
             pst1.setInt(2, idPanier);
             pst1.setInt(3, prixTotal);
             pst1.setString(4, adresse);
+            pst1.setString(5, etatLivraison); // Ajout de l'état de livraison
             pst1.executeUpdate();
 
             // Récupération des annonces associées au panier

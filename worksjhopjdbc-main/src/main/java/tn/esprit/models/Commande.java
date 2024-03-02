@@ -6,16 +6,18 @@ public class Commande {
     private int prix_total;
     private String adresse;
     private int id_panier;
+    private String etatLivraison;
 
     public Commande(){
 
     }
 
-    public Commande(int id_commande,int id_client,int prix_total,String adresse){
+    public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatLivraison){
         this.id_commande=id_commande;
         this.id_client=id_client;
         this.prix_total=prix_total;
         this.adresse=adresse;
+        this.etatLivraison=etatLivraison;
 
     }
     public Commande(int id_commande,int id_client,int prix_total,String adresse,int id_panier){
@@ -85,6 +87,14 @@ public class Commande {
         this.id_panier = id_panier;
     }
 
+    public String getEtatLivraison() {
+        return etatLivraison;
+    }
+
+    public void setEtatLivraison(String etatLivraison) {
+        this.etatLivraison = etatLivraison;
+    }
+
     @Override
     public String toString() {
         return "Commande{" +
@@ -93,6 +103,7 @@ public class Commande {
                 ", prix_total=" + prix_total +
                 ", adresse='" + adresse + '\'' +
                 ", id_panier=" + id_panier +
+                ", etatLivraison='" + etatLivraison + '\'' +
                 '}';
     }
 

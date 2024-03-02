@@ -39,7 +39,11 @@
             <artifactId>javafx-base</artifactId>
             <version>21.0.2</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.stripe</groupId>
+            <artifactId>stripe-java</artifactId>
+            <version>20.61.0</version>
+        </dependency>
 
     </dependencies>
 
