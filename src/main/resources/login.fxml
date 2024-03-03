@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-image: url('img/bg.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.loginController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff25" height="621.0" layoutX="242.0" layoutY="56.0" stroke="#00000015" strokeType="INSIDE" width="511.0" />
+      <VBox alignment="CENTER" layoutX="250.0" layoutY="102.0" prefHeight="580.0" prefWidth="486.0" style="-fx-border-image-width: 2;">
+         <children>
+            <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="Connexion">
+               <VBox.margin>
+                  <Insets bottom="60.0" top="-100.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Microsoft YaHei UI Bold" size="30.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Email ">
+               <font>
+                  <Font name="Serif Regular" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="-400.0" />
+               </VBox.margin>
+            </Text>
+            <TextField fx:id="Email" prefHeight="48.0" prefWidth="486.0" promptText="Email">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe ">
+               <font>
+                  <Font name="Serif Regular" size="18.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="15.0" left="-340.0" top="15.0" />
+               </VBox.margin>
+            </Text>
+            <HBox>
+               <PasswordField fx:id="mdp" prefHeight="46.0" prefWidth="441.0" promptText="Mot de passe" />
+               <ToggleButton fx:id="showPasswordToggleButton" onAction="#togglePasswordVisibility">
+                  <graphic>
+                     <ImageView fitHeight="37.0" fitWidth="35.0">
+                        <image>
+<!--                           <Image url="@img/eye_open.png" />-->
+                        </image>
+                     </ImageView>
+                  </graphic>
+               </ToggleButton>
+            </HBox>
+            <!-- Ajout du label "Mot de passe oublié ?" -->
+            <Label fx:id="mdpoublier" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#mdpoubliee" text="Mot de passe oublié ?" textAlignment="RIGHT" textFill="#100d43">
+               <font>
+                  <Font name="Cambria Math" size="13.0" />
+               </font>
+               <VBox.margin>
+                  <Insets left="340.0" top="15.0" />
+               </VBox.margin>
+            </Label>
+            <!-- Afficher l'équation CAPTCHA -->
+            <HBox>
+               <Label fx:id="captchaLabel" text="Veuillez résoudre le test CAPTCHA : " style="-fx-font-size: 18pt;" />
+               <!-- Afficher le test CAPTCHA généré dans le code -->
+            </HBox>
+
+            <!-- Champ de texte pour la réponse du test CAPTCHA -->
+            <TextField fx:id="userCaptchaAnswerField" prefHeight="48.0" prefWidth="300.0" promptText="Entrez votre réponse au test CAPTCHA" />
+
+
+
+            <!-- Autres éléments de votre interface utilisateur... -->
+
+            <Button fx:id="connexion" mnemonicParsing="false" onAction="#connexion" prefHeight="34.0" prefWidth="176.0" text="Se connecter">
+               <VBox.margin>
+                  <Insets top="30.0" />
+               </VBox.margin>
+            </Button>
+
+            <Label fx:id="cnx" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#inscription" text="Créer un compte" textAlignment="RIGHT" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+               <VBox.margin>
+                  <Insets bottom="-70.0" top="60.0" />
+               </VBox.margin>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
+

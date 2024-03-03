@@ -1,0 +1,78 @@
+.button {
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 30;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+}
+
+.button:hover {
+    -fx-background-color: #BAEAC3;
+}
+
+.button:pressed {
+    -fx-background-color: #BAEAC3;
+}
+
+.button:focused {
+    -fx-background-color: #BAEAC3;
+    -fx-border-color: #CDD1D6;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.button2 {
+    -fx-background-color: #FFFFFF;
+    -fx-background-radius: 1px;
+    -fx-border-width: 1px;
+}
+
+.button2:hover {
+    -fx-background-color: #EBE9F6;
+    -fx-border-color: #CDD1D6;
+}
+
+.button2:pressed {
+    -fx-background-color: #BAEAC3;
+}
+
+.button2:focused {
+    -fx-background-color: red;
+    -fx-text-fill: #FFFFFF;
+}
+
+.comment-box {
+    -fx-padding: 5px;
+    -fx-margin-bottom: 10px;
+    -fx-background-color: #f0f0f0;
+    -fx-border-color: #ccc;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.comment-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333;
+}
+
+.like-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: black;
+    -fx-font-size: 14px;
+}
+
+.like-button:selected {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.delete-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: red;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+
+.delete-button:hover {
+    -fx-background-color: #eee;
+}

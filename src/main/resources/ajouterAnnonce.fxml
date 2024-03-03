@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<?import java.net.URL?>
+<AnchorPane prefHeight="300.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterAnnonceController">
+    <stylesheets>
+        <URL value="@/css/sample.css" />
+    </stylesheets>
+    <VBox alignment="CENTER" spacing="10" prefWidth="300" prefHeight="300" style="-fx-background-color: #7a8727; -fx-padding: 20;">
+        <!-- TextFields for entering annonce details -->
+        <TextField fx:id="nomPlatTextField" promptText="Nom du plat" style="-fx-pref-width: 200px;" />
+        <TextField fx:id="descriptionPlatTextField" promptText="Description du plat" style="-fx-pref-width: 200px;" />
+        <TextField fx:id="prixTextField" promptText="Prix" style="-fx-pref-width: 200px;" />
+        <TextField fx:id="categorieTextField" promptText="Catégorie" style="-fx-pref-width: 200px;" />
+        <TextField fx:id="ingredientTextField" promptText="Ingrédients" style="-fx-pref-width: 200px;" />
+        <Button fx:id="importImageButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="125.0" stylesheets="@/css/sample.css" text="Importer Image" onAction="#importImageClicked" textFill="WHITE" />
+
+        <Button fx:id="ajouterButton" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="125.0" stylesheets="@/css/sample.css" text="Ajouter Annonce" onAction="#ajouterAnnonce" textFill="WHITE" />
+
+
+
+    </VBox>
+</AnchorPane>
