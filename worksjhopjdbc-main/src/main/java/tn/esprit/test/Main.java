@@ -49,5 +49,7 @@ public class Main {
 //        panier1.setDateModification(new Date()); // Définir la date de modification
 //        sp1.Ajouter(panier1);
 //        System.out.println(sp1.getAll());
+        //sp.archiverCommande(45);
+        //System.out.println(sp.getAllCommandeArchive(1));
     }
 }

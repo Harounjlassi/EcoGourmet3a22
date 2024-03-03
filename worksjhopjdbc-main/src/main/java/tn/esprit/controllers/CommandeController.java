@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -93,8 +94,10 @@ public class CommandeController {
     private ClientService clientService = new ClientService();
 
     @FXML
-    private void initialize() {
+    private Button finaliserCommandeButton;
 
+    @FXML
+    private void initialize() {
         int idClient = 1; // Remplacez 1 par l'ID du client dont vous avez besoin
         afficherInformationsClient(idClient);
 
@@ -133,11 +136,11 @@ public class CommandeController {
 
     @FXML
     private void finaliserCommande(ActionEvent event) {
+
         String nom = nomField.getText();
         String prenom = prenomField.getText();
         String numero = numeroField.getText();
         String adresseLivraison = adresse.getText();
-
 
         String etatLivraison = null;
         if (ramassageDirectCheckBox.isSelected()) {
@@ -145,8 +148,6 @@ public class CommandeController {
         } else if (livraisonLivreurCheckBox.isSelected()) {
             etatLivraison = "Livraison par livreur";
         }
-
-
         Commande commande = new Commande();
         commande.setAdresse(adresseLivraison);
 
@@ -157,7 +158,19 @@ public class CommandeController {
 
         // Appeler la méthode pour ajouter la commande
         commandeService commandeService = new commandeService();
-        commandeService.ajouterCommande(idClient, idPanier, prixTotal, adresseLivraison,etatLivraison);
+        if (adresse.getText().isEmpty() ||
+                (!ramassageDirectCheckBox.isSelected() && !livraisonLivreurCheckBox.isSelected()) ||
+                (!paiementALivraisonCheckBox.isSelected() && !paiementEnLigneCheckBox.isSelected())) {
+            // Afficher un message d'erreur ou effectuer une action appropriée
+            System.out.println("Veuillez remplir tous les champs obligatoires.");
+            return; // Sortir de la méthode si un champ requis est manquant
+        } else if (paiementEnLigneCheckBox.isSelected() && (cardNumberField.getText().isEmpty() || expiryDateField.getText().isEmpty() || cvvField.getText().isEmpty())) {
+            // Afficher un message d'erreur spécifique pour les champs de paiement en ligne
+            System.out.println("Veuillez remplir tous les champs de paiement en ligne.");
+            return; // Sortir de la méthode si les champs de paiement en ligne sont manquants
+        } else {
+            commandeService.ajouterCommande(idClient, idPanier, prixTotal, adresseLivraison, etatLivraison);
+        }
 
         try {
             Stripe.apiKey = "sk_test_51OpfHFILsmRV4nqPsSywa4szvWj4tbLuAKXd2ASLPTHOZSEyzKwdq67s2M5ePFSDnddYqSSht0Ol7AlmxqwP2zbQ00HyYh2tk1";
@@ -247,5 +260,8 @@ public class CommandeController {
         // Afficher la fenêtre
         stage.show();
     }
+
+
+
 }
 

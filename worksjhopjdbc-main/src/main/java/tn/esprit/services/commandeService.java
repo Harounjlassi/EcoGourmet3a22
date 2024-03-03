@@ -270,4 +270,84 @@ public class commandeService implements ICService<Commande> {
         return commandesTrouvees;
     }
 
+    public void archiverCommande(int idCommande) {
+        String qry = "UPDATE commande SET archive = TRUE WHERE id_commande = ?";
+        try  {
+            PreparedStatement pst = cnx.prepareStatement(qry);
+            pst.setInt(1, idCommande);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la mise à jour de l'archive de la commande : " + e.getMessage());
+        }
+    }
+
+    public void nonArchiverCommande(int idCommande) {
+        String qry = "UPDATE commande SET archive = False WHERE id_commande = ?";
+        try  {
+            PreparedStatement pst = cnx.prepareStatement(qry);
+            pst.setInt(1, idCommande);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la mise à jour de l'archive de la commande : " + e.getMessage());
+        }
+    }
+
+    public List<Commande> getAllCommandeNonArchive(int id_client) {
+        List<Commande> commandesArchivees = new ArrayList<>();
+
+        String qry = "SELECT * FROM commande WHERE id_client = ? AND archive = FALSE";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(qry);
+            pst.setInt(1, id_client);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Commande commande = new Commande();
+                // Remplir les détails de la commande à partir du ResultSet
+                commande.setId_commande(rs.getInt("id_commande"));
+                commande.setId_client(rs.getInt("id_client"));
+                commande.setPrix_total(rs.getInt("prix_total"));
+                commande.setAdresse(rs.getString("adresse"));
+                commande.setEtatLivraison(rs.getString("etat_livraison"));
+                commande.setTempsCommande(Timestamp.valueOf(rs.getTimestamp("tempsCommande").toLocalDateTime()));
+                commande.setArchive(rs.getBoolean("archive"));
+                // Assigner d'autres propriétés de la commande
+                commandesArchivees.add(commande);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return commandesArchivees;
+    }
+    public List<Commande> getAllCommandeArchive(int id_client) {
+        List<Commande> commandesArchivees = new ArrayList<>();
+
+        String qry = "SELECT * FROM commande WHERE id_client = ? AND archive = TRUE";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(qry);
+            pst.setInt(1, id_client);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                Commande commande = new Commande();
+                // Remplir les détails de la commande à partir du ResultSet
+                commande.setId_commande(rs.getInt("id_commande"));
+                commande.setId_client(rs.getInt("id_client"));
+                commande.setPrix_total(rs.getInt("prix_total"));
+                commande.setAdresse(rs.getString("adresse"));
+                commande.setEtatLivraison(rs.getString("etat_livraison"));
+                commande.setTempsCommande(Timestamp.valueOf(rs.getTimestamp("tempsCommande").toLocalDateTime()));
+                commande.setArchive(rs.getBoolean("archive"));
+                // Assigner d'autres propriétés de la commande
+                commandesArchivees.add(commande);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return commandesArchivees;
+    }
 }

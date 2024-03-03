@@ -12,7 +12,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" stylesheets="@css/tableViewDesign.css"
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" stylesheets="@css/commande.css"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.CommandeController">
     <children>
       <TableView fx:id="annonceTable" layoutX="513.0" layoutY="115.0" prefHeight="382.0" prefWidth="412.0">
@@ -50,7 +52,8 @@
          </font>
       </Text>
       <Text layoutX="124.0" layoutY="278.0" strokeType="OUTSIDE" strokeWidth="0.0" text="L'adresse sélectionnée sera utilisée comme adresse de livraison." wrappingWidth="308.5366973876953" />
-      <TextField fx:id="adresse" layoutX="123.0" layoutY="231.0" prefHeight="26.0" prefWidth="287.0" promptText="Adresse de livraison" />
+      <TextField fx:id="adresse"  layoutX="123.0" layoutY="231.0"
+                 prefHeight="26.0" prefWidth="287.0" promptText="Adresse de livraison" />
         <TextField fx:id="cardNumberField" layoutX="137.0" layoutY="508.0" prefHeight="26.0" prefWidth="190.0" promptText="Numéro de carte" />
         <TextField fx:id="expiryDateField" layoutX="137.0" layoutY="541.0" prefHeight="26.0" prefWidth="109.0" promptText="Date d'expiration (MM/YY)" />
         <TextField fx:id="cvvField" layoutX="250.0" layoutY="541.0" prefHeight="26.0" prefWidth="76.0" promptText="CVV" />
@@ -59,7 +62,7 @@
             <Font size="15.0" />
          </font>
       </Text>
-      <Button layoutX="153.0" layoutY="586.0" mnemonicParsing="false" onAction="#finaliserCommande" prefHeight="26.0" prefWidth="158.0" text="Finalizer Votre Commande" />
+      <Button fx:id="finaliserCommandeButton" layoutX="153.0" layoutY="586.0" mnemonicParsing="false" onAction="#finaliserCommande" prefHeight="26.0" prefWidth="158.0" text="Finalizer Votre Commande" />
       <Text layoutX="163.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mode De Livraison :" wrappingWidth="157.3367462158203">
          <font>
             <Font size="15.0" />

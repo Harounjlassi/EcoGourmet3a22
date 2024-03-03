@@ -10,6 +10,7 @@ public class Commande {
     private int id_panier;
     private String etatLivraison;
     private Timestamp tempsCommande;
+    private boolean archive;
 
     public Commande(){
     }
@@ -21,6 +22,16 @@ public class Commande {
         this.adresse=adresse;
         this.etatLivraison=etatLivraison;
         this.tempsCommande=tempsCommande;
+    }
+    public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatLivraison
+            ,Timestamp tempsCommande,boolean archive){
+        this.id_commande=id_commande;
+        this.id_client=id_client;
+        this.prix_total=prix_total;
+        this.adresse=adresse;
+        this.etatLivraison=etatLivraison;
+        this.tempsCommande=tempsCommande;
+        this.archive=archive;
     }
 
     public Commande(int id_commande,int id_client,int prix_total,String adresse,String etatLivraison){
@@ -114,6 +125,14 @@ public class Commande {
         this.tempsCommande = tempsCommande;
     }
 
+    public boolean isArchive() {
+        return archive;
+    }
+
+    public void setArchive(boolean archive) {
+        this.archive = archive;
+    }
+
     @Override
     public String toString() {
         return "Commande{" +
@@ -124,7 +143,7 @@ public class Commande {
                 ", id_panier=" + id_panier +
                 ", etatLivraison='" + etatLivraison + '\'' +
                 ", tempsCommande=" + tempsCommande +
+                ", archive=" + archive +
                 '}';
     }
-
 }

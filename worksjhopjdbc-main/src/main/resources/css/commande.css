@@ -1,0 +1,113 @@
+.table-view {
+    -fx-table-cell-border-color: transparent;
+}
+
+.table-row-cell:empty {
+    -fx-background-color: transparent;
+}
+.hbox-labels {
+    -fx-spacing: 5;
+    -fx-padding: 10;
+    -fx-background-color: #f0f0f0; /* couleur de fond */
+    -fx-border-color: #ccc; /* couleur de la bordure */
+    -fx-border-width: 1px; /* épaisseur de la bordure */
+    -fx-border-radius: 5px; /* arrondi des bords */
+}
+
+.label-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.label-value {
+    -fx-font-size: 14px;
+}
+
+.main-container {
+    -fx-background-color: #f5f5f5;
+}
+
+.search-bar {
+    -fx-padding: 10px;
+    -fx-background-color: #fff;
+    -fx-border-radius: 5px;
+}
+
+.table-view {
+    -fx-border-color: #ddd;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+}
+
+.table-header {
+    -fx-font-weight: bold;
+    -fx-text-align: center;
+}
+
+.total-price-box {
+    -fx-background-color: #f0f0f0;
+    -fx-padding: 10px;
+    -fx-border-radius: 5px;
+}
+.text {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+}
+
+/* Styles pour les boutons */
+.button {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFFFFF;
+    -fx-background-color: #4CAF50; /* couleur de fond */
+    -fx-border-color: #4CAF50; /* couleur de la bordure */
+}
+
+/* Styles pour les boutons lorsqu'ils sont survolés */
+.button:hover {
+    -fx-background-color: #45a049; /* couleur de fond au survol */
+    -fx-border-color: #45a049; /* couleur de la bordure au survol */
+}
+
+/* Styles pour les boutons lorsqu'ils sont cliqués */
+.button:pressed {
+    -fx-background-color: #357733; /* couleur de fond lorsque cliqué */
+    -fx-border-color: #357733; /* couleur de la bordure lorsque cliqué */
+}
+.button {
+    -fx-background-color: #4CAF50; /* Green */
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-padding: 8px 16px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #45a049; /* Darker Green */
+}
+
+/* Styles for CheckBox */
+.check-box {
+    -fx-font-size: 14px;
+}
+
+/* Styles for TableView */
+.table-view {
+    -fx-background-color: #f0f0f0;
+}
+
+/* Styles for TableColumn */
+.table-column {
+    -fx-font-size: 14px;
+}
+
+/* Styles for Text */
+.text {
+    -fx-font-size: 14px;
+}
+/*.anchor-pane {*/
+/*    -fx-background-image: url("background.jpg");*/
+/*    -fx-background-size: cover;*/
+/*    -fx-background-repeat: no-repeat;*/
+/*}*/
