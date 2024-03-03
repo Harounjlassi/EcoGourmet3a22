@@ -9,9 +9,17 @@ import tn.esprit.models.User;
 import tn.esprit.services.UserService;
 import tn.esprit.utils.MyDataBase;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.io.Serializable;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
+import java.util.Base64;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -27,8 +35,13 @@ public class SignupController implements Serializable {
     public Label back;
     public ToggleButton showPasswordToggleButton; // ToggleButton to show/hide password
     UserService uti = new UserService();
+    private static final String ALGORITHM = "AES";
 
-    public void inscription(ActionEvent actionEvent) {
+    // Cette clé est utilisée pour chiffrer et déchiffrer. Gardez-la en sécurité.
+    private static final String SECRET_KEY = "SALAH";
+
+
+    public void inscription(ActionEvent actionEvent) throws NoSuchPaddingException, IllegalBlockSizeException, NoSuchAlgorithmException, BadPaddingException, InvalidKeyException {
         // Basic input validation
         if (Nom.getText().isEmpty() || Prenom.getText().isEmpty() || Email.getText().isEmpty() || mdp.getText().isEmpty() || tel.getText().isEmpty()) {
             showAlert(Alert.AlertType.ERROR, "Error", "Veuillez remplir tous les champs.");
@@ -133,4 +146,5 @@ public class SignupController implements Serializable {
             Logger.getLogger(loginController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
 }

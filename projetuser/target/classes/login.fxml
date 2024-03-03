@@ -15,6 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-image: url('img/bg.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.loginController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffffff25" height="621.0" layoutX="242.0" layoutY="56.0" stroke="#00000015" strokeType="INSIDE" width="511.0" />
@@ -64,19 +65,34 @@
                   </graphic>
                </ToggleButton>
             </HBox>
-            <Label fx:id="mdpoublier" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#mdpoubliee" text="Mot de passe oublié ? " textAlignment="RIGHT" textFill="#100d43">
+            <!-- Label "Mot de passe oublié ?" -->
+            <Label fx:id="mdpoublier" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#mdpoubliee" text="Mot de passe oublié ?" textAlignment="RIGHT" textFill="#100d43">
                <font>
                   <Font name="Cambria Math" size="13.0" />
                </font>
                <VBox.margin>
-                  <Insets left="320.0" top="25.0" />
+                  <Insets left="340.0" top="15.0" />
                </VBox.margin>
             </Label>
+            <!-- Afficher l'équation CAPTCHA -->
+            <HBox>
+               <Label fx:id="captchaLabel" text="Veuillez résoudre le test CAPTCHA : " style="-fx-font-size: 18pt;" />
+               <!-- Afficher le test CAPTCHA généré dans le code -->
+            </HBox>
+
+            <!-- Champ de texte pour la réponse du test CAPTCHA -->
+            <TextField fx:id="userCaptchaAnswerField" prefHeight="48.0" prefWidth="300.0" promptText="Entrez votre réponse au test CAPTCHA" />
+
+
+
+            <!-- Autres éléments de votre interface utilisateur... -->
+
             <Button fx:id="connexion" mnemonicParsing="false" onAction="#connexion" prefHeight="34.0" prefWidth="176.0" text="Se connecter">
                <VBox.margin>
                   <Insets top="30.0" />
                </VBox.margin>
             </Button>
+
             <Label fx:id="cnx" alignment="CENTER" contentDisplay="CENTER" onMouseClicked="#inscription" text="Créer un compte" textAlignment="RIGHT" textFill="WHITE">
                <font>
                   <Font size="24.0" />

@@ -5,8 +5,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>tn.esprit</groupId>
-    <artifactId>workshopjdbc+templateWithMaven</artifactId>
+    <artifactId>projetuser</artifactId>
     <version>1.0-SNAPSHOT</version>
+
+    <!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+
+
+
+
+
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -14,6 +21,11 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
+        <dependency>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
@@ -28,6 +40,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-fxml</artifactId>
             <version>21.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>8.20.0</version>
         </dependency>
 
     </dependencies>

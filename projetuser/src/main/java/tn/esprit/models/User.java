@@ -23,13 +23,14 @@ public class User {
         this.Role = Role;
     }
 
-    public User(String Nom, String Prenom, String Email, String Numero, String Password, String Role) {
+    public User(int UserID,String Nom, String Prenom, String Email, String Numero, String Password) {
+
+        this.UserID = UserID;
         this.Nom = Nom;
         this.Prenom = Prenom;
         this.Email = Email;
         this.Numero = Numero;
         this.Password = Password;
-        this.Role = Role;
     }
 
     public User(String nom, String prenom, String email, String numero, String role) {
@@ -38,6 +39,14 @@ public class User {
         this.Email = email;
         this.Numero = numero;
         this.Role = role;
+    }
+
+    public User(int id, String nom, String prenom, String email, String numero) {
+        this.UserID = id;
+        this.Nom = nom;
+        this.Prenom = prenom;
+        this.Email = email;
+        this.Numero = numero;
     }
 
     public int getUserID() {

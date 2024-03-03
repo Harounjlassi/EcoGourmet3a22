@@ -2,26 +2,22 @@ package tn.esprit.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import tn.esprit.models.User;
 import tn.esprit.services.UserService;
 import tn.esprit.utils.MyDataBase;
 
-import java.io.IOException;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-public class adminController implements Serializable {
+public class adminController {
+    @FXML
     public Tab adminaff;
     public Tab Chefaff;
     public Tab livreuraff;
@@ -54,6 +50,9 @@ public class adminController implements Serializable {
     private TableColumn<User, String> t_action;
 
     @FXML
+    private TableColumn<User, String> t_UserID;
+
+    @FXML
     private TableColumn<User,String> delete;
 
     public PasswordField mdp;
@@ -83,6 +82,9 @@ public class adminController implements Serializable {
     @FXML
     private TableColumn<User, String> t_action11;
 
+    @FXML
+    private TableColumn<User, String> t_UserID111;
+
 
 
     @FXML
@@ -103,7 +105,10 @@ public class adminController implements Serializable {
     @FXML
     private TableColumn<User, String> t_action111;
 
+    @FXML
+    private TableColumn<User, String> t_UserID1111;
 
+    User user;
 
     @FXML
     private TableView<User> table1;
@@ -117,11 +122,15 @@ public class adminController implements Serializable {
     @FXML
     private TableColumn<User, String> t_num1;
 
+
     @FXML
     private TableColumn<User, String> t_email1;
 
     @FXML
     private TableColumn<User, String> t_action1;
+
+    @FXML
+    private TableColumn<User,String> t_UserID11;
 
     private final UserService userService = new UserService();
 
@@ -132,30 +141,6 @@ public class adminController implements Serializable {
         // Initialize column properties
         connection = MyDataBase.getInstance().getCnx();
 
-        t_name.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        t_prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        t_num.setCellValueFactory(new PropertyValueFactory<>("numero"));
-        t_email.setCellValueFactory(new PropertyValueFactory<>("email"));
-
-        t_action.setCellValueFactory(new PropertyValueFactory<>("action"));
-
-        t_name1.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        t_prenom1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        t_email1.setCellValueFactory(new PropertyValueFactory<>("email"));
-        t_num1.setCellValueFactory(new PropertyValueFactory<>("numero"));
-        t_action1.setCellValueFactory(new PropertyValueFactory<>("action"));
-
-        t_name11.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        t_prenom11.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        t_email11.setCellValueFactory(new PropertyValueFactory<>("email"));
-        t_num11.setCellValueFactory(new PropertyValueFactory<>("numero"));
-        t_action11.setCellValueFactory(new PropertyValueFactory<>("action"));
-
-        t_name111.setCellValueFactory(new PropertyValueFactory<>("nom"));
-        t_prenom111.setCellValueFactory(new PropertyValueFactory<>("prenom"));
-        t_email111.setCellValueFactory(new PropertyValueFactory<>("email"));
-        t_num111.setCellValueFactory(new PropertyValueFactory<>("numero"));
-        t_action111.setCellValueFactory(new PropertyValueFactory<>("action"));
 
         // Load data into TableView when the corresponding tabs are selected
 
@@ -187,6 +172,83 @@ public class adminController implements Serializable {
                 table111.getItems().setAll(admin);
             }
         });
+
+
+        t_name.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        t_prenom.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        t_num.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        t_email.setCellValueFactory(new PropertyValueFactory<>("email"));
+
+        t_action.setCellValueFactory(new PropertyValueFactory<>("action"));
+
+        t_name1.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        t_prenom1.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        t_email1.setCellValueFactory(new PropertyValueFactory<>("email"));
+        t_num1.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        t_action1.setCellValueFactory(new PropertyValueFactory<>("action"));
+
+        t_name11.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        t_prenom11.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        t_email11.setCellValueFactory(new PropertyValueFactory<>("email"));
+        t_num11.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        t_action11.setCellValueFactory(new PropertyValueFactory<>("action"));
+
+        t_name111.setCellValueFactory(new PropertyValueFactory<>("nom"));
+        t_name111.setCellValueFactory(new PropertyValueFactory<>("UserID"));
+
+        t_prenom111.setCellValueFactory(new PropertyValueFactory<>("prenom"));
+        t_email111.setCellValueFactory(new PropertyValueFactory<>("email"));
+        t_num111.setCellValueFactory(new PropertyValueFactory<>("numero"));
+        t_action111.setCellValueFactory(new PropertyValueFactory<>("action"));
+
+        refreshActionCells(); // Appel de la fonction de rafraîchissement des cellules d'action
+        refreshTableData(); // Rafraîchir les données au démarrage
+    }
+
+    // Fonction de rafraîchissement des données de la table
+    private void refreshTableData() {
+        List<User> admin = getUsersByRole("admin");
+        table.getItems().setAll(admin);
+        table1.getItems().setAll(admin);
+        table11.getItems().setAll(admin);
+        table111.getItems().setAll(admin);
+    }
+
+    // Fonction de rafraîchissement des cellules d'action
+    private void refreshActionCells() {
+        Callback<TableColumn<User, String>, TableCell<User, String>> cellFactory = new Callback<>() {
+            @Override
+            public TableCell<User, String> call(final TableColumn<User, String> param) {
+                final TableCell<User, String> cell = new TableCell<>() {
+                    private final Button deleteButton = new Button("Supprimer");
+
+                    {
+                        deleteButton.setOnAction((ActionEvent event) -> {
+                            User user = getTableView().getItems().get(getIndex());
+
+                            userService.supprimer(user.getUserID());
+                            refreshTableData();
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(deleteButton);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        t_action.setCellFactory(cellFactory);
+        t_action1.setCellFactory(cellFactory);
+        t_action11.setCellFactory(cellFactory);
+        t_action111.setCellFactory(cellFactory);
     }
 
     private List<User> getUsersByRole(String role) {
@@ -204,8 +266,7 @@ public class adminController implements Serializable {
                 String email = resultSet.getString("Email");
                 String numero = resultSet.getString("Numero");
 
-
-                users.add(new User(nom, prenom, email, numero, role));
+                users.add(new User(id, nom, prenom, email, numero));
             }
 
             resultSet.close();
@@ -216,23 +277,18 @@ public class adminController implements Serializable {
         return users;
     }
 
-    public void handleAddUser(ActionEvent actionEvent) {
-
-    }
-
     public void togglePasswordVisibility(ActionEvent actionEvent) {
-            if (showPasswordToggleButton.isSelected()) {
-                // Show the password
-                mdp.setPromptText(mdp.getText());
-                mdp.setText("");
-                mdp.setDisable(true);
-            } else {
-                // Hide the password
-                mdp.setText(mdp.getPromptText());
-                mdp.setPromptText("");
-                mdp.setDisable(false);
-            }
-
+        if (showPasswordToggleButton.isSelected()) {
+            // Show the password
+            mdp.setPromptText(mdp.getText());
+            mdp.setText("");
+            mdp.setDisable(true);
+        } else {
+            // Hide the password
+            mdp.setText(mdp.getPromptText());
+            mdp.setPromptText("");
+            mdp.setDisable(false);
+        }
     }
 
     public void chef(ActionEvent actionEvent) {
@@ -247,10 +303,8 @@ public class adminController implements Serializable {
         Role.setText("livreur");
     }
 
-
     public void admin(ActionEvent actionEvent) {
         Role.setText("admin");
-
     }
 
     public void Ajouter(ActionEvent actionEvent) {
@@ -287,16 +341,15 @@ public class adminController implements Serializable {
         u.setNumero(tel.getText());
         uti.add(u);
         showAlert(Alert.AlertType.CONFIRMATION, "Success", "Bien ajouté");
-
-
-
     }
+
     private void showAlert(Alert.AlertType alertType, String title, String content) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setContentText(content);
         alert.show();
     }
+
     private boolean isValidEmail(String email) {
         // Use a simple regular expression for email validation
         String emailRegex = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -317,37 +370,4 @@ public class adminController implements Serializable {
         }
         return true;
     }
-delete.setCellFactory(param -> new TableCell<>() {
-        private final Button deleteButton = new Button("Delete");
-
-        @Override
-        protected void updateItem(Void item, boolean empty) {
-            super.updateItem(item, empty);
-
-            if (empty) {
-                setGraphic(null);
-            } else {
-                deleteButton.setOnAction(event -> {
-                    User user = getTableView().getItems().get(getIndex());
-
-                    // Delete the user
-                    userService.delete(user.getId()); // Adjust this based on your UserService implementation
-
-                    // Update the table view
-                    getTableView().getItems().remove(user);
-                    getTableView().refresh();
-                });
-
-                setGraphic(deleteButton);
-            }
-        }
-    });
 }
-
-    public void handleModifier(ActionEvent actionEvent) {
-    }
-
-    public void handleSupprimer(ActionEvent actionEvent) {
-    }
-}
-
