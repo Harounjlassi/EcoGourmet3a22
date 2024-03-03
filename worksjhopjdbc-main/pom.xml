@@ -39,6 +39,16 @@
             <artifactId>fontawesomefx</artifactId>
             <version>8.9</version>
         </dependency>
+        <dependency>
+            <groupId>com.vonage</groupId>
+            <artifactId>vonage-java-sdk</artifactId>
+            <version>6.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.twilio.sdk</groupId>
+            <artifactId>twilio</artifactId>
+            <version>7.17.0</version> <!-- Use the latest version -->
+        </dependency>
 
 
     </dependencies>

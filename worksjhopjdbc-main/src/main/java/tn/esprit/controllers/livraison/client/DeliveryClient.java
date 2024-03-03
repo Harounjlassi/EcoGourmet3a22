@@ -18,13 +18,16 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.esprit.controllers.livraison.AddRéclamation;
 import tn.esprit.controllers.livraison.Add_Feedback;
+import tn.esprit.controllers.livraison.DetailsCommande;
 import tn.esprit.controllers.livraison.chef.AnnonceDelivery2;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.livraison;
+import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.ServiceLivraison;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 public class DeliveryClient implements Initializable{
@@ -48,11 +51,13 @@ public class DeliveryClient implements Initializable{
     private Label ageLabel;
     @FXML
     private Label telLabel;
+    @FXML
+    private Button button1;
     private Timeline timeline;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Refresh.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
+        button1.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
         label1.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
         label2.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
         label3.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
@@ -195,6 +200,35 @@ public class DeliveryClient implements Initializable{
 
 
         }
+    }
+    @FXML
+    void Command_Details(ActionEvent event) {
+        try {
+            // Get the livreur details
+            commandeService serviceCommande = new commandeService();
+            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(new ServiceLivraison().getLastInsertedLivraison().getCommande().getId_commande());
+
+            // Load the FXML file for the new stage
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Get the controller of the new stage
+            DetailsCommande controller = fxmlLoader.getController();
+
+            // Pass the livreur details to the controller
+            controller.setCommande(commandedetails);
+
+            // Create the new stage
+            Stage detailsStage = new Stage();
+            detailsStage.setTitle("Commande Details");
+            detailsStage.setScene(new Scene(root));
+
+            // Show the new stage
+            detailsStage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 }

@@ -19,6 +19,7 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.esprit.controllers.livraison.*;
+import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.Feedback_livraison;
 import tn.esprit.models.livraison.Réclamation;
@@ -26,6 +27,7 @@ import tn.esprit.models.livraison.commande;
 import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.User.UserService;
 import tn.esprit.controllers.User.loginController;
+import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.ServiceCommande;
 import tn.esprit.services.livraison.ServiceLivraison;
 import tn.esprit.services.livraison.ServiceRéclamation;
@@ -34,6 +36,7 @@ import tn.esprit.services.livraison.Service_FeedBack_livraison;
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -48,7 +51,7 @@ public class LivreurController {
     @FXML
     private TableColumn<livraison, String> adresse_destination;
     @FXML
-    private TableColumn<livraison, tn.esprit.models.livraison.commande> commande;
+    private TableColumn<livraison, Commande> commande;
     @FXML
     private TableColumn<livraison,Void> accepter;
 
@@ -138,7 +141,7 @@ public class LivreurController {
             final Button btn = new Button("commande");
 
             @Override
-            public void updateItem(commande item, boolean empty) {
+            public void updateItem(Commande item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item==null) {
                     setGraphic(null);
@@ -146,9 +149,8 @@ public class LivreurController {
                     btn.setOnAction(event -> {
                         try {
                             // Get the livreur details
-                            ServiceCommande serviceCommande = new ServiceCommande();
-                            System.out.println(item.getId());
-                            commande commandedetails = serviceCommande.getById(item.getId());
+                            commandeService serviceCommande = new commandeService();
+                            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));
@@ -158,7 +160,7 @@ public class LivreurController {
                             DetailsCommande controller = fxmlLoader.getController();
 
                             // Pass the livreur details to the controller
-                            controller.setFeedback(commandedetails);
+                            controller.setCommande(commandedetails);
 
                             // Create the new stage
                             Stage detailsStage = new Stage();

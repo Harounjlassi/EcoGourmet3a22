@@ -1,27 +1,39 @@
 package tn.esprit.test;
 
+import com.vonage.client.VonageClient;
+import com.vonage.client.sms.SmsSubmissionResponse;
+import com.vonage.client.sms.messages.TextMessage;
 import tn.esprit.models.Personne;
 import tn.esprit.services.ServicePersonne;
+import tn.esprit.services.livraison.ServiceCommande;
 import tn.esprit.utils.MyDataBase;
+
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Main {
     public static void main(String[] args) {
 
-        Personne p1 = new Personne(1000,"ben mohamed ", "mohamed ",20);
-        Personne p2 = new Personne(5,"ben mohamed ", "mohamed haroun ",35);
-        Personne p3 = new Personne(47,"ben mohamed ", "mohamed ali ",99);
+        /*VonageClient client = VonageClient.builder().apiKey("34699909").apiSecret("B2F7w5g3aUpI7j7c").build();
 
-        ServicePersonne sp = new ServicePersonne();
-//        sp.add(p1);
-//        sp.add(p2);
-//        sp.add(p3);
-        //sp.delete(p2);
-       // sp.update(p3);
+        TextMessage message = new TextMessage(
+                "Vonage APIs",
+                "+21696489286",
+                "Hello from Vonage!");
 
+        SmsSubmissionResponse response = client.getSmsClient().submitMessage(message);
 
-
-        //System.out.println(sp.getAll());
-
-
+        if (response.getMessages().get(0).getStatus().name().equals("0")) {
+            System.out.println("Message sent successfully.");
+        } else {
+            System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
+        }*/
+        ServiceCommande scmd=new ServiceCommande();
+        System.out.println(scmd.getCommandeDetails(scmd.getLastInsertedCommande().getId_commande()));
     }
+
+    //System.out.println(sp.getAll());
+
+
 }

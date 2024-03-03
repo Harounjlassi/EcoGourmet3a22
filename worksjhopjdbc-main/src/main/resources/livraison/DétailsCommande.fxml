@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<AnchorPane xmlns="http://javafx.com/javafx/21.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.DetailsCommande">
+
+<AnchorPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.DetailsCommande">
     <children>
-        <VBox alignment="CENTER" spacing="10" prefWidth="250.0" prefHeight="250.0">
-            <Label fx:id="idLabel" text="ID: " />
+        <VBox alignment="CENTER" prefHeight="250.0" prefWidth="250.0" spacing="10">
+            <Label fx:id="label1" prefHeight="17.0" prefWidth="141.0" text="Nom du plat" />
+         <Label fx:id="label2" prefHeight="17.0" prefWidth="141.0" text="quantite" />
+         <Label fx:id="label3" prefHeight="17.0" prefWidth="144.0" text="prix_total" />
         </VBox>
     </children>
 </AnchorPane>

@@ -13,14 +13,17 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
 import tn.esprit.services.User.UserService;
+import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.*;
 
 import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Map;
 
 
 public class YourController {
@@ -45,7 +48,7 @@ public class YourController {
     @FXML
     private TableColumn<livraison, Timestamp> time_start;
     @FXML
-    private TableColumn<livraison, commande> commande;
+    private TableColumn<livraison, Commande> commande;
     @FXML
     private TableColumn<livraison,Void> update;
     @FXML
@@ -308,7 +311,7 @@ public class YourController {
             final Button btn = new Button("commande");
 
             @Override
-            public void updateItem(commande item, boolean empty) {
+            public void updateItem(Commande item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty || item==null) {
                     setGraphic(null);
@@ -316,9 +319,8 @@ public class YourController {
                     btn.setOnAction(event -> {
                         try {
                             // Get the livreur details
-                            ServiceCommande serviceCommande = new ServiceCommande();
-                            System.out.println(item.getId());
-                            commande commandedetails = serviceCommande.getById(item.getId());
+                            commandeService serviceCommande = new commandeService();
+                            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));
@@ -328,7 +330,7 @@ public class YourController {
                             DetailsCommande controller = fxmlLoader.getController();
 
                             // Pass the livreur details to the controller
-                            controller.setFeedback(commandedetails);
+                            controller.setCommande(commandedetails);
 
                             // Create the new stage
                             Stage detailsStage = new Stage();

@@ -1,5 +1,6 @@
 package tn.esprit.models.livraison;
 
+import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 
 import java.sql.Timestamp;
@@ -16,9 +17,9 @@ public class livraison {
     private boolean state_delivery;
     private Timestamp time_start;
     private Timestamp time_end;
-    private tn.esprit.models.livraison.commande commande;
+    private tn.esprit.models.Commande.Commande commande;
 
-    public livraison(int id,User livreur, User chef, String adresse_source, String adresse_destination, Feedback_livraison feedback_liv, Réclamation réclamation, boolean state_reception, boolean state_delivery, Timestamp time_start, Timestamp time_end, tn.esprit.models.livraison.commande commande) {
+    public livraison(int id,User livreur, User chef, String adresse_source, String adresse_destination, Feedback_livraison feedback_liv, Réclamation réclamation, boolean state_reception, boolean state_delivery, Timestamp time_start, Timestamp time_end, Commande commande) {
         this.id = id;
         this.livreur = livreur;
         this.chef = chef;
@@ -128,12 +129,12 @@ public class livraison {
         this.time_end = time_end;
     }
 
-    public commande getCommande() {
+    public Commande getCommande() {
         return commande;
     }
 
-    public void setCommande(commande commande) {
-        this.commande = commande;
+    public void setCommande(Commande Commande) {
+        this.commande = Commande;
     }
 
     @Override

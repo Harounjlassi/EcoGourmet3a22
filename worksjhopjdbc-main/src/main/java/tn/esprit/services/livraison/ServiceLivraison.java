@@ -1,10 +1,12 @@
 package tn.esprit.services.livraison;
 
 import tn.esprit.interfaces.IService;
+import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
 import tn.esprit.services.User.UserService;
 import tn.esprit.utils.MyDataBase;
+import tn.esprit.services.commande.commandeService;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -53,7 +55,7 @@ public class ServiceLivraison implements IService<livraison> {
             stm.setTimestamp(10,livraison.getTime_end());
 
             if (livraison.getCommande() != null) {
-                stm.setInt(11,livraison.getCommande().getId());
+                stm.setInt(11,livraison.getCommande().getId_commande());
             } else {
                 stm.setNull(11, Types.INTEGER);
             }
@@ -109,7 +111,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean("state_delivery"));
                 liv.setTime_start(rs.getTimestamp("time_start"));
                 liv.setTime_end(rs.getTimestamp("time_end"));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt("commande")));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt("commande")));
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -137,7 +139,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
         } catch (SQLException e) {
@@ -168,7 +170,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
 
@@ -219,7 +221,7 @@ public class ServiceLivraison implements IService<livraison> {
             stm.setTimestamp(10, livraison.getTime_end());
 
             if (livraison.getCommande() != null) {
-                stm.setInt(11, livraison.getCommande().getId());
+                stm.setInt(11, livraison.getCommande().getId_commande());
             } else {
                 stm.setNull(11, Types.INTEGER);
             }
@@ -290,8 +292,8 @@ public class ServiceLivraison implements IService<livraison> {
                 boolean state_delivery = rs.getBoolean("state_delivery");
                 Timestamp time_start = rs.getTimestamp("time_start");
                 Timestamp time_end = rs.getTimestamp("time_end");
-                ServiceCommande scom=new ServiceCommande();
-                commande commande = scom.getById(rs.getInt("commande"));
+                commandeService scom=new commandeService();
+                Commande commande = scom.getCommandeById(rs.getInt("commande"));
 
                 livraison = new livraison(id, livreur, chef, adresse_source, adresse_destination, feedback_liv, reclamation, state_reception, state_delivery, time_start, time_end, commande);
             }
@@ -319,7 +321,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
         } catch (SQLException e) {
@@ -346,7 +348,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
         } catch (SQLException e) {
@@ -373,7 +375,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
         } catch (SQLException e) {
@@ -402,7 +404,7 @@ public class ServiceLivraison implements IService<livraison> {
                 liv.setState_delivery(rs.getBoolean(9));
                 liv.setTime_start(rs.getTimestamp(10));
                 liv.setTime_end(rs.getTimestamp(11));
-                liv.setCommande(new ServiceCommande().getById(rs.getInt(12)));
+                liv.setCommande(new commandeService().getCommandeById(rs.getInt(12)));
                 livraisons.add(liv);
             }
         } catch (SQLException e) {

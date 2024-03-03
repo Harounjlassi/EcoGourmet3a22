@@ -12,10 +12,12 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.*;
 import tn.esprit.services.User.UserService;
 import tn.esprit.services.livraison.*;
+import tn.esprit.services.commande.commandeService;
 
 import java.io.IOException;
 import java.sql.Timestamp;
@@ -37,7 +39,7 @@ public class Add_livraison {
     @FXML
     private Button reclamationButton;
     @FXML
-    private ComboBox<commande> commande;
+    private ComboBox<Commande> commande;
     @FXML
     private Button mySubmitButton;
     private boolean isFeedbackAdded = false;
@@ -67,7 +69,7 @@ public class Add_livraison {
             List<User> chefs = new UserService().getAllChefs();
             List<Feedback_livraison> feedbacks = new Service_FeedBack_livraison().getAll();
             List<Réclamation> reclamations = new ServiceRéclamation().getAll();
-            List<commande> commandes = new ServiceCommande().getAll();
+            List<Commande> commandes = new commandeService().getAll();
 
             livreur.getItems().addAll(livreurs);
             chef.getItems().addAll(chefs);
