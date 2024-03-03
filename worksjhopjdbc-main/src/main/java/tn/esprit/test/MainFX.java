@@ -30,7 +30,7 @@ public class MainFX extends Application {
             Scene scene =new Scene(root);
             //primaryStage.setTitle("livreur");
             //primaryStage.setTitle("chef");
-            primaryStage.setTitle("client");
+            //primaryStage.setTitle("client");
             primaryStage.setScene(scene);
             primaryStage.show();
 

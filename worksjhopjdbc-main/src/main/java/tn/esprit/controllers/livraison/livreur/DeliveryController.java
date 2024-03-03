@@ -13,9 +13,11 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import tn.esprit.controllers.livraison.AddRéclamation;
 import tn.esprit.controllers.livraison.DetailsCommande;
+import tn.esprit.models.livraison.CommandeDetail;
 import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.User.UserService;
 import tn.esprit.services.commande.commandeService;
@@ -24,6 +26,7 @@ import tn.esprit.services.livraison.ServiceLivraison;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -118,7 +121,7 @@ public class DeliveryController implements Initializable {
 
     @FXML
     void open_maps(ActionEvent event) {
-        WebView webView = new WebView();
+        /*WebView webView = new WebView();
         WebEngine webEngine = webView.getEngine();
 
         // Load OpenStreetMap
@@ -137,7 +140,28 @@ public class DeliveryController implements Initializable {
         Stage stage = new Stage();
 
         stage.setScene(scene);
-        stage.show();
+        stage.show();*/
+        try {
+            // Load the FXML file for the map view
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/Maps.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the map view
+            Stage mapStage = new Stage();
+            mapStage.setTitle("Google Maps");
+            mapStage.setScene(new Scene(root));
+
+            // Set the modality of the map stage to APPLICATION_MODAL
+            mapStage.initModality(Modality.APPLICATION_MODAL);
+
+            // Show the map stage
+            mapStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
 
@@ -187,7 +211,7 @@ public class DeliveryController implements Initializable {
         try {
             // Get the livreur details
             commandeService serviceCommande = new commandeService();
-            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(new ServiceLivraison().getLastInsertedLivraison().getCommande().getId_commande());
+            List<CommandeDetail> commandedetails = serviceCommande.getCommandeDetails(new ServiceLivraison().getLastInsertedLivraison().getCommande().getId_commande());
 
             // Load the FXML file for the new stage
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));

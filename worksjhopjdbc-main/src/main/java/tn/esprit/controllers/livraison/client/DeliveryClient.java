@@ -21,12 +21,14 @@ import tn.esprit.controllers.livraison.Add_Feedback;
 import tn.esprit.controllers.livraison.DetailsCommande;
 import tn.esprit.controllers.livraison.chef.AnnonceDelivery2;
 import tn.esprit.models.User.User;
+import tn.esprit.models.livraison.CommandeDetail;
 import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.ServiceLivraison;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -206,7 +208,7 @@ public class DeliveryClient implements Initializable{
         try {
             // Get the livreur details
             commandeService serviceCommande = new commandeService();
-            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(new ServiceLivraison().getLastInsertedLivraison().getCommande().getId_commande());
+            List<CommandeDetail> commandedetails = serviceCommande.getCommandeDetails(new ServiceLivraison().getLastInsertedLivraison().getCommande().getId_commande());
 
             // Load the FXML file for the new stage
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));

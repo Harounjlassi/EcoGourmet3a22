@@ -1,11 +1,7 @@
 package tn.esprit.controllers.livraison.livreur;
 
-import javafx.application.Platform;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -15,30 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import tn.esprit.controllers.livraison.*;
 import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
-import tn.esprit.models.livraison.Feedback_livraison;
-import tn.esprit.models.livraison.Réclamation;
-import tn.esprit.models.livraison.commande;
-import tn.esprit.models.livraison.livraison;
+import tn.esprit.models.livraison.*;
 import tn.esprit.services.User.UserService;
-import tn.esprit.controllers.User.loginController;
 import tn.esprit.services.commande.commandeService;
-import tn.esprit.services.livraison.ServiceCommande;
 import tn.esprit.services.livraison.ServiceLivraison;
-import tn.esprit.services.livraison.ServiceRéclamation;
-import tn.esprit.services.livraison.Service_FeedBack_livraison;
 
 import java.io.IOException;
-import java.sql.Timestamp;
 import java.util.List;
-import java.util.Map;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class LivreurController {
     @FXML
@@ -101,6 +84,7 @@ public class LivreurController {
                 if (empty || item==null) {
                     setGraphic(null);
                 } else {
+                    System.out.println(item.getNom());
                     btn.setText(item.getNom());
                     btn.setOnAction(event -> {
                         try {
@@ -150,7 +134,7 @@ public class LivreurController {
                         try {
                             // Get the livreur details
                             commandeService serviceCommande = new commandeService();
-                            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
+                            List<CommandeDetail> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));

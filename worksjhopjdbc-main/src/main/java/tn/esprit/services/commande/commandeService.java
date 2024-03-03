@@ -4,6 +4,7 @@ package tn.esprit.services.commande;
 import tn.esprit.interfaces.ICService;
 import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
+import tn.esprit.models.livraison.CommandeDetail;
 import tn.esprit.models.livraison.commande;
 import tn.esprit.utils.MyDataBase;
 
@@ -226,7 +227,7 @@ public class commandeService implements ICService<Commande> {
         }
         return commande;
     }
-    public Map<String, Object> getCommandeDetails(int idCommande) {
+    /*public Map<String, Object> getCommandeDetails(int idCommande) {
         String selectCommandeDetailsQuery = "SELECT a.Nom_du_plat, pa.quantite, c.prix_total, c.adresse " +
                 "FROM Commande c JOIN Panier_Annonce pa ON c.id_panier = pa.id_panier " +
                 "JOIN Annonce a ON pa.id_annonce = a.id_annonce " +
@@ -250,10 +251,37 @@ public class commandeService implements ICService<Commande> {
         }
 
         return commandeDetails;
+    }*/
+    public List<CommandeDetail> getCommandeDetails(int idCommande) {
+        String selectCommandeDetailsQuery = "SELECT a.Nom_du_plat, pa.quantite, c.prix_total, c.adresse " +
+                "FROM Commande c JOIN Panier_Annonce pa ON c.id_panier = pa.id_panier " +
+                "JOIN Annonce a ON pa.id_annonce = a.id_annonce " +
+                "WHERE c.id_commande = ?";
+
+        List<CommandeDetail> commandeDetailsList = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectCommandeDetailsQuery);
+            pst.setInt(1, idCommande);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                CommandeDetail detail = new CommandeDetail();
+                detail.setNomDuPlat(rs.getString("Nom_du_plat"));
+                detail.setQuantite(rs.getInt("quantite"));
+                detail.setPrixTotal(rs.getInt("prix_total"));
+                detail.setAdresse(rs.getString("adresse"));
+                commandeDetailsList.add(detail);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des détails de la commande : " + e.getMessage());
+        }
+
+        return commandeDetailsList;
     }
     public User getChefDetailsFromCommande(int idCommande) {
         String selectChefDetailsQuery = "SELECT u.* FROM User u " +
-                "JOIN Annonce a ON u.UserId = a.id_du_chef " +
+                "JOIN Annonce a ON u.UserId = a.UserID " +
                 "JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "JOIN Commande c ON pa.id_panier = c.id_panier " +
                 "WHERE c.id_commande = ?";

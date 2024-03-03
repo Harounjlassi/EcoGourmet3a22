@@ -14,12 +14,14 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import tn.esprit.controllers.livraison.DetailsCommande;
+import tn.esprit.models.livraison.CommandeDetail;
 import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.ServiceLivraison;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
@@ -139,7 +141,7 @@ public class AnnonceDelivery2 implements Initializable {
         try {
             // Get the livreur details
             commandeService serviceCommande = new commandeService();
-            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(liv.getCommande().getId_commande());
+            List<CommandeDetail> commandedetails = serviceCommande.getCommandeDetails(liv.getCommande().getId_commande());
 
             // Load the FXML file for the new stage
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));

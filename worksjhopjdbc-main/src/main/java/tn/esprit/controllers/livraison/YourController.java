@@ -320,7 +320,7 @@ public class YourController {
                         try {
                             // Get the livreur details
                             commandeService serviceCommande = new commandeService();
-                            Map<String, Object> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
+                            List<CommandeDetail> commandedetails = serviceCommande.getCommandeDetails(item.getId_commande());
 
                             // Load the FXML file for the new stage
                             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/DétailsCommande.fxml"));

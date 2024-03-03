@@ -1,16 +1,6 @@
 package tn.esprit.test;
 
-import com.vonage.client.VonageClient;
-import com.vonage.client.sms.SmsSubmissionResponse;
-import com.vonage.client.sms.messages.TextMessage;
-import tn.esprit.models.Personne;
-import tn.esprit.services.ServicePersonne;
-import tn.esprit.services.livraison.ServiceCommande;
-import tn.esprit.utils.MyDataBase;
-
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
+import tn.esprit.services.commande.commandeService;
 
 public class Main {
     public static void main(String[] args) {
@@ -29,7 +19,7 @@ public class Main {
         } else {
             System.out.println("Message failed with error: " + response.getMessages().get(0).getErrorText());
         }*/
-        ServiceCommande scmd=new ServiceCommande();
+        commandeService scmd=new commandeService();
         System.out.println(scmd.getCommandeDetails(scmd.getLastInsertedCommande().getId_commande()));
     }
 

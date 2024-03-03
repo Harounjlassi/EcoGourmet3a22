@@ -8,8 +8,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import tn.esprit.models.Commande.Commande;
-import tn.esprit.services.User.UserService;
-import tn.esprit.services.livraison.ServiceCommande;
+import tn.esprit.services.commande.commandeService;
 import tn.esprit.services.livraison.ServiceLivraison;
 import tn.esprit.models.livraison.livraison;
 
@@ -22,9 +21,9 @@ public class CommandeDelivery {
     @FXML
     void Valider_Commande(ActionEvent event) {
         ServiceLivraison sliv=new ServiceLivraison();
-        ServiceCommande scom=new ServiceCommande();
+        commandeService scom=new commandeService();
         Commande last=scom.getLastInsertedCommande();
-        livraison liv=new livraison(1,null,scom.getChefDetailsFromCommande(last.getId_commande()),new ServiceCommande().getAdresseFromCommande(last.getId_commande()),last.getAdresse(),null,null,false,false,null,null,last);
+        livraison liv=new livraison(1,null,scom.getChefDetailsFromCommande(last.getId_commande()),new commandeService().getAdresseFromCommande(last.getId_commande()),last.getAdresse(),null,null,false,false,null,null,last);
         sliv.add(liv);
 
         try {

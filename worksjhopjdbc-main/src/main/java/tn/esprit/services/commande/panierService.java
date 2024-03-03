@@ -142,7 +142,7 @@ public class panierService implements IPService<Panier> {
 
     public List<Annonce> getAllAnnoncesFromPanier(int idPanier) {
         List<Annonce> annonces = new ArrayList<>();
-        String qry = "SELECT a.id_annonce, a.nom_du_plat, a.description_du_plat, a.prix, a.id_du_chef, a.ingredients, a.categorie_de_plat, pa.quantite " +
+        String qry = "SELECT a.id_annonce, a.nom_du_plat, a.description_du_plat, a.prix, a.UserID, a.ingredients, a.categorie_de_plat, pa.quantite " +
                 "FROM Annonce a " +
                 "JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "JOIN Panier p ON pa.id_panier = p.id_panier " +
