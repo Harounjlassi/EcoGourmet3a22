@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AnnonceController">
+    <!-- + Button to open ajouterAnnonce.fxml -->
+    <stylesheets>
+        <URL value="@/css/sample.css" />
+    </stylesheets>
+    <Button fx:id="plusButton" layoutX="219.0" layoutY="-34.0" onAction="#openAjouterAnnonce" text="+" />
+
+    <!-- Container for TilePanes and pagination buttons -->
+    <VBox spacing="10" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0">
+        <!-- Container for TilePanes -->
+        <VBox fx:id="tilePaneContainer" spacing="10" />
+
+        <!-- Pagination buttons -->
+        <HBox alignment="CENTER">
+            <Button fx:id="previousPageButton" onAction="#showPreviousPage" text="Previous" />
+            <Button fx:id="nextPageButton" onAction="#showNextPage" text="Next" />
+        </HBox>
+    </VBox>
+
+    <TextField fx:id="searchField" layoutX="262.0" layoutY="-34.0" onKeyReleased="#searchTextChanged" promptText="Search" />
+    <ComboBox fx:id="Tri" layoutX="433.0" layoutY="-34.0" onAction="#sortAnnonces" prefWidth="150.0" />
+    <TilePane fx:id="tilePane" layoutX="10.0" layoutY="14.0" prefHeight="614.0" prefWidth="1890.0" />
+    <Button fx:id="openChatbotButton" layoutX="832.0" layoutY="-33.0" mnemonicParsing="false" onAction="#openChatbot" text="EcoGourmet chatbot" />
+</AnchorPane>
