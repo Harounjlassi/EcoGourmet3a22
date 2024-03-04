@@ -3,12 +3,15 @@ package tn.esprit.controllers.livraison.chef;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
@@ -48,7 +51,67 @@ public class AnnonceDelivery2 implements Initializable {
         label4.setText("Nom:"+liv.getLivreur().getNom());
         label5.setText("Prenom:"+liv.getLivreur().getPrenom());
         label6.setText("tel"+liv.getLivreur().getNumero());
-        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refresh()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
+            ServiceLivraison sliv2 = new ServiceLivraison();
+            if(sliv2.getLastInsertedLivraison().getRéclamation()==null){
+                System.out.println(sliv.getById(liv.getId()));
+                System.out.println(sliv.getById(liv.getId()).isState_reception());
+                if( sliv.getById(liv.getId()).isState_reception()){
+                    timeline.stop();
+                    label1.setVisible(false);
+                    label2.setVisible(true);
+                    button1.setVisible(false);
+                    PauseTransition pause = new PauseTransition(Duration.seconds(3));
+                    pause.setOnFinished(e -> {
+                        try {
+                            Stage currentStage = (Stage) button1.getScene().getWindow();
+                            currentStage.close();
+                            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+                            Parent root = fxmlLoader.load();
+
+                            Scene scene = new Scene(root);
+                            Stage stage = new Stage();
+                            stage.setScene(scene);
+                            stage.show();
+                        } catch (IOException ex) {
+                            ex.printStackTrace();
+                        }
+                    });
+                    pause.play();
+                }}
+            else{
+                timeline.stop();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Réclamation is done by delivery man!");
+
+                    alert.show();
+
+                try {
+                    // Get the current stage
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+                    Stage newStage = new Stage();
+
+                    // Load the FXML file for the new view
+                    FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+                    Parent root = fxmlLoader.load();
+
+                    // Set the scene on the new stage
+                    newStage.setScene(new Scene(root));
+
+                    // Show the new stage
+                    newStage.show();
+
+                    // Close the current stage
+                    stage.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
@@ -76,7 +139,8 @@ public class AnnonceDelivery2 implements Initializable {
     @FXML
     private Label label6;
     private Timeline timeline;
-    void refresh() {
+    /*void refresh() {
+        if(new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null){
         ServiceLivraison sliv=new ServiceLivraison();
         System.out.println(sliv.getById(liv.getId()));
         System.out.println(sliv.getById(liv.getId()).isState_reception());
@@ -102,6 +166,20 @@ public class AnnonceDelivery2 implements Initializable {
                 }
             });
             pause.play();
+        }}
+        else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Information Dialog");
+            alert.setHeaderText(null);
+            alert.setContentText("Réclamation is done by delivery man!");
+
+            alert.showAndWait();
+
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Close the stage
+            stage.close();
         }
     }
 

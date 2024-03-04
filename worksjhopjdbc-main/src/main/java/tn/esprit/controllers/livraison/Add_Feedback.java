@@ -2,8 +2,11 @@ package tn.esprit.controllers.livraison;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -64,6 +67,17 @@ public class Add_Feedback implements Initializable {
             alert.showAndWait();
             Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             stage.close();
+            Stage newStage = new Stage();
+
+            // Load the FXML file for the new view
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Set the scene on the new stage
+            newStage.setScene(new Scene(root));
+
+            // Show the new stage
+            newStage.show();
         } catch (Exception e) {
             e.printStackTrace();
         }

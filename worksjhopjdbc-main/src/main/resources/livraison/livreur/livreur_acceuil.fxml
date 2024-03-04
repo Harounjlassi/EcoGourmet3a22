@@ -25,96 +25,7 @@
             <left>
                 <VBox prefHeight="514.0" prefWidth="223.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
                     <children>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" stylesheets="@/css/sample.css" text="Profile" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/profile.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding></Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Users" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/user.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Projects" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/projects.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Tasks" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/tasks.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Logs" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/logs.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Chats" textFill="WHITE">
-                            <graphic>
-                                <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
-                                    <image>
-                                        <Image url="@/icon/chat.png" />
-                                    </image>
-                                </ImageView>
-                            </graphic>
-                            <padding>
-                                <Insets left="20.0" />
-                            </padding>
-                            <VBox.margin>
-                                <Insets left="16.0" top="16.0" />
-                            </VBox.margin>
-                        </Button>
-                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="238.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Gestion livraisons" textFill="WHITE">
+                        <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" stylesheets="@/css/sample.css" text="Livraisons" textFill="WHITE">
                             <graphic>
                                 <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
@@ -125,6 +36,9 @@
                             <VBox.margin>
                                 <Insets left="16.0" top="16.0" />
                             </VBox.margin>
+                            <padding>
+                                <Insets left="20.0" />
+                            </padding>
                         </Button>
                     </children>
                 </VBox>

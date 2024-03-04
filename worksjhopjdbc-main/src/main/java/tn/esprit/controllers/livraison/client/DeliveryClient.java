@@ -3,6 +3,7 @@ package tn.esprit.controllers.livraison.client;
 import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
 import javafx.animation.Timeline;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -66,6 +67,7 @@ public class DeliveryClient implements Initializable{
         label4.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
         timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> {
             ServiceLivraison sliv = new ServiceLivraison();
+            System.out.println(sliv.getLastInsertedLivraison().getRéclamation());
             if (sliv.getLastInsertedLivraison().getRéclamation() == null) {
                 if (sliv.getLastInsertedLivraison().getLivreur() == null) {
 
@@ -116,18 +118,34 @@ public class DeliveryClient implements Initializable{
                     }
                 }
             } else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information Dialog");
-                alert.setHeaderText(null);
-                alert.setContentText("Réclamation is done by delivery man!");
+                timeline.stop();
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("Information Dialog");
+                    alert.setHeaderText(null);
+                    alert.setContentText("Réclamation is done by delivery man!");
 
-                alert.showAndWait();
+                    alert.show();
+                    // Adjust the duration as needed
+                PauseTransition pause = new PauseTransition(Duration.seconds(2)); // Adjust the duration as needed
+                pause.setOnFinished(e -> {
+                    alert.close(); // Close the alert after the specified duration
 
-                // Get the current stage
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    Stage currentStage = (Stage) label1.getScene().getWindow();
 
-                // Close the stage
-                stage.close();
+                    try {
+                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
+                        Parent root = fxmlLoader.load();
+                        Stage newStage = new Stage();
+                        newStage.setScene(new Scene(root));
+                        newStage.show();
+
+                        // Close the current stage
+                        currentStage.close();
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                pause.play();
             }
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
@@ -135,74 +153,6 @@ public class DeliveryClient implements Initializable{
     }
 
 
-    @FXML
-    void Check_livraison(ActionEvent event) {
-        System.out.println(new ServiceLivraison().getLastInsertedLivraison().getLivreur());
-        if(new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null){
-        if(new ServiceLivraison().getLastInsertedLivraison().getLivreur()==null){
-
-        }
-        else {
-            if(new ServiceLivraison().getLastInsertedLivraison().isState_delivery()) {
-                nameLabel.setVisible(false);
-                prenomLabel.setVisible(false);
-                telLabel.setVisible(false);
-                label3.setVisible(false);
-                label4.setVisible(true);
-
-                PauseTransition pause = new PauseTransition(Duration.seconds(3));
-                pause.setOnFinished(event1 -> {
-                    try {
-                        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/add_Feedback.fxml"));
-                        Scene scene = new Scene(fxmlLoader.load());
-                        Add_Feedback controller = fxmlLoader.getController();
-                        controller.setLivraison(new ServiceLivraison().getLastInsertedLivraison());
-
-                        // Create a new scene
-
-                        // Get the current stage
-                        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-                        // Set the new scene to the stage
-                        stage.setScene(scene);
-
-                        // Show the new scene
-                        stage.show();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                pause.play();
-            }
-           else if (new ServiceLivraison().getLastInsertedLivraison().isState_reception()){
-            label2.setVisible(false);
-            label3.setVisible(true);
-        }
-        else{label1.setVisible(false);
-        label2.setVisible(true);
-            nameLabel.setText("nom :"+new ServiceLivraison().getLastInsertedLivraison().getLivreur().getNom());
-            prenomLabel.setText("prenom :"+new ServiceLivraison().getLastInsertedLivraison().getLivreur().getPrenom());
-            telLabel.setText("tel :"+String.valueOf(new ServiceLivraison().getLastInsertedLivraison().getLivreur().getNumero()));
-            nameLabel.setVisible(true);
-            prenomLabel.setVisible(true);
-            telLabel.setVisible(true);}
-        }}else {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Information Dialog");
-            alert.setHeaderText(null);
-            alert.setContentText("Réclamation is done by delivery man!");
-
-            alert.showAndWait();
-
-            // Get the current stage
-            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
-            // Close the stage
-            stage.close();
-
-
-        }
-    }
     @FXML
     void Command_Details(ActionEvent event) {
         try {
