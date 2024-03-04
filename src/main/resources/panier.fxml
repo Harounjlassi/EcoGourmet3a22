@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="689.0" prefWidth="1066.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.PanierController" stylesheets="@css/tableViewDesign.css">
+    <VBox alignment="TOP_CENTER" prefHeight="586.0" prefWidth="902.0" spacing="10">
+        <HBox alignment="CENTER" spacing="10">
+            <Label text="Rechercher Annonce" />
+            <TextField fx:id="searchField" promptText="Rechercher Annonce" />
+            <ComboBox fx:id="triComboBox" onAction="#trierAnnonces" promptText="Trier par :">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="Prix croissant" />
+                        <String fx:value="Prix décroissant" />
+                        <String fx:value="Nom A à Z" />
+                        <String fx:value="Nom Z à A" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+            <Button fx:id="passerCommandeButton" onAction="#passerCommandeButtonClicked" style="-fx-font-weight: bold; -fx-text-fill: green; -fx-background-color: white;" text="Passer une commande" />
+
+        </HBox>
+        <TableView fx:id="annonceTable" prefHeight="496.0" prefWidth="874.0">
+            <columns>
+                <TableColumn fx:id="nomPlatColumn" prefWidth="200.0" text="Nom du plat" />
+                <TableColumn fx:id="descriptionColumn" prefWidth="400.0" text="Description" />
+                <TableColumn fx:id="prixColumn" prefWidth="100.0" text="Prix" />
+                <TableColumn fx:id="quantiteColumn" prefWidth="100.0" text="Quantité" />
+                <TableColumn fx:id="supprimerColumn" prefWidth="100.0" text="Supprimer" />
+            </columns>
+        </TableView>
+        <HBox fx:id="prixTotalHBox" alignment="CENTER" spacing="10" styleClass="hbox-labels">
+            <Label fx:id="prixTotalTitleLabel" text="Prix total du panier : " styleClass="label-title" />
+            <Label fx:id="prixTotalLabel" styleClass="label-value" />
+        </HBox>
+    </VBox>
+</AnchorPane>

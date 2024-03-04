@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.collections.FXCollections?>
+<AnchorPane xmlns="http://javafx.com/javafx" stylesheets="@css/tableViewDesign.css"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.CommandeArchive"
+            prefHeight="689.0" prefWidth="1066.0">
+    <VBox alignment="CENTER_RIGHT" prefHeight="538.0" prefWidth="883.0">
+        <TableView fx:id="commandeTable" prefHeight="513.0" prefWidth="895.0">
+            <columns>
+                <TableColumn fx:id="adresseColumn" prefWidth="180.0" text="Adresse">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="adresse" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="tempsCommandeColumn" prefWidth="169.60000610351562" text="Temps Commande">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="tempsCommande" />
+                    </cellValueFactory>
+                </TableColumn>
+
+                <TableColumn fx:id="etatLivraisonColumn" prefWidth="211.20001220703125" text="type livraison">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="etatlivraison" />
+                    </cellValueFactory>
+                </TableColumn>
+                <TableColumn fx:id="prixTotalColumn" prefWidth="132.0" text="Prix Total">
+                    <cellValueFactory>
+                        <PropertyValueFactory property="prix_total" />
+                    </cellValueFactory>
+                </TableColumn>
+            </columns>
+        </TableView>
+    </VBox>
+</AnchorPane>

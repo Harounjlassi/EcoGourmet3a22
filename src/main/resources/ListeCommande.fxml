@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="689.0" prefWidth="1066.0" stylesheets="@css/tableViewDesign.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.ListeCommandeController">
+    <VBox alignment="CENTER_RIGHT" prefHeight="538.0" prefWidth="883.0">
+        <ComboBox fx:id="triComboBox" onAction="#trierCommandes" prefHeight="26.0" prefWidth="131.0" promptText="Trier par :">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Prix croissant" />
+                    <String fx:value="Prix décroissant" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+       <TableView fx:id="commandeTable" prefHeight="513.0" prefWidth="895.0">
+           <columns>
+               <TableColumn fx:id="adresseColumn" prefWidth="180.0" text="Adresse">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="adresse" />
+                   </cellValueFactory>
+               </TableColumn>
+               <TableColumn fx:id="tempsCommandeColumn" prefWidth="169.60000610351562" text="Temps Commande">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="tempsCommande" />
+                   </cellValueFactory>
+               </TableColumn>
+               <!--                <TableColumn fx:id="idPanierColumn" prefWidth="83.20001220703125" text="ID Panier">-->
+               <!--                    <cellValueFactory>-->
+               <!--                        <PropertyValueFactory property="id_panier" />-->
+               <!--                    </cellValueFactory>-->
+               <!--                </TableColumn>-->
+               <TableColumn fx:id="etatLivraisonColumn" prefWidth="211.20001220703125" text="type livraison">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="etatlivraison" />
+                   </cellValueFactory>
+               </TableColumn>
+               <!--                <TableColumn fx:id="idCommandeColumn" prefWidth="147.20001220703125" text="ID Commande">-->
+               <!--                    <cellValueFactory>-->
+               <!--                        <PropertyValueFactory property="id_commande" />-->
+               <!--                    </cellValueFactory>-->
+               <!--                </TableColumn>-->
+               <!--                <TableColumn fx:id="idClientColumn" prefWidth="202.39996337890625" text="ID Client">-->
+               <!--                    <cellValueFactory>-->
+               <!--                        <PropertyValueFactory property="id_client" />-->
+               <!--                    </cellValueFactory>-->
+               <!--                </TableColumn>-->
+   
+                  <TableColumn fx:id="prixTotalColumn" prefWidth="132.0" text="Prix Total">
+                   <cellValueFactory>
+                       <PropertyValueFactory property="prix_total" />
+                   </cellValueFactory>
+               </TableColumn>
+           </columns>
+       </TableView>
+    </VBox>
+</AnchorPane>
