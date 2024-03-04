@@ -5,14 +5,11 @@ import tn.esprit.interfaces.ICService;
 import tn.esprit.models.Commande.Commande;
 import tn.esprit.models.User.User;
 import tn.esprit.models.livraison.CommandeDetail;
-import tn.esprit.models.livraison.commande;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class commandeService implements ICService<Commande> {
     private Connection cnx ;
@@ -209,23 +206,6 @@ public class commandeService implements ICService<Commande> {
             System.err.println(e.getMessage());
         }
         return commandesTriees;
-    }
-    public commande getById(int id) {
-        commande commande = null;
-        String qry = "SELECT * FROM `commande` WHERE `id` = ?";
-        try {
-            PreparedStatement stm = cnx.prepareStatement(qry);
-            stm.setInt(1, id);
-            ResultSet rs = stm.executeQuery();
-            if (rs.next()) {
-                commande = new commande();
-                commande.setId(rs.getInt("id"));
-                // Set other fields as needed
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
-        return commande;
     }
     /*public Map<String, Object> getCommandeDetails(int idCommande) {
         String selectCommandeDetailsQuery = "SELECT a.Nom_du_plat, pa.quantite, c.prix_total, c.adresse " +

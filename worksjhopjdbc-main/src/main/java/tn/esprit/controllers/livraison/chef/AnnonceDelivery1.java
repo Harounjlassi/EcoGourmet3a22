@@ -63,7 +63,7 @@ public class AnnonceDelivery1 /*implements Initializable*/ {
 
     @FXML
     void refresh(ActionEvent event) {
-        //if(new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user){
+        if(/*new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user && */new ServiceLivraison().getLastInsertedLivraison().getLivreur()!=null && new ServiceLivraison().getLastInsertedLivraison().getFeedback_liv()==null && new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null){
         try {
 
             ServiceLivraison sliv = new ServiceLivraison();
@@ -87,7 +87,7 @@ public class AnnonceDelivery1 /*implements Initializable*/ {
             currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }}
 
         //}
 
