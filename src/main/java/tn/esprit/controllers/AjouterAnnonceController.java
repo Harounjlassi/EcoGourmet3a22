@@ -48,6 +48,12 @@ public class AjouterAnnonceController {
     private TextField ingredientTextField;
 
     @FXML
+    private TextField adresseTextField;
+
+    @FXML
+    private TextField quantiteTextField;
+
+    @FXML
     private Button ajouterButton;
     // Assuming PopulateTilePaneController is the class where populateTilePane() is defined
 
@@ -62,10 +68,6 @@ public class AjouterAnnonceController {
     public void setAnnonceController(AnnonceController annonceController) {
         this.annonceController = annonceController;
     }
-
-    private static final String API_URL = "https://graph.facebook.com/%s/photos";
-    private static final String ACCESS_TOKEN = "EAAF4PQJaaJsBOZC2J5JYwbcBDrK1lZBFbIPPlxlMFA7EREZBP84luJVeCTpnCqy8bmPJLmjDFMRVp44GCZCdaInQ7FhDgZAZBsYDnKQ4uYC5jXHYtT1cZANZANGVQnpLI8iZB9cEHhVruRA9dj1ZCLPFa3Dljy5wMcZB2Vlcr0xtUZA3Gao5ovpWZA94tli0OQCkFIlMvWi2l9OZCEo6LfEyPOONdRkfQZD";
-    private static final String PAGE_ID = "193731830479603";
     @FXML
     void importImageClicked(ActionEvent event) {
         // Open a file chooser dialog
@@ -82,7 +84,6 @@ public class AjouterAnnonceController {
         }
     }
 
-
     @FXML
     private void ajouterAnnonce(ActionEvent event) {
         // Get the values from the text fields
@@ -91,20 +92,24 @@ public class AjouterAnnonceController {
         String prixText = prixTextField.getText();
         String ingredients = ingredientTextField.getText();
         String categorie = categorieTextField.getText();
+        String quantiteText = quantiteTextField.getText(); // Get quantité value
+        String adresse = adresseTextField.getText(); // Get adresse value
 
         // Validate input fields
-        if (nomPlat.isEmpty() || descriptionPlat.isEmpty() || prixText.isEmpty() || ingredients.isEmpty() || categorie.isEmpty()) {
+        if (nomPlat.isEmpty() || descriptionPlat.isEmpty() || prixText.isEmpty() || ingredients.isEmpty() || categorie.isEmpty() || quantiteText.isEmpty() || adresse.isEmpty()) {
             // Show an error message indicating that all fields are required
             showAlert(Alert.AlertType.ERROR, "Input Validation Error", "All fields are required.", "Please fill in all the fields.");
             return;
         }
 
         float prix;
+        int quantite; // Variable to hold quantité value
         try {
             prix = Float.parseFloat(prixText);
+            quantite = Integer.parseInt(quantiteText); // Parse quantité as an integer
         } catch (NumberFormatException e) {
-            // Show an error message indicating that prix must be a valid number
-            showAlert(Alert.AlertType.ERROR, "Input Validation Error", "Invalid Prix", "Prix must be a valid number.");
+            // Show an error message indicating that prix and quantité must be valid numbers
+            showAlert(Alert.AlertType.ERROR, "Input Validation Error", "Invalid Prix or Quantité", "Prix and Quantité must be valid numbers.");
             return;
         }
 
@@ -113,12 +118,16 @@ public class AjouterAnnonceController {
         annonce.setNom_du_plat(nomPlat);
         annonce.setDescription_du_plat(descriptionPlat);
         annonce.setPrix(prix);
+        annonce.setQuantite(quantite); // Set quantité
+        annonce.setAdresse(adresse); // Set adresse
         // Set ID_du_chef if needed
         annonce.setUserID(loginController.id);
         annonce.setIngredients(ingredients);
         annonce.setCategorie_de_plat(categorie);
-        annonce.setImage_plat(imagePath); // Set the image path
-        String message = "New announcement: " + nomPlat + "\nDescription: " + descriptionPlat + "\nPrix: " + prixText + "\nIngredients: " + ingredients + "\nCategorie: " + categorie;
+        annonce.setImage_plat(imagePath);
+
+        // Set the image path
+        String message = "New announcement: " + nomPlat + "\nDescription: " + descriptionPlat + "\nPrix: " + prixText + "\nIngredients: " + ingredients + "\nCategorie: " + categorie + "\nQuantité Disponible: " + quantiteText;
 
         // Add the Annonce to the database using the service
         sa.add(annonce);
@@ -126,14 +135,8 @@ public class AjouterAnnonceController {
         annonceController.handleAnnouncementAdded();
         annonceController.sortedAnnonces = sa.getAll();
         annonceController.handleAnnouncementAdded();
-        FacebookAnnouncementHandler.postAnnouncementOnFacebook(message,imagePath);
-
-
-
-        // Attempt to post the announcement on Facebook
-        //postAnnouncementOnFacebook(message, imagePath);
+        FacebookAnnouncementHandler.postAnnouncementOnFacebook(message, imagePath);
     }
-
 
     private void showAlert(Alert.AlertType alertType, String title, String headerText, String contentText) {
         Alert alert = new Alert(alertType);

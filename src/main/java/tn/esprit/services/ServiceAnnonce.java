@@ -17,7 +17,7 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
 
     @Override
     public void add(Annonce annonce) {
-        String qry = "INSERT INTO annonce (id_Annonce, Nom_du_plat, Description_du_plat, prix, userID, Ingredients, Categorie_de_plat, image_plat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String qry = "INSERT INTO annonce (id_Annonce, Nom_du_plat, Description_du_plat, prix, userID, Ingredients, Categorie_de_plat, image_plat, quantite, adresse) VALUES (?, ?, ?, ?, ?, ?, ?, ?,?,?)";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
             stm.setInt(1, annonce.getId_Annonce());
@@ -28,6 +28,8 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
             stm.setString(6, annonce.getIngredients());
             stm.setString(7, annonce.getCategorie_de_plat());
             stm.setString(8, annonce.getImage_plat());
+            stm.setInt(9, annonce.getQuantite());
+            stm.setString(10, annonce.getAdresse());
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -52,6 +54,8 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
                 a.setIngredients(rs.getString("Ingredients"));
                 a.setCategorie_de_plat(rs.getString("Categorie_de_plat"));
                 a.setImage_plat(rs.getString("image_plat"));
+                a.setQuantite(rs.getInt("quantite"));
+                a.setIngredients(rs.getString("adresse"));
                 annonces.add(a);
             }
         } catch (SQLException e) {
@@ -66,7 +70,7 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
 
     @Override
     public void update(Annonce annonce) {
-        String qry = "UPDATE annonce SET Nom_du_plat = ?, Description_du_plat = ?, prix = ?, UserID = ?, Ingredients = ?, Categorie_de_plat = ?, image_plat = ? WHERE id_Annonce = ?";
+        String qry = "UPDATE annonce SET Nom_du_plat = ?, Description_du_plat = ?, prix = ?, userID = ?, Ingredients = ?, Categorie_de_plat = ?, image_plat = ?,quantite = ? , adresse = ? WHERE id_Annonce = ?";
         try {
             PreparedStatement stm = cnx.prepareStatement(qry);
             stm.setString(1, annonce.getNom_du_plat());
@@ -77,6 +81,8 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
             stm.setString(6, annonce.getCategorie_de_plat());
             stm.setString(7, annonce.getImage_plat());
             stm.setInt(8, annonce.getId_Annonce());
+            stm.setInt(9, annonce.getQuantite());
+            stm.setString(10, annonce.getAdresse());
             stm.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -113,7 +119,9 @@ public class ServiceAnnonce implements IServiceAnnonce<Annonce> {
                         rs.getInt("UserID"),
                         rs.getString("Ingredients"),
                         rs.getString("Categorie_de_plat"),
-                        rs.getString("image_plat")
+                        rs.getString("image_plat"),
+                        rs.getInt("quantite"),
+                        rs.getString("adresse")
                 );
                 filteredList.add(annonce);
             }

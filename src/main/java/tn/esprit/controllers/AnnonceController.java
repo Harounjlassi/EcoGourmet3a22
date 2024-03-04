@@ -27,6 +27,8 @@ import javafx.stage.Stage;
 import tn.esprit.models.Annonce;
 import tn.esprit.models.Commentaire;
 import tn.esprit.services.ServiceAnnonce;
+import tn.esprit.services.panierService;
+import tn.esprit.models.Panier;
 import tn.esprit.services.ServiceCommentaire;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -93,7 +95,8 @@ public class AnnonceController {
     private final ServiceCommentaire comment = new ServiceCommentaire();
     private int currentPage = 0;
     private int itemsPerPage = 8;
-
+private panierService panierService;
+panierService p =new panierService();
 
     List<String> badWords = Arrays.asList("fuck", "dick", "zebi");
 
@@ -206,6 +209,7 @@ public class AnnonceController {
         content.getChildren().add(new Label("Prix: " + annonce.getPrix()));
         content.getChildren().add(new Label("Ingrédients: " + annonce.getIngredients()));
         content.getChildren().add(new Label("Catégorie: " + annonce.getCategorie_de_plat()));
+        content.getChildren().add(new Label("Quantité: " + annonce.getQuantite())); // Add "quantite" field
 
         // Button to display nutritional info
         Button nutritionalInfoButton = new Button("Nutritional Info");
@@ -216,18 +220,31 @@ public class AnnonceController {
 
         // Add the nutritional info button to an HBox
         HBox buttonBox = new HBox();
+
         buttonBox.getChildren().add(nutritionalInfoButton);
         content.getChildren().add(buttonBox);
+        Button addToCartButton = new Button("Ajouter au panier");
+        addToCartButton.setOnAction(event -> {
+            // Call a method to add the current dish to the cart
+
+            p.ajouterAnnonceAuPanier(loginController.id, annonce.getId_Annonce());
+
+        });
+
+// Add the "Ajouter au panier" button to the buttonBox
+        buttonBox.getChildren().add(addToCartButton);
 
         dialogPane.setContent(content);
 
         dialogPane.getScene().getWindow().setOnCloseRequest(event -> {
             dialog.close();
         });
-
+        int X=annonce.getUserID();
         // Show the dialog
         dialog.showAndWait();
+        System.out.print(X);
     }
+
     List<Annonce> sortedAnnonces = new ArrayList<>();
 
     @FXML
@@ -377,6 +394,10 @@ public class AnnonceController {
 
                     // Add components to the commentBox
                     commentBox.getChildren().addAll(nameLabel, commentLabel, likeButton, likeCountLabel, deleteButton);
+                    commentBox.setSpacing(10); // Adjust the spacing as needed
+
+// Align all components vertically centered
+                    commentBox.setAlignment(Pos.CENTER_LEFT);
 
                     // Add like button and count to the comment box
                     HBox.setMargin(likeButton, new Insets(0, 5, 0, 5));
@@ -503,8 +524,29 @@ public class AnnonceController {
 
     @FXML
     private void showButtons(HBox buttonBox, Annonce annonce) {
-        // Check if the logged-in user is a chef or admin and if the announcement is associated with them
-        if ((Objects.equals(loginController.role, "chef") && annonce.getUserID()== loginController.id) || Objects.equals(loginController.role, "admin")) {
+        // Check if the logged-in user is a chef and if the announcement is associated with them
+        if (Objects.equals(loginController.role, "chef") && annonce.getUserID() == loginController.id) {
+            Button updateButton = new Button("Update");
+            Button deleteButton = new Button("Delete");
+
+            // Add event listener for update button
+            updateButton.setOnAction(event -> {
+                Optional<Annonce> result = showUpdateDialog(annonce); // Open the update dialog
+                result.ifPresent(updatedAnnonce -> {
+                    sa.update(updatedAnnonce); // Update the announcement in the database
+                    populateTilePane(); // Refresh the TilePane after updating
+                });
+            });
+
+            // Add event listener for delete button
+            deleteButton.setOnAction(event -> {
+                sa.delete(annonce); // Delete the announcement
+                tilePane.getChildren().remove(buttonBox.getParent()); // Remove the tile content from the tile pane
+            });
+
+            // Add buttons to the button box
+            buttonBox.getChildren().addAll(updateButton, deleteButton);
+        } else if (Objects.equals(loginController.role, "admin")) {
             Button updateButton = new Button("Update");
             Button deleteButton = new Button("Delete");
 
@@ -527,6 +569,7 @@ public class AnnonceController {
             buttonBox.getChildren().addAll(updateButton, deleteButton);
         }
     }
+
 
 
     @FXML
@@ -581,7 +624,8 @@ public class AnnonceController {
         TextField prixField = new TextField(Float.toString(annonce.getPrix()));
         TextField ingredientsField = new TextField(annonce.getIngredients());
         TextField categorieField = new TextField(annonce.getCategorie_de_plat());
-
+        TextField quantiteField = new TextField(Integer.toString(annonce.getQuantite())); // New field for quantité
+        TextField adresseField = new TextField(annonce.getAdresse()); // New field for adresse
 
         // Add labels and fields to the dialog
         dialog.getDialogPane().setContent(new VBox(8,
@@ -589,7 +633,10 @@ public class AnnonceController {
                 new Label("Description du plat:"), descriptionField,
                 new Label("Prix:"), prixField,
                 new Label("Ingredients:"), ingredientsField,
-                new Label("Categorie de plat:"), categorieField));
+                new Label("Categorie de plat:"), categorieField,
+                new Label("Quantité:"), quantiteField, // Add label and field for quantité
+                new Label("Adresse:"), adresseField // Add label and field for adresse
+        ));
 
         // Enable/Disable update button depending on whether a text field is empty
         Node updateButton = dialog.getDialogPane().lookupButton(updateButtonType);
@@ -611,6 +658,12 @@ public class AnnonceController {
         categorieField.textProperty().addListener((observable, oldValue, newValue) -> {
             updateButton.setDisable(newValue == null || newValue.trim().isEmpty());
         });
+        quantiteField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateButton.setDisable(newValue.trim().isEmpty());
+        });
+        adresseField.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateButton.setDisable(newValue.trim().isEmpty());
+        });
 
         // Convert the result to a person object when the update button is clicked
         dialog.setResultConverter(dialogButton -> {
@@ -620,6 +673,8 @@ public class AnnonceController {
                 annonce.setPrix(Float.parseFloat(prixField.getText()));
                 annonce.setIngredients(ingredientsField.getText());
                 annonce.setCategorie_de_plat(categorieField.getText());
+                annonce.setQuantite(Integer.parseInt(quantiteField.getText())); // Update quantité
+                annonce.setAdresse(adresseField.getText()); // Update adresse
                 return annonce;
             }
             return null;
@@ -634,6 +689,7 @@ public class AnnonceController {
         });
         return result;
     }
+
     // Method to show update and delete buttons on hover
 
     private Button createDeleteButton(Annonce annonce) {

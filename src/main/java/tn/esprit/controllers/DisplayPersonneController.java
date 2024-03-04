@@ -107,7 +107,65 @@ public class DisplayPersonneController implements Initializable {
             ajouterAnnonceController.setAnnonceController(annonceController);
 
             // Set AjouterPersonne.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(null);
             annoncePane.setCenter(ajouterPersonnePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    private void openAnnonces(ActionEvent event) {
+        try {
+            // Load annonce.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/annonce.fxml"));
+            Parent annonce = loader.load();
+
+            // Set annonce.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(null);
+            annoncePane.setCenter(annonce);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void openPanier(ActionEvent actionEvent) {
+        try {
+            // Load annonce.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/panier.fxml"));
+            Parent panier = loader.load();
+
+            // Set annonce.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(null);
+            annoncePane.setCenter(panier);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openListeCommande(ActionEvent actionEvent) {
+        try {
+            // Load annonce.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ListeCommande.fxml"));
+            Parent panier = loader.load();
+
+            // Set annonce.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(null);
+            annoncePane.setCenter(panier);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openCommandeArchive(ActionEvent actionEvent) {
+        try {
+            // Load annonce.fxml
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/commandeArchive.fxml"));
+            Parent panier = loader.load();
+
+            // Set annonce.fxml as the center of the mainBorderPane
+            annoncePane.setCenter(null);
+            annoncePane.setCenter(panier);
         } catch (IOException e) {
             e.printStackTrace();
         }

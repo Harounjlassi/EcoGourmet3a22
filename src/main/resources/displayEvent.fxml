@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1109.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.DisplayPersonneController">
+<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1109.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.DisplayPersonneController">
     <stylesheets>
         <URL value="@/css/style.css" />
     </stylesheets>
@@ -65,7 +65,7 @@
                         <Insets left="16.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Tasks" textFill="WHITE">
+                  <Button fx:id="panier" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" onAction="#openPanier" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Panier" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -80,7 +80,7 @@
                         <Insets left="16.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Logs" textFill="WHITE">
+                  <Button fx:id="listeCommande" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" onAction="#openListeCommande" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="History des Commandes" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -95,7 +95,7 @@
                         <Insets left="16.0" top="16.0" />
                      </VBox.margin>
                   </Button>
-                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Chats" textFill="WHITE">
+                  <Button fx:id="listeCommande" alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" onAction="#openCommandeArchive" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Commande Archive" textFill="WHITE">
                      <graphic>
                         <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
                            <image>

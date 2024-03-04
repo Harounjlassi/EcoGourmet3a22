@@ -2,15 +2,15 @@ package tn.esprit.models;
 
 public class Annonce {
 
-    private int id_Annonce, UserID;
-    private String nom_du_plat, Description_du_plat, Ingredients, Categorie_de_plat;
+    private int id_Annonce, UserID, quantite;
+    private String nom_du_plat, Description_du_plat, Ingredients, Categorie_de_plat,adresse;
     private float Prix;
     private String image_plat;
 
     public Annonce() {
     }
 
-    public Annonce(int id_Annonce, String nom_du_plat, String description_du_plat, float prix, int UserID, String ingredients, String categorie_de_plat) {
+    public Annonce(int id_Annonce, String nom_du_plat, String description_du_plat, float prix, int UserID, String ingredients, String categorie_de_plat,int quantite,String adresse) {
         this.id_Annonce = id_Annonce;
         this.nom_du_plat = nom_du_plat;
         this.Description_du_plat = description_du_plat;
@@ -18,6 +18,9 @@ public class Annonce {
         this.UserID = UserID;
         this.Ingredients = ingredients;
         this.Categorie_de_plat = categorie_de_plat;
+        this.quantite=quantite;
+        this.adresse=adresse;
+
 
     }
 
@@ -33,6 +36,9 @@ public class Annonce {
     }
 
     public Annonce(int idAnnonce, String nomDuPlat, String descriptionDuPlat, float prix, int UserID, String ingredients, String categorieDePlat, String imagePlat) {
+    }
+
+    public Annonce(int idAnnonce, String nomDuPlat, String descriptionDuPlat, float prix, int userID, String ingredients, String categorieDePlat, String imagePlat, int quantite, String adresse) {
     }
 
 
@@ -54,6 +60,22 @@ public class Annonce {
 
     public String getNom_du_plat() {
         return nom_du_plat;
+    }
+
+    public int getQuantite() {
+        return quantite;
+    }
+
+    public void setQuantite(int quantite) {
+        this.quantite = quantite;
+    }
+
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
     }
 
     public void setNom_du_plat(String nom_du_plat) {
@@ -104,15 +126,15 @@ public class Annonce {
     public String toString() {
         return "Annonce{" +
                 "id_Annonce=" + id_Annonce +
-                ", ID_du_chef=" + UserID +
+                ", UserID=" + UserID +
+                ", quantite=" + quantite +
                 ", nom_du_plat='" + nom_du_plat + '\'' +
                 ", Description_du_plat='" + Description_du_plat + '\'' +
                 ", Ingredients='" + Ingredients + '\'' +
                 ", Categorie_de_plat='" + Categorie_de_plat + '\'' +
+                ", adresse='" + adresse + '\'' +
                 ", Prix=" + Prix +
-                ", imagePlat='" + image_plat + '\'' +
+                ", image_plat='" + image_plat + '\'' +
                 '}';
     }
-
-
 }

@@ -15,10 +15,7 @@ import tn.esprit.utils.MyDataBase;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,6 +39,8 @@ public class loginController implements Initializable {
     public static String role;
     public static String nom;
     public static String prenom;
+    public static String email;
+    public static String Num;
     public Label mdpoublier;
     public TextField Email;
     public Button connexion;
@@ -59,7 +58,7 @@ public class loginController implements Initializable {
             connection = MyDataBase.getInstance().getCnx();
 
             try {
-                String req = "select UserID, Role,Nom ,Prenom from user where Email = '" + Email.getText() + "' AND Password='" + mdp.getText() + "'";
+                String req = "select UserID, Role,Nom ,Prenom ,Numero ,Email from user where Email = '" + Email.getText() + "' AND Password='" + mdp.getText() + "'";
                 Statement st = connection.createStatement();
                 ResultSet rs = st.executeQuery(req);
                 if (rs.next()) {
@@ -69,6 +68,21 @@ public class loginController implements Initializable {
                     r = rs.getString("Role");
                     nom=rs.getString("Nom");
                     prenom=rs.getString("Prenom");
+                    email=rs.getString("Email");
+                    Num=rs.getString("Numero");
+                    try {
+                        PreparedStatement statement = connection.prepareStatement("INSERT INTO panier (id_panier,id_client) VALUES (?,?)");
+                        statement.setInt(1, userId);
+                        statement.setInt(2, userId);
+                        statement.executeUpdate();
+                        statement.close();
+                    } catch (SQLException e) {
+                        e.printStackTrace();
+                        // Handle any exceptions here
+                    }
+
+
+
                     System.out.println(r);
 
                     switch (r) {

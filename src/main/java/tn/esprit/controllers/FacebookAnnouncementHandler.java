@@ -16,7 +16,7 @@ public class FacebookAnnouncementHandler {
 
     // Your Facebook access token
     private static final String API_URL = "https://graph.facebook.com/%s/photos";
-    private static final String ACCESS_TOKEN = "EAAF4PQJaaJsBO8fLmoJAyOke0gHvlD2Q0Q6VZAesCSYZBPNnJXHLfblM3mknXwtBljgIs8st4Rjh6cEOIGkOWNtDdBlduFDGSwZBmsA5CUgjN1hoMJbssm8yMPjRJlVqsI5sEiKl6Ia6WK3arpZChRFwbksZBVgeBTZChci8w0b6XeuTcsPXe15tO0LLfskiiaLEkzZCWJxwBF5kcpNTqGaEXQ9xgZDZD";
+    private static final String ACCESS_TOKEN = "EAAF4PQJaaJsBO9HTyVUFZAG2vmJ8wJLQlbCBIrbpgnM4EgkZAHeOACZC5hZAkyUaN2mKNpZBKikLR7tXhSoXDZCMvzLWOw3ZCRres3hiddRvz2WO1ZAk0Q8XP15IkwIEGabsxhiyODFGW5MFmZC8vgaKggQAmMORnZAcNyN7JAMe91xfZBg35hkCatpMQuH0qYuvfzBeeZB3N3kMmN2qwKW8ilwyFotV";
     private static final String PAGE_ID = "193731830479603";
 
     // Method to post an announcement to Facebook page
