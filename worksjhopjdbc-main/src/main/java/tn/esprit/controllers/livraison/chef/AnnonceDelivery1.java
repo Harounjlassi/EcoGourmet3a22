@@ -20,20 +20,22 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class AnnonceDelivery1 /*implements Initializable*/ {
+
+public class AnnonceDelivery1 implements Initializable {
     @FXML
     private Button refresh;
-    /*@Override
+    Timeline timeline;
+    @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refresh()));
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refresh()));
         timeline.setCycleCount(Timeline.INDEFINITE);
         timeline.play();
 
     }
     void  refresh(){
-        //if(new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user){
+        if(/*new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user && */new ServiceLivraison().getLastInsertedLivraison().getLivreur()!=null && new ServiceLivraison().getLastInsertedLivraison().getFeedback_liv()==null && new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null && !new ServiceLivraison().getLastInsertedLivraison().isState_reception()){
         try {
-
+            timeline.stop();
             ServiceLivraison sliv = new ServiceLivraison();
             livraison liv=sliv.getLastInsertedLivraison();
             System.out.println(liv);
@@ -59,11 +61,11 @@ public class AnnonceDelivery1 /*implements Initializable*/ {
 
         //}
 
-    }*/
+    }}
 
-    @FXML
+    /*@FXML
     void refresh(ActionEvent event) {
-        if(/*new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user && */new ServiceLivraison().getLastInsertedLivraison().getLivreur()!=null && new ServiceLivraison().getLastInsertedLivraison().getFeedback_liv()==null && new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null){
+        if(new ServiceLivraison().getLastInsertedLivraison().getChef()==loginController.logged_in_user && new ServiceLivraison().getLastInsertedLivraison().getLivreur()!=null && new ServiceLivraison().getLastInsertedLivraison().getFeedback_liv()==null && new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null){
         try {
 
             ServiceLivraison sliv = new ServiceLivraison();
@@ -91,5 +93,5 @@ public class AnnonceDelivery1 /*implements Initializable*/ {
 
         //}
 
-    }
+    }*/
 }

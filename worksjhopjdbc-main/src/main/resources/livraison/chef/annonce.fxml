@@ -3,8 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" style="-fx-background-color: #7A8727;" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.chef.AnnonceDelivery1">
-   <children>
-      <Button fx:id="refresh" layoutX="274.0" layoutY="322.0" mnemonicParsing="false" onAction="#refresh" text="refresh" />
-   </children>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21"
+            style="-fx-background-color: #7A8727;" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="tn.esprit.controllers.livraison.chef.AnnonceDelivery1">
 </AnchorPane>

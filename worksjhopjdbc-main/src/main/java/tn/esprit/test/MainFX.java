@@ -25,6 +25,7 @@ public class MainFX extends Application {
         //FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/livreur/livreur_acceuil.fxml"));
         //FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/chef/annonce.fxml"));
         FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/client/commande.fxml"));
+        //FXMLLoader loader=new FXMLLoader(getClass().getResource("/livraison/Gestion_livraisons.fxml"));
         try {
             Parent root = loader.load();
             Scene scene =new Scene(root);

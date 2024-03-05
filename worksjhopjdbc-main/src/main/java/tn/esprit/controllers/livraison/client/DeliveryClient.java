@@ -58,6 +58,7 @@ public class DeliveryClient implements Initializable{
     private Button button1;
     private Timeline timeline;
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         button1.getStylesheets().add(getClass().getResource("/css/sample1.css").toExternalForm());
@@ -112,6 +113,7 @@ public class DeliveryClient implements Initializable{
                         nameLabel.setText("nom :" + sliv.getLastInsertedLivraison().getLivreur().getNom());
                         prenomLabel.setText("prenom :" + sliv.getLastInsertedLivraison().getLivreur().getPrenom());
                         telLabel.setText("tel :" + String.valueOf(sliv.getLastInsertedLivraison().getLivreur().getNumero()));
+
                         nameLabel.setVisible(true);
                         prenomLabel.setVisible(true);
                         telLabel.setVisible(true);

@@ -8,6 +8,7 @@ import javafx.scene.web.WebView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
 public class locationView implements Initializable {
 
     @FXML
