@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="javafx-base-16-linux">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/javafx-base-16-linux.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/javafx-controls-16-linux.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/javafx-graphics-16-linux.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/maps-2.0.0-ea+6.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/storage-4.0.11.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/jxmaps/util-4.0.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -4,10 +4,13 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -24,9 +27,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import tn.esprit.controllers.livraison.chef.AnnonceDelivery2;
 import tn.esprit.models.Annonce;
 import tn.esprit.models.Commentaire;
+import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.ServiceCommentaire;
+import tn.esprit.services.livraison.ServiceLivraison;
 import tn.esprit.services.panierService;
 
 import java.io.BufferedReader;
@@ -40,10 +47,47 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 public class AnnonceController {
+    Timeline timeline;
+
+    void  refresh(){
+        if(Objects.equals(loginController.role, "chef" )&&new ServiceLivraison().getLastInsertedLivraison().getLivreur()!=null && new ServiceLivraison().getLastInsertedLivraison().getFeedback_liv()==null
+
+                && new ServiceLivraison().getLastInsertedLivraison().getRéclamation()==null && !new ServiceLivraison().getLastInsertedLivraison().isState_reception()){
+            try {
+                timeline.stop();
+                ServiceLivraison sliv = new ServiceLivraison();
+                livraison liv=sliv.getLastInsertedLivraison();
+                System.out.println(liv);
+
+                FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/chef/chef_delivery.fxml"));
+                Parent root = fxmlLoader.load();
+
+                // Get the controller of the new view
+                AnnonceDelivery2 controller = fxmlLoader.getController();
+
+                // Pass sliv to the controller
+                controller.setLivraison(liv);
+
+                Scene scene = new Scene(root);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.show();
+                Stage currentStage = (Stage) plusButton.getScene().getWindow();
+                currentStage.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            //}
+
+        }}
     @FXML
     public Button plusButton;
     @FXML
     public Button openChatbotButton;
+
+    @FXML
+    private ComboBox<String> combo_table;
     private Annonce annonce;
     @FXML
     private Button Annonce;
@@ -97,7 +141,6 @@ public class AnnonceController {
     panierService p =new panierService();
 
 
-    List<String> badWords = Arrays.asList("fuck", "dick", "zebi");
 
     @FXML
     public void ajouterAnnonce(ActionEvent actionEvent) {
@@ -185,8 +228,6 @@ public class AnnonceController {
     }
 
 
-
-
     @FXML
     private void displayAnnonceInfo(Annonce annonce) {
         // Create a dialog to display Annonce information
@@ -222,13 +263,18 @@ public class AnnonceController {
 
         buttonBox.getChildren().add(nutritionalInfoButton);
         content.getChildren().add(buttonBox);
+
         Button addToCartButton = new Button("Ajouter au panier");
-        addToCartButton.setOnAction(event -> {
-            // Call a method to add the current dish to the cart
-
-            p.ajouterAnnonceAuPanier(loginController.id, annonce.getId_Annonce());
-
-        });
+        if (Objects.equals(loginController.role, "client")) {
+            addToCartButton.setOnAction(event -> {
+                // Call a method to add the current dish to the cart
+                p.ajouterAnnonceAuPanier(loginController.id, annonce.getId_Annonce());
+                // Optionally, you can perform additional actions here if needed
+            });
+        } else {
+            // You may not need this line if the default visibility of the button is false
+            addToCartButton.setVisible(false);
+        }
 
 // Add the "Ajouter au panier" button to the buttonBox
         buttonBox.getChildren().add(addToCartButton);
@@ -238,11 +284,68 @@ public class AnnonceController {
         dialogPane.getScene().getWindow().setOnCloseRequest(event -> {
             dialog.close();
         });
-        int X=annonce.getUserID();
+
         // Show the dialog
         dialog.showAndWait();
-        System.out.print(X);
+
     }
+
+//    @FXML
+//    private void displayAnnonceInfo(Annonce annonce) {
+//        // Create a dialog to display Annonce information
+//        Dialog<String> dialog = new Dialog<>();
+//        dialog.setTitle("Annonce Information");
+//        dialog.setHeaderText("Annonce Information");
+//
+//        // Get the dialog pane
+//        DialogPane dialogPane = dialog.getDialogPane();
+//
+//        // Set the background color
+//        dialogPane.setStyle("-fx-background-color: #7a8727;"); // Green background color
+//
+//        VBox content = new VBox();
+//        content.getStyleClass().add("custom-dialog-content"); // Add custom style class
+//
+//        content.getChildren().add(new Label("Nom: " + annonce.getNom_du_plat()));
+//        content.getChildren().add(new Label("Description: " + annonce.getDescription_du_plat()));
+//        content.getChildren().add(new Label("Prix: " + annonce.getPrix()));
+//        content.getChildren().add(new Label("Ingrédients: " + annonce.getIngredients()));
+//        content.getChildren().add(new Label("Catégorie: " + annonce.getCategorie_de_plat()));
+//        content.getChildren().add(new Label("Quantité: " + annonce.getQuantite())); // Add "quantite" field
+//
+//        // Button to display nutritional info
+//        Button nutritionalInfoButton = new Button("Nutritional Info");
+//        nutritionalInfoButton.setOnAction(event -> {
+//            // Call a method to fetch and display nutritional info based on the name of the dish
+//            displayNutritionalInfo(annonce.getNom_du_plat());
+//        });
+//
+//        // Add the nutritional info button to an HBox
+//        HBox buttonBox = new HBox();
+//
+//        buttonBox.getChildren().add(nutritionalInfoButton);
+//        content.getChildren().add(buttonBox);
+//        Button addToCartButton = new Button("Ajouter au panier");
+//        addToCartButton.setOnAction(event -> {
+//            // Call a method to add the current dish to the cart
+//
+//            p.ajouterAnnonceAuPanier(loginController.id, annonce.getId_Annonce());
+//
+//        });
+//
+//// Add the "Ajouter au panier" button to the buttonBox
+//        buttonBox.getChildren().add(addToCartButton);
+//
+//        dialogPane.setContent(content);
+//
+//        dialogPane.getScene().getWindow().setOnCloseRequest(event -> {
+//            dialog.close();
+//        });
+//        int X=annonce.getUserID();
+//        // Show the dialog
+//        dialog.showAndWait();
+//        System.out.print(X);
+//    }
 
 
     List<Annonce> sortedAnnonces = new ArrayList<>();
@@ -322,6 +425,8 @@ public class AnnonceController {
         // Populate tile pane with default display logic here...
     }
 
+
+    List<String> badWords = Arrays.asList("fuck", "masta" , "zamer" , "bhim");
     @FXML
     private void populateTilePane() {
         // Clear existing children from the tile pane
@@ -377,6 +482,7 @@ public class AnnonceController {
 
                     // Create a label for the comment
                     Label commentLabel = new Label(comment.getComment());
+                    commentLabel = new Label(censorBadWords(comment.getComment()));
                     commentLabel.getStyleClass().add("comment-label");  // Adjust font size as needed
 
                     // Add like button
@@ -520,6 +626,220 @@ public class AnnonceController {
             }
         }
     }
+    @FXML
+    private String censorBadWords(String commentText) {
+        // Split the comment text into words
+        String[] words = commentText.split("\\s+");
+        // Iterate through each word
+        for (int i = 0; i < words.length; i++) {
+            // Check if the word is a bad word
+            if (badWords.contains(words[i].toLowerCase())) {
+                // Replace the bad word with stars of the same length
+                words[i] = "*".repeat(words[i].length());
+            }
+        }
+        // Reconstruct the comment text with censored words
+        return String.join(" ", words);
+    }
+
+//    @FXML
+//    private void populateTilePane() {
+//        // Clear existing children from the tile pane
+//        String searchText = searchField.getText().toLowerCase();
+//        tilePane.getChildren().clear();
+//
+//        // Get all announcements
+//        List<Annonce> allAnnonces = sa.getAll();
+//
+//        // Apply search filter
+//        List<Annonce> filteredAnnonces = sortedAnnonces.stream()
+//                .filter(annonce ->
+//                        annonce.getNom_du_plat().toLowerCase().contains(searchText) || // Filter by name
+//                                annonce.getIngredients().toLowerCase().contains(searchText)) // Filter by ingredients
+//                .collect(Collectors.toList());
+//
+//        // Create tile panes for each announcement
+//        for (Annonce annonce : filteredAnnonces) {
+//            try {
+//                // Create ImageView for the announcement image
+//                ImageView imageView = new ImageView(new Image(new File(annonce.getImage_plat()).toURI().toString()));
+//                imageView.setFitWidth(150); // Adjust image width
+//                imageView.setFitHeight(150); // Adjust image height
+//                imageView.setOnMouseClicked(event -> displayAnnonceInfo(annonce));
+//
+//                // Create VBox to hold image, comments, and text field
+//                VBox tileContent = new VBox();
+//                tileContent.getChildren().add(imageView);
+//                tileContent.setPadding(new Insets(5)); // Set padding for vertical spacing
+//                VBox.setMargin(imageView, new Insets(0, 0, 10, 0));
+//                HBox buttonBox = new HBox(); // Create an empty HBox
+//                buttonBox.setAlignment(Pos.CENTER); // Align buttons to the center
+//                tileContent.getChildren().add(buttonBox); // Add the button box to the tile content
+//
+//                // Add event listeners for showing buttons on hover
+//                tileContent.setOnMouseEntered(e -> showButtons(buttonBox, annonce));
+//                tileContent.setOnMouseExited(e -> hideButtons(buttonBox));
+//
+//                // Set user data to associate the announcement with the tile content
+//                tileContent.setUserData(annonce);
+//
+//                // Fetch and display comments for the current announcement
+//                List<Commentaire> comments = comment.getCommentsForAnnouncement(annonce.getId_Annonce());
+//                for (Commentaire comment : comments) {
+//                    // Create HBox for each comment
+//                    HBox commentBox = new HBox();
+//                    commentBox.getStyleClass().add("comment-box");
+//                    // Create a label for the comment with the user's name
+//                    ServiceCommentaire C = new ServiceCommentaire();
+//
+//                    String nomComplet = C.getUserName(comment.getUserId());
+//                    Label nameLabel = new Label(nomComplet + " : ");
+//
+//                    // Create a label for the comment
+//                    Label commentLabel = new Label(comment.getComment());
+//                    commentLabel.getStyleClass().add("comment-label");  // Adjust font size as needed
+//
+//                    // Add like button
+//                    ToggleButton likeButton = new ToggleButton("♡");
+//                    likeButton.getStyleClass().add("like-button");
+//                    likeButton.setStyle("-fx-font-size: 1.5em;");
+//
+//                    // Like count label
+//                    Label likeCountLabel = new Label(String.valueOf(comment.getLikesCount()));
+//                    likeCountLabel.getStyleClass().add("like-count-label");
+//
+//                    // Delete button
+//                    Button deleteButton = new Button("X");
+//                    deleteButton.getStyleClass().add("delete-button");
+//
+//                    // Add components to the commentBox
+//                    commentBox.getChildren().addAll(nameLabel, commentLabel, likeButton, likeCountLabel, deleteButton);
+//                    commentBox.setSpacing(10); // Adjust the spacing as needed
+//
+//// Align all components vertically centered
+//                    commentBox.setAlignment(Pos.CENTER_LEFT);
+//
+//                    // Add like button and count to the comment box
+//                    HBox.setMargin(likeButton, new Insets(0, 5, 0, 5));
+//                    HBox.setMargin(likeCountLabel, new Insets(0, 5, 0, 0));
+//
+//                    // Add event listeners for like button and delete button
+//                    likeButton.setOnAction(event -> {
+//                        try {
+//                            if (likeButton.isSelected()) {
+//                                // Check if the current user has already liked this comment
+//                                if (!C.hasUserLikedComment(comment.getCommentaireId(), loginController.id)) {
+//                                    // Increment likes count and update UI
+//                                    C.incrementLikesCount(comment.getCommentaireId());
+//                                    likeButton.setStyle("-fx-background-color: red; -fx-text-fill: white;");
+//                                    handleAnnouncementAdded();
+//                                } else {
+//                                    // If the user has already liked the comment, set the button back to unselected
+//                                    likeButton.setSelected(false);
+//                                }
+//                            } else {
+//                                // Decrement likes count and update UI
+//                                C.decrementLikesCount(comment.getCommentaireId());
+//                                likeButton.setStyle("-fx-background-color: transparent; -fx-text-fill: black;");
+//                                handleAnnouncementAdded();
+//                            }
+//                        } catch (SQLException ex) {
+//                            ex.printStackTrace();
+//                        }
+//                    });
+//
+//                    deleteButton.setOnAction(event -> {
+//                        // Handle delete comment action
+//                        try {
+//                            ServiceCommentaire serviceCommentaire = new ServiceCommentaire();
+//                            serviceCommentaire.deleteComment(comment.getCommentaireId()); // Implement deleteComment method in ServiceCommentaire class
+//                            // Refresh the tile pane to remove the deleted comment
+//                            handleAnnouncementAdded();
+//                        } catch (SQLException e) {
+//                            e.printStackTrace();
+//                        }
+//                    });
+//
+//                    // Add double-click event handling to the comment label
+//                    commentLabel.setOnMouseClicked(e -> {
+//                        if (e.getButton().equals(MouseButton.PRIMARY) && e.getClickCount() == 2) {
+//                            // Double-click detected, enable editing if the comment belongs to the current user
+//                            if (comment.getUserId() == loginController.id || Objects.equals(loginController.role, "admin")) {
+//                                TextField updateField = new TextField(comment.getComment());
+//                                commentBox.getChildren().set(1, updateField); // Replace label with text field
+//
+//                                // Add event listener for Enter key to save update
+//                                updateField.setOnKeyPressed(event -> {
+//                                    if (event.getCode() == KeyCode.ENTER) {
+//                                        String updatedComment = updateField.getText().trim();
+//                                        if (!updatedComment.isEmpty()) {
+//                                            comment.setComment(updatedComment);
+//                                            try {
+//                                                // Update the comment in the database
+//                                                ServiceCommentaire serviceCommentaire = new ServiceCommentaire();
+//                                                serviceCommentaire.updateComment(comment); // Implement updateComment method in ServiceCommentaire class
+//                                                // Refresh the tile pane to display the updated comment
+//                                                handleAnnouncementAdded();
+//                                            } catch (SQLException ex) {
+//                                                ex.printStackTrace();
+//                                            }
+//                                        }
+//                                    }
+//                                });
+//
+//                                // Request focus on the text field for editing
+//                                updateField.requestFocus();
+//                            }
+//                        }
+//                    });
+//
+//                    // Add the comment box to the tile content
+//                    tileContent.getChildren().add(commentBox);
+//                }
+//
+//                // Create a TextField for adding comments
+//                TextField commentField = new TextField();
+//                commentField.setPromptText("Add a comment...");
+//
+//                // Add event listener to add comment when Enter key is pressed
+//                commentField.setOnKeyPressed(event -> {
+//                    if (event.getCode() == KeyCode.ENTER) {
+//                        String commentText = commentField.getText().trim();
+//                        if (!commentText.isEmpty()) {
+//                            Commentaire commentaire = new Commentaire();
+//                            commentaire.setUserId(loginController.id); // Set user ID for the comment
+//                            commentaire.setid_Annonce(annonce.getId_Annonce());
+//                            commentaire.setComment(commentText);
+//                            try {
+//                                // Add comment to the database
+//                                comment.addComment(commentaire);
+//                                // Clear the comment text field
+//                                commentField.clear();
+//                                // Refresh the tile pane to display the new comment
+//                                handleAnnouncementAdded();
+//                            } catch (SQLException e) {
+//                                e.printStackTrace();
+//                            }
+//                        }
+//                    }
+//                });
+//
+//                // Add comment field to the tile content
+//                tileContent.getChildren().add(commentField);
+//
+//                // Add event listeners for showing update and delete buttons on hover
+//                tileContent.setOnMouseEntered(e -> showButtons(buttonBox, annonce));
+//                tileContent.setOnMouseExited(e -> hideButtons(buttonBox));
+//
+//                // Add the tile content to the tile pane
+//                tilePane.getChildren().add(tileContent);
+//
+//            } catch (Exception e) {
+//                System.err.println("Error loading image: " + e.getMessage());
+//                updatePaginationButtons();
+//            }
+//        }
+//    }
 
 
     @FXML
@@ -586,7 +906,9 @@ public class AnnonceController {
         Tri.setItems(FXCollections.observableArrayList("Par defaut", "Ascendant", "Descendant", "Likes Ascendant", "Likes Descendant"));
         Tri.setValue("Par defaut"); // Set "Par default" as the default value
 
-
+        timeline = new Timeline(new KeyFrame(Duration.seconds(2), event -> refresh()));
+        timeline.setCycleCount(Timeline.INDEFINITE);
+        timeline.play();
         sortedAnnonces = sa.getAll();
         if (Objects.equals(loginController.role, "client")) {
             // If the user is a client, hide the button

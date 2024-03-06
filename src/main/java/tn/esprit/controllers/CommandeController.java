@@ -16,11 +16,15 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import tn.esprit.models.Annonce;
 import tn.esprit.models.Commande;
+import tn.esprit.models.livraison.livraison;
 import tn.esprit.services.UserService;
 import tn.esprit.services.commandeService;
+import tn.esprit.services.livraison.ServiceLivraison;
+import tn.esprit.services.livraison.Service_Command_details;
 import tn.esprit.services.panierService;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.List;
 
 public class CommandeController {
@@ -124,8 +128,75 @@ public class CommandeController {
         adresseEmailField.setText(loginController.email);
     }
 
+    //@FXML
+//    private void finaliserCommande(ActionEvent event) {
+//
+//        String nom = nomField.getText();
+//        String prenom = prenomField.getText();
+//        String numero = numeroField.getText();
+//        String adresseLivraison = adresse.getText();
+//
+//        String etatLivraison = null;
+//        if (ramassageDirectCheckBox.isSelected()) {
+//            etatLivraison = "Ramassage direct";
+//        } else if (livraisonLivreurCheckBox.isSelected()) {
+//            etatLivraison = "Livraison par livreur";
+//        }
+//        Commande commande = new Commande();
+//        commande.setAdresse(adresseLivraison);
+//
+//        int idClient = loginController.id;
+//        int idPanier=loginController.id;
+//        int prixTotal= panierService.calculerPrixTotalPanier(idPanier);
+//
+//
+//        // Appeler la méthode pour ajouter la commande
+//        commandeService commandeService = new commandeService();
+//        if (adresse.getText().isEmpty() ||
+//                (!ramassageDirectCheckBox.isSelected() && !livraisonLivreurCheckBox.isSelected()) ||
+//                (!paiementALivraisonCheckBox.isSelected() && !paiementEnLigneCheckBox.isSelected())) {
+//            // Afficher un message d'erreur ou effectuer une action appropriée
+//            showAlert("Veuillez remplir tous les champs obligatoires.");
+//            return; // Sortir de la méthode si un champ requis est manquant
+//        } else if (paiementEnLigneCheckBox.isSelected() && (cardNumberField.getText().isEmpty() || expiryDateField.getText().isEmpty() || cvvField.getText().isEmpty())) {
+//            // Afficher un message d'erreur spécifique pour les champs de paiement en ligne
+//            showAlert("Veuillez remplir tous les champs de paiement en ligne.");
+//            return; // Sortir de la méthode si les champs de paiement en ligne sont manquants
+//        } else {
+//            commandeService.ajouterCommande(idClient, idPanier, prixTotal, adresseLivraison, etatLivraison);
+//        }
+//
+//        try {
+//            Stripe.apiKey = "sk_test_51OpfHFILsmRV4nqPsSywa4szvWj4tbLuAKXd2ASLPTHOZSEyzKwdq67s2M5ePFSDnddYqSSht0Ol7AlmxqwP2zbQ00HyYh2tk1";
+//
+//            PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+//                    .setCurrency("usd")
+//                    .setAmount((long) prixTotal)
+//                    .build();
+//
+//            PaymentIntent paymentIntent = PaymentIntent.create(params);
+//            System.out.println("PaymentIntent créé : " + paymentIntent.getId());
+//            ServiceLivraison sliv=new ServiceLivraison();
+//            commandeService scom=new commandeService();
+//            Commande last=scom.getLastInsertedCommande();
+//            livraison liv=new livraison(1,null,scom.getChefDetailsFromCommande(last.getId_commande()),new commandeService().getAdresseFromCommande(last.getId_commande()),last.getAdresse(),null,null,false,false,null,null,last);
+//            sliv.add(liv);
+//        } catch (StripeException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/livraison/client/Delivery_client.fxml"));
+//            Parent panierParent = loader.load();
+//            Scene panierScene = new Scene(panierParent);
+//            Stage panierStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+//            panierStage.setScene(panierScene);
+//            panierStage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//    }
     @FXML
-    private void finaliserCommande(ActionEvent event) {
+    private void finaliserCommande(ActionEvent event) throws SQLException {
 
         String nom = nomField.getText();
         String prenom = prenomField.getText();
@@ -145,6 +216,8 @@ public class CommandeController {
         int idPanier=loginController.id;
         int prixTotal= panierService.calculerPrixTotalPanier(idPanier);
 
+        String userEmail = adresseEmailField.getText();
+        //EmailSender.sendEmail(userEmail, "Confirmation de commande", "Votre commande a été passée avec succès.");
 
         // Appeler la méthode pour ajouter la commande
         commandeService commandeService = new commandeService();
@@ -160,28 +233,61 @@ public class CommandeController {
             return; // Sortir de la méthode si les champs de paiement en ligne sont manquants
         } else {
             commandeService.ajouterCommande(idClient, idPanier, prixTotal, adresseLivraison, etatLivraison);
+
+            // Vérifier si la case de paiement en ligne est sélectionnée
+            if (paiementEnLigneCheckBox.isSelected()) {
+                try {
+                    Stripe.apiKey = "sk_test_51OpfHFILsmRV4nqPsSywa4szvWj4tbLuAKXd2ASLPTHOZSEyzKwdq67s2M5ePFSDnddYqSSht0Ol7AlmxqwP2zbQ00HyYh2tk1";
+
+                    PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
+                            .setCurrency("usd")
+                            .setAmount((long) prixTotal)
+                            .build();
+
+                    PaymentIntent paymentIntent = PaymentIntent.create(params);
+                    System.out.println("PaymentIntent créé : " + paymentIntent.getId());
+                } catch (StripeException e) {
+                    e.printStackTrace();
+                }
+
+
+                EmailSender.sendEmail(userEmail, "Confirmation de commande", "Votre commande a été passée avec succès.");
+            }
+
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/livraison/client/Delivery_client.fxml"));
+                Parent panierParent = loader.load();
+                Scene panierScene = new Scene(panierParent);
+                Stage panierStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                panierStage.setScene(panierScene);
+                panierStage.show();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-
+        ServiceLivraison sliv=new ServiceLivraison();
+        commandeService scom=new commandeService();
+        Commande last=scom.getLastInsertedCommande();
+        livraison liv=new livraison(1,null,scom.getChefDetailsFromCommande(last.getId_commande()),new commandeService().getAdresseFromCommande(last.getId_commande()),last.getAdresse(),null,null,false,false,null,null,last);
+        sliv.add(liv);
+        Service_Command_details.COMMANDE_DETAILS=new Service_Command_details().getCommandeDetails(last.getId_commande());
+        scom.supprimerAnnoncesDuPanier(idPanier);
         try {
-            Stripe.apiKey = "sk_test_51OpfHFILsmRV4nqPsSywa4szvWj4tbLuAKXd2ASLPTHOZSEyzKwdq67s2M5ePFSDnddYqSSht0Ol7AlmxqwP2zbQ00HyYh2tk1";
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/livraison/client/Delivery_client.fxml"));
 
-            PaymentIntentCreateParams params = PaymentIntentCreateParams.builder()
-                    .setCurrency("usd")
-                    .setAmount((long) prixTotal)
-                    .build();
+            // Create a new scene
+            Scene scene = new Scene(fxmlLoader.load());
 
-            PaymentIntent paymentIntent = PaymentIntent.create(params);
-            System.out.println("PaymentIntent créé : " + paymentIntent.getId());
-        } catch (StripeException e) {
-            e.printStackTrace();
-        }
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/displayEvent.fxml"));
-            Parent panierParent = loader.load();
-            Scene panierScene = new Scene(panierParent);
-            Stage panierStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            panierStage.setScene(panierScene);
-            panierStage.show();
+            // Get the current stage
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            // Set the new scene to the stage
+            stage.setScene(scene);
+
+            // Show the new scene
+            stage.show();
+            Stage currentStage = (Stage) cvvField.getScene().getWindow();
+            currentStage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -242,7 +348,7 @@ public class CommandeController {
     @FXML
     private void retourPanierButtonClicked(ActionEvent actionEvent) throws IOException {
         // Charger l'interface du panier
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/displayEvent.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/displayPersonne.fxml"));
         Parent root = loader.load();
 
         // Créer une nouvelle scène avec l'interface du panier

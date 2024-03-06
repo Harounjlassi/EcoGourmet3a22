@@ -1,0 +1,37 @@
+
+#table .table-row-cell {
+    -fx-border-width: 0px;
+    -fx-background-color: #f8f8f8, #f8f8f8 0px 1px 0px 0px, #f8f8f8 0px -1px 0px 0px;
+}
+
+#table .table-row-cell:odd {
+    -fx-background-color: #f0f0f0, #f0f0f0 0px 1px 0px 0px, #f0f0f0 0px -1px 0px 0px;
+}
+
+#table .column-header {
+    -fx-background-color: #ffb347;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+}
+#livreur .list-cell {
+    -fx-background-color: #ffb347;
+}
+#chef .list-cell {
+    -fx-background-color: #ffb347;
+}
+#commande .list-cell {
+    -fx-background-color: #ffb347;
+}
+#feedbackButton {
+    -fx-background-color: #ffb347;
+}
+#reclamationButton {
+    -fx-background-color: #ffb347;
+}
+#mySubmitButton{
+    -fx-background-color: #ffb347;
+}
+
+
+
+

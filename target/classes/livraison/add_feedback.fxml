@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+
+<VBox spacing="10" xmlns:fx="http://javafx.com/fxml/1" style="-fx-background-color: #7A8727;" xmlns="http://javafx.com/javafx/21" fx:controller="tn.esprit.controllers.livraison.Add_Feedback">
+    <children>
+        <Text fx:id="label1" text="Feedback Livreur:" />
+        <HBox spacing="10">
+            <children>
+                <RadioButton text="0">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="groupLivreur" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton text="1" toggleGroup="$groupLivreur" />
+                <RadioButton text="2" toggleGroup="$groupLivreur" />
+                <RadioButton text="3" toggleGroup="$groupLivreur" />
+                <RadioButton text="4" toggleGroup="$groupLivreur" />
+                <RadioButton text="5" toggleGroup="$groupLivreur" />
+            </children>
+        </HBox>
+        <Text fx:id="label2" text="Feedback Temps:" />
+        <HBox spacing="10">
+            <children>
+                <RadioButton text="0">
+                    <toggleGroup>
+                        <ToggleGroup fx:id="groupTemps" />
+                    </toggleGroup>
+                </RadioButton>
+                <RadioButton text="1" toggleGroup="$groupTemps" />
+                <RadioButton text="2" toggleGroup="$groupTemps" />
+                <RadioButton text="3" toggleGroup="$groupTemps" />
+                <RadioButton text="4" toggleGroup="$groupTemps" />
+                <RadioButton text="5" toggleGroup="$groupTemps" />
+            </children>
+        </HBox>
+        <HBox alignment="CENTER">
+            <Button fx:id="submit" onAction="#ajouterfeedback" text="Submit" />
+        </HBox>
+    </children>
+</VBox>

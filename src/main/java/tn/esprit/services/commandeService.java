@@ -3,6 +3,8 @@ package tn.esprit.services;
 
 import tn.esprit.interfaces.ICService;
 import tn.esprit.models.Commande;
+import tn.esprit.models.User;
+import tn.esprit.models.livraison.CommandeDetail;
 import tn.esprit.utils.MyDataBase;
 
 import java.sql.*;
@@ -88,12 +90,12 @@ public class commandeService implements ICService<Commande> {
                 "VALUES (?, ?, ?, ?, ?, NOW())"; // Utilisation de la fonction SQL NOW() pour obtenir le temps actuel
         String selectAnnoncesQuery = "SELECT a.* FROM Annonce a JOIN Panier_Annonce pa ON a.id_annonce = pa.id_annonce " +
                 "WHERE pa.id_panier = ?";
-        String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
+       // String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
 
         try  {
             PreparedStatement pst1 = cnx.prepareStatement(insertCommandeQuery);
             PreparedStatement pst2 = cnx.prepareStatement(selectAnnoncesQuery);
-            PreparedStatement pst3 = cnx.prepareStatement(deletePanierAnnonceQuery);
+            //PreparedStatement pst3 = cnx.prepareStatement(deletePanierAnnonceQuery);
             // Ajout de la commande
             pst1.setInt(1, idClient);
             pst1.setInt(2, idPanier);
@@ -111,8 +113,8 @@ public class commandeService implements ICService<Commande> {
             }
 
             // Suppression des annonces du panier
-            pst3.setInt(1, idPanier);
-            pst3.executeUpdate();
+            //pst3.setInt(1, idPanier);
+            //pst3.executeUpdate();
 
             System.out.println("Commande ajoutée avec succès !");
         } catch (SQLException e) {
@@ -350,4 +352,145 @@ public class commandeService implements ICService<Commande> {
 
         return commandesArchivees;
     }
+    public Commande getCommandeById(int idCommande) {
+        String selectCommandeQuery = "SELECT * FROM Commande WHERE id_commande = ?";
+
+        Commande commande = null;
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectCommandeQuery);
+            pst.setInt(1, idCommande);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int idClient = rs.getInt("id_client");
+                int idPanier = rs.getInt("id_panier");
+                int prixTotal = rs.getInt("prix_total");
+                String adresse = rs.getString("adresse");
+
+                commande = new Commande(idCommande, idClient, idPanier,adresse,idPanier);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération de la commande : " + e.getMessage());
+        }
+
+        return commande;
+    }
+    public List<CommandeDetail> getCommandeDetails(int idCommande) {
+        String selectCommandeDetailsQuery = "SELECT a.Nom_du_plat, pa.quantite, c.prix_total, c.adresse " +
+                "FROM Commande c JOIN Panier_Annonce pa ON c.id_panier = pa.id_panier " +
+                "JOIN Annonce a ON pa.id_annonce = a.id_annonce " +
+                "WHERE c.id_commande = ?";
+
+        List<CommandeDetail> commandeDetailsList = new ArrayList<>();
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectCommandeDetailsQuery);
+            pst.setInt(1, idCommande);
+            ResultSet rs = pst.executeQuery();
+
+            while (rs.next()) {
+                CommandeDetail detail = new CommandeDetail();
+                detail.setNomDuPlat(rs.getString("Nom_du_plat"));
+                detail.setQuantite(rs.getInt("quantite"));
+                detail.setPrixTotal(rs.getInt("prix_total"));
+                detail.setAdresse(rs.getString("adresse"));
+                commandeDetailsList.add(detail);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des détails de la commande : " + e.getMessage());
+        }
+
+        return commandeDetailsList;
+    }
+    public Commande getLastInsertedCommande() {
+        String selectLastInsertedCommandeQuery = "SELECT * FROM Commande ORDER BY id_commande DESC LIMIT 1";
+
+        Commande lastInsertedCommande = null;
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectLastInsertedCommandeQuery);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int idCommande = rs.getInt("id_commande");
+                int idClient = rs.getInt("id_client");
+                int idPanier = rs.getInt("id_panier");
+                int prixTotal = rs.getInt("prix_total");
+                String adresse = rs.getString("adresse");
+
+
+                lastInsertedCommande = new Commande(idCommande, idClient,prixTotal, adresse);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération de la dernière commande : " + e.getMessage());
+        }
+
+        return lastInsertedCommande;
+    }
+    public User getChefDetailsFromCommande(int idCommande) {
+        String selectChefDetailsQuery = "SELECT u.* FROM User u " +
+                "JOIN annonce a ON u.UserId = a.userID " +
+                "JOIN panier_annonce pa ON a.id_Annonce = pa.id_annonce " +
+                "JOIN commande c ON pa.id_panier = c.id_panier " +
+                "WHERE c.id_commande = ?";
+
+        User chefDetails = null;
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(selectChefDetailsQuery);
+            pst.setInt(1, idCommande);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                int userId = rs.getInt("UserId");
+                String nom = rs.getString("Nom");
+                String prenom = rs.getString("Prenom");
+                String email = rs.getString("Email");
+                String numero = rs.getString("Numero");
+                String password = rs.getString("Password");
+                String role = rs.getString("Role");
+
+                chefDetails = new User(userId, nom, prenom, email, numero, password, role);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des détails du chef : " + e.getMessage());
+        }
+
+        return chefDetails;
+    }
+    public String getAdresseFromCommande(int idCommande) {
+        String adresse = "";
+        String query = "SELECT a.adresse " +
+                "FROM annonce a, panier_annonce pa, panier p, commande c " +
+                "WHERE a.id_Annonce = pa.id_annonce " +
+                "AND pa.id_panier = p.id_panier " +
+                "AND p.id_panier = c.id_panier " +
+                "AND c.id_commande = ?";
+
+        try {
+            PreparedStatement pst = cnx.prepareStatement(query);
+            pst.setInt(1, idCommande);
+            ResultSet rs = pst.executeQuery();
+
+            if (rs.next()) {
+                adresse = rs.getString("adresse");
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération de l'adresse : " + e.getMessage());
+        }
+
+        return adresse;
+    }
+    public void supprimerAnnoncesDuPanier(int idPanier) throws SQLException {
+        String deletePanierAnnonceQuery = "DELETE FROM Panier_Annonce WHERE id_panier = ?";
+        try {
+            PreparedStatement pst = cnx.prepareStatement(deletePanierAnnonceQuery);
+            pst.setInt(1, idPanier);
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

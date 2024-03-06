@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AjouterVoteController">
+   <children>
+      <BorderPane prefHeight="699.0" prefWidth="1109.0">
+         <left>
+            <VBox prefHeight="514.0" prefWidth="223.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <ComboBox fx:id="combo_table" accessibleRole="BUTTON" prefHeight="50.0" prefWidth="214.0" promptText="Gestion Evenement" stylesheets="@css/sample.css">
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets bottom="12.0" left="10.0" right="10.0" top="50.0" />
+                     </VBox.margin>
+                  </ComboBox>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Users" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Projects" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/projects.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Tasks" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/tasks.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Logs" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/logs.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Chats" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/chat.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="238.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Reports" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/report.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="858.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label graphicTextGap="14.0" prefHeight="131.0" prefWidth="319.0" text="EcoGourmet" textFill="#ffb347">
+                     <graphic>
+                        <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Britannic Bold" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="35.0" />
+               </padding>
+            </HBox>
+         </top>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Members">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <BorderPane prefHeight="607.0" prefWidth="889.0" stylesheets="@/css/sample.css">
+                                 <top>
+                                    <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="858.0" spacing="10.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Label graphicTextGap="10.0" prefHeight="22.0" prefWidth="66.0" text="Vote" textFill="#6e6969">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <Button fx:id="add" mnemonicParsing="false" onAction="#ajouter_btn" prefHeight="34.0" prefWidth="82.0" styleClass="button2" stylesheets="@css/sample.css" text="add new" textFill="#52438f" />
+                                          <Button layoutX="132.0" layoutY="24.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="143.0" styleClass="button2" stylesheets="@/css/sample.css" text="Import members" textFill="#52438f" />
+                                          <Button layoutX="224.0" layoutY="24.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="154.0" styleClass="button2" stylesheets="@/css/sample.css" text="export members(Excel)" textFill="#52438f" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="35.0" />
+                                       </padding>
+                                    </HBox>
+                                 </top>
+                                 <left>
+                                    <Pane prefWidth="877.0" BorderPane.alignment="CENTER">
+                                       <children>
+                                          <Button layoutX="656.0" layoutY="412.0" mnemonicParsing="false" onAction="#afficherVote" text="retour" />
+                                          <Button layoutX="742.0" layoutY="412.0" mnemonicParsing="false" onAction="#AjouterVote" text="Ajouetr" />
+                                          <Label graphicTextGap="10.0" layoutX="39.0" layoutY="14.0" prefHeight="22.0" prefWidth="66.0" text="Vote" textFill="#6e6969">
+                                             <font>
+                                                <Font name="Berlin Sans FB" size="20.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="t_event" layoutX="74.0" layoutY="205.0" prefHeight="42.0" prefWidth="169.0" styleClass="text-field1" stylesheets="@css/sample.css" />
+                                          <Label layoutX="73.0" layoutY="177.0" styleClass="label1" stylesheets="@css/sample.css" text="Event :" />
+                                          <Label layoutX="291.0" layoutY="81.0" styleClass="label1" stylesheets="@css/sample.css" text="Vote value" />
+                                          <ComboBox fx:id="t_user" layoutX="291.0" layoutY="205.0" prefHeight="42.0" prefWidth="169.0" styleClass="text-field1" stylesheets="@css/sample.css" />
+                                          <Label layoutX="290.0" layoutY="177.0" styleClass="label1" stylesheets="@css/sample.css" text="User:" />
+                                          <Label layoutX="72.0" layoutY="71.0" styleClass="label1" stylesheets="@css/sample.css" text="Commentaire:" />
+                                          <TextField fx:id="t_commentaire" layoutX="73.0" layoutY="96.0" prefHeight="62.0" prefWidth="170.0" styleClass="text-field1" stylesheets="@css/sample.css" />
+                                          <ComboBox fx:id="t_value" layoutX="291.0" layoutY="106.0" prefHeight="42.0" prefWidth="169.0" styleClass="text-field1" stylesheets="@css/sample.css" />
+                                       </children>
+                                    </Pane>
+                                 </left>
+                              </BorderPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Admins">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="858.0" style="-fx-background-color: #52438F;">
+                                 <children>
+                                    <Label graphicTextGap="10.0" text="KeepToo MList" textFill="WHITE">
+                                       <font>
+                                          <Font name="Berlin Sans FB" size="20.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                                 <padding>
+                                    <Insets left="35.0" />
+                                 </padding>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </TabPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

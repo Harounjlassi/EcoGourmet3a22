@@ -2,6 +2,8 @@ package tn.esprit.test;
 
 import tn.esprit.models.User;
 import tn.esprit.services.UserService;
+import tn.esprit.services.commandeService;
+import tn.esprit.services.livraison.Service_Command_details;
 
 public class Main {
     public static void main(String[] args) {
@@ -24,8 +26,11 @@ public class Main {
 
 
         //test Affichage resultat sur le terminal
-        uti.getall();
+        Service_Command_details sc = new Service_Command_details();
+        //System.out.println(sc.getCommandeDetails(1));
 
+        UserService p = new UserService();
+        System.out.println(p.getIdByName("aaa"));
 
 
     }

@@ -18,7 +18,7 @@
 
 <AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1080.0" prefWidth="1920.0" style="-fx-background-image: url('img/bg.jpg'); -fx-background-size: cover;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.SignupController">
    <children>
-      <VBox alignment="CENTER" layoutX="220.0" layoutY="34.0" prefHeight="1053.0" prefWidth="411.0">
+      <VBox alignment="CENTER" layoutX="243.0" prefHeight="970.0" prefWidth="411.0">
          <children>
             <Label text="Inscription" textFill="WHITE">
                <font>
@@ -127,7 +127,7 @@
             <Line endX="200.0" stroke="#0000002a" />
             <Label fx:id="back" onMouseClicked="#back" text="Avez-vous déjà un compte ?" textFill="#d4fcce">
                <VBox.margin>
-                  <Insets top="10.0" />
+                  <Insets />
                </VBox.margin>
                <font>
                   <Font size="16.0" />
@@ -140,4 +140,3 @@
       </VBox>
    </children>
 </AnchorPane>
-

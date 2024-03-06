@@ -476,20 +476,5 @@ public class adminController {
         return true;
     }
 
-    public void Decon(ActionEvent actionEvent) {
-        try {
-            // Load the previous page
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/login.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
 
-            // Get the stage from the event source
-            Stage stage = (Stage) ((Button) actionEvent.getSource()).getScene().getWindow();
-
-            // Set the scene to the previous stage
-            stage.setScene(scene);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 }

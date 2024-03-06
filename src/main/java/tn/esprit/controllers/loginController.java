@@ -11,8 +11,6 @@
 
     import java.io.IOException;
     import java.net.URL;
-    import java.security.InvalidKeyException;
-    import java.security.NoSuchAlgorithmException;
     import java.sql.*;
     import java.util.*;
     import java.util.logging.Level;
@@ -20,16 +18,9 @@
 
     import javafx.scene.control.Alert;
 
-    import javax.crypto.BadPaddingException;
-    import javax.crypto.Cipher;
-    import javax.crypto.IllegalBlockSizeException;
-    import javax.crypto.NoSuchPaddingException;
-    import javax.crypto.spec.SecretKeySpec;
     import javax.mail.*;
     import javax.mail.internet.InternetAddress;
     import javax.mail.internet.MimeMessage;
-
-    import static io.jsonwebtoken.JwsHeader.ALGORITHM;
 
 
     public class loginController implements Initializable {
@@ -113,16 +104,16 @@
                             // Redirection vers la page suivante en fonction du rôle de l'utilisateur
                             switch (r) {
                                 case "admin":
-                                    loadFXML("/admin.fxml");
+                                    loadFXML("/displayPersonne.fxml");
                                     break;
                                 case "client":
-                                    loadFXML("/displayEvent.fxml");
+                                    loadFXML("/displayPersonne.fxml");
                                     break;
                                 case "chef":
-                                    loadFXML("/displayEvent.fxml");
+                                    loadFXML("/displayPersonne.fxml");
                                     break;
                                 case "livreur":
-                                    loadFXML("/displayEvent.fxml");
+                                    loadFXML("/livraison/livreur/livreur_acceuil.fxml");
                                     break;
                             }
                         } else {

@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="699.0" prefWidth="1270.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.livraison.YourController">
+    <stylesheets>
+        <URL value="@/css/sample.css" />
+    </stylesheets>
+   <children>
+      <BorderPane layoutX="-1.0" prefHeight="699.0" prefWidth="1270.0">
+         <left>
+            <VBox prefHeight="514.0" prefWidth="223.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="178.0" stylesheets="@/css/sample.css" text="Profile" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/profile.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding></Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="30.0" layoutY="10.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Users" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/user.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="56.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Projects" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/projects.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="101.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Tasks" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/tasks.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="147.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Logs" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/logs.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="192.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Chats" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/chat.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <padding>
+                        <Insets left="20.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button alignment="BASELINE_LEFT" graphicTextGap="10.0" layoutX="10.0" layoutY="238.0" mnemonicParsing="false" prefHeight="45.0" prefWidth="183.0" stylesheets="@/css/sample.css" text="Gestion livraisons" textFill="WHITE">
+                     <graphic>
+                        <ImageView fitHeight="18.0" fitWidth="18.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/report.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets left="16.0" top="16.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
+         </left>
+         <top>
+            <HBox alignment="CENTER_LEFT" prefHeight="62.0" prefWidth="858.0" style="-fx-background-color: #7A8727;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label graphicTextGap="14.0" prefHeight="131.0" prefWidth="319.0" text="EcoGourmet" textFill="#ffb347">
+                     <graphic>
+                        <ImageView fitHeight="131.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@/icon/logo.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <font>
+                        <Font name="Britannic Bold" size="27.0" />
+                     </font>
+                  </Label>
+               </children>
+               <padding>
+                  <Insets left="35.0" />
+               </padding></HBox>
+         </top>
+         <center>
+            <TabPane prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+               <tabs>
+                  <Tab text="Gestion_livraisons">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Button fx:id="tri_par_FB_livreur" layoutX="14.0" layoutY="14.0" text="Tri par feedback livreur" />
+                              <Button fx:id="tri_par_FB_temps" layoutX="190.0" layoutY="14.0" text="Tri par Feedback temps" />
+                              <Button fx:id="tri_par_debut_livraison" layoutX="350.0" layoutY="14.0" text="Tri par debut livraison" />
+                              <Button fx:id="avec_réclamation" layoutX="520.0" layoutY="14.0" text="avec réclamation" />
+                              <Button fx:id="addLivraisonButton" layoutX="750.0" layoutY="14.0" text="Add Livraison" onAction="#openAddLivraisonForm" />
+                              <TableView fx:id="table" layoutX="14.0" layoutY="50.0" prefHeight="500.0" prefWidth="1200.0" style="-fx-background-color: #f8f8f8; -fx-border-color: #e8e8e8; -fx-border-width: 1px;">
+                                 <columns>
+                                    <TableColumn fx:id="idColumn" prefWidth="75.0" text="ID" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="livreurColumn" prefWidth="100.0" text="Livreur" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="chefColumn" prefWidth="100.0" text="Chef" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="adresse_source" prefWidth="100.0" text="Adresse Source" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="adresse_destination" prefWidth="100.0" text="Adresse Destination" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="Feedback_liv" prefWidth="100.0" text="Feedback Livraison" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="réclamation" prefWidth="100.0" text="Réclamation" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="time_start" prefWidth="150.0" text="Time Start" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="commande" prefWidth="100.0" text="Commande" style="-fx-alignment: CENTER;"/>
+                                    <TableColumn fx:id="delete" prefWidth="100.0" text="delete" style="-fx-alignment: CENTER;"/>
+                                 </columns>
+                              </TableView>
+
+                           </children>
+
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+
+               </tabs>
+            </TabPane>
+
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>

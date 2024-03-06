@@ -4,6 +4,14 @@ import java.sql.Timestamp;
 
 public class Commande {
     private int id_commande ;
+
+    public Commande(int id_commande, int id_client, int prix_total, String adresse) {
+        this.id_commande = id_commande;
+        this.id_client = id_client;
+        this.prix_total = prix_total;
+        this.adresse = adresse;
+    }
+
     private int id_client;
     private int prix_total;
     private String adresse;

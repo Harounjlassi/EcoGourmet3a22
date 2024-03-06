@@ -12,16 +12,16 @@
 }
 .button:hover
 {
-    -fx-background-color: #BAEAC3;
+    -fx-background-color:#FFB347;
 }
 .button:pressed
-{-fx-background-color: #BAEAC3;
+{-fx-background-color: #ffb347;
 
 }
 
 .button:focused{
 
-    -fx-background-color:#BAEAC3;
+    -fx-background-color:#ffb347;
     -fx-border-color: #CDD1D6;
     -fx-border-width: 0px 0px 0px 3px;
 }
@@ -47,7 +47,7 @@
 
 .button2:focused{
 
-    -fx-background-color: red;
+    -fx-background-color: #BAEAC3;
     -fx-background-radius: 1px 1px 1px 1px;
     -fx-text-fill:#FFFFFF;
 
@@ -81,16 +81,16 @@ table-view .column-header,
 }
 /*scrool bar strated here*/
 
-/* The increment and decrement button CSS class of scrollbar */
+/* The increment and decrement button CSS class of scrollbar */ 
 .table-view .increment-button,.table-view .decrement-button {
 
     -fx-background-color:transparent;
     -fx-background-radius: 2em;
 }
-/* The main scrollbar **track** CSS class */
-.table-view .scroll-bar:horizontal .track,
+/* The main scrollbar **track** CSS class */ 
+.table-view .scroll-bar:horizontal .track, 
 .table-view .scroll-bar:vertical .track{
-    -fx-background-color: transparent;
+    -fx-background-color: transparent; 
     -fx-border-color: #BAEAC3; /* 80% opacity */
     -fx-background-radius: 2em;
     -fx-border-radius:2em;
@@ -100,7 +100,7 @@ table-view .column-header,
 .table-view .scroll-bar:vertical .thumb {
 
     -fx-background-color: #BAEAC3; /* 80% opacity */
-    -fx-background-insets: 2, 0, 0;
+    -fx-background-insets: 2, 0, 0; 
     -fx-background-radius: 2em;}
 /* chart properties */
 .chart {
@@ -146,9 +146,9 @@ table-view .column-header,
 
 
 .tab tab-label {
-    -fx-alignment: CENTER;
+    -fx-alignment: CENTER; 
     -fx-text-fill: #A5A9B4;
-/*    -fx-font-size: 12px;
+/*    -fx-font-size: 12px; 
     -fx-font-weight: bold;*/
 }
 .tab:selected .tab-label {
@@ -161,47 +161,295 @@ table-view .column-header,
     -fx-font-size: 14px; /* Font size */
     /* Add more styling properties as needed */
 }
-.custom-dialog-content {
-    -fx-background-color: #b8e994; /* Green background color */
-    -fx-padding: 10px; /* Adjust padding for better appearance */
-}
-/* Comment Box */
-.comment-box {
-    padding: 5px;
-    margin-bottom: 10px;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-}
-
-/* Comment Label */
-.comment-label {
-    font-size: 14px;
-    color: #333;
+.photo-button {
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-background-image: url("/icon/icons8-image-64.png"); /* Replace with your photo icon */
+    -fx-background-size: cover;
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-fill: transparent; /* Hide text */
+    -fx-font-size: 16; /* Hide font */
+    -fx-padding: 3; /* Remove padding */
+    -fx-border-color: transparent; /* Remove border */
+    -fx-cursor: hand; /* Change cursor to indicate clickability */
 }
 
-/* Like Button */
-.like-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: black;
-    -fx-font-size: 14px;
+.photo-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.2); /* Add a slight overlay on hover */
 }
-
-.like-button:selected {
-    -fx-background-color: red;
-    -fx-text-fill: white;
-}
-
-/* Delete Button */
 .delete-button {
-    -fx-background-color: transparent;
-    -fx-text-fill: red;
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-background-image: url("/icon/icons8-delete-20.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-fill: transparent; /* Hide text */
+    -fx-font-size: 6; /* Hide font */
+    -fx-padding: 3; /* Remove padding */
+    -fx-border-color: transparent; /* Remove border */
+    -fx-cursor: hand; /* Change cursor to indicate clickability */
+    -fx-background-size: 30 30; /* Set size to 48x48 */
+
+
+
+
+
 }
 
 .delete-button:hover {
-    -fx-background-color: #eee;
+    -fx-background-color: rgba(0, 0, 0, 0.2); /* Add a slight overlay on hover */
+}
+
+.update-button{
+    -fx-background-color: transparent; /* Transparent background */
+    -fx-background-image: url("/icon/icons8-update-30.png");
+    -fx-background-repeat: no-repeat;
+    -fx-background-position: center;
+    -fx-text-fill: transparent; /* Hide text */
+    -fx-font-size: 9; /* Hide font */
+    -fx-start-margin: 4;
+    -fx-padding: 3; /* Remove padding */
+    -fx-border-color: transparent; /* Remove border */
+    -fx-cursor: hand; /* Change cursor to indicate clickability */
+    -fx-background-size: 30 30; /* Set size to 48x48 */
+
+
+
+
+
+}
+
+.update-button:hover {
+    -fx-background-color: rgba(0, 0, 0, 0.2); /* Add a slight overlay on hover */
+}
+.text-field1 {
+    -fx-background-color: #ffffff; /* Background color */
+    -fx-border-color: #cccccc; /* Border color */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-radius: 3px; /* Border radius */
+    -fx-padding: 5px; /* Padding */
+    -fx-font-size: 14px; /* Font size */
+}
+
+/* Focused style for TextField */
+.text-field1:focused {
+    -fx-border-color: #FFCB00; /* Border color when focused */
+    -fx-border-width: 1px; /* Border width when focused */
+    -fx-border-radius: 3px; /* Border radius when focused */
+    -fx-background-color: #ffffff; /* Background color when focused */
+}
+.label1 {
+    -fx-text-fill: #7A8727; /* Text color */
+    -fx-font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; /* Font family */
+    -fx-font-size: 13px; /* Font size */
+    -fx-font-weight: bold; /* Font weight */
+}
+
+/* Optional: Hover style for Label */
+.label1:hover {
+    -fx-text-fill: #FFCB00; /* Text color on hover */
 }
 
 
+.combo-box{
+    -fx-background-color: rgba(255, 255, 255, 0.3);
+    -fx-background-radius: 30;
+    -fx-font-weight:"Arial"; /* Make text bold */
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+
+}
+.combo-box:hover
+{
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+}
+.combo-box:pressed
+{
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1); /* Add a subtle shadow effect when focused */
+
+
+
+
+
+}
+
+.combo-box:focused{
+
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-border-color: #CDD1D6;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+
+}
+.combo-box-popup .list-view .list-cell:filled {
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+}
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */}
+
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color:#FFB347;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */}
+
+
+
+
+
+
+
+
+
+
+.combo-box1{
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+    -fx-font-weight:"Arial"; /* Make text bold */
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+
+}
+.combo-box1:hover
+{
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+}
+.combo-box1:pressed
+{
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 10, 0, 0, 1); /* Add a subtle shadow effect when focused */
+
+
+
+
+
+}
+
+.combo-box1:focused{
+
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-border-color: #CDD1D6;
+    -fx-border-width: 0px 0px 0px 3px;
+}
+
+.combo-box1-pop.list-view {
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+
+}
+.combo-box1-popup .list-view .list-cell:filled {
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */
+
+}
+.combo-box1-popup .list-view .list-cell:filled:hover {
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */}
+
+.combo-box1-popup .list-view .list-cell:filled:selected {
+    -fx-background-color:#BAEAC3;
+    -fx-background-radius: 30;
+
+    -fx-border-width: 1px;
+    -fx-font-size: 14px;
+    -fx-padding: 5px 10px; /* Adjust padding for better appearance */
+    -fx-margin: 5px; /* Add margin around the button */}
+
+
+.root {
+    -fx-font-family: "Arial";
+}
+
+.alert {
+    -fx-background-color: #7A8727; /* Light Blue */
+}
+
+.alert .header-panel {
+    -fx-background-color:#FFB347; /* Steel Blue */
+    -fx-text-fill: red;
+}
+
+.alert .content.label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #FFB347;
+}
+
+.alert .button-bar {
+    -fx-background-color: #7A8727; /* Light Blue */
+}
+.alert .alert-icon {
+    -fx-background-color: red; /* Green (Change to your desired color) */
+}
+.alert .graphic {
+    visibility: hidden;
+}
